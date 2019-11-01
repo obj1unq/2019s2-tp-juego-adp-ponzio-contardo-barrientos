@@ -1,0 +1,32 @@
+import wollok.game.*
+import Personaje.*
+import Mundo.*
+import Ataques.* 
+import NPCs.*
+
+// NPCs Categoria.
+const galio = new NPC (image = "Galio-NPC.png", position = game.at(2,2))
+
+
+
+
+
+
+
+const atrox = new Personaje (nombreDelPersonaje = "Atrox",image = "atrox.png", position = game.at(1,0), puntosDeSalud = 100, energia = 120, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
+const garen = new Personaje (nombreDelPersonaje = "Garen",image = "garen.png", position = game.at(1,2),puntosDeSalud = 120, energia = 100, ataqueBasico = golpeGaren,ataqueEspecial = rabiaDemaciana)
+const portal =  new  Personaje (nombreDelPersonaje = "PortalVioleta",image = "Portal-violeta.png", position = game.at(6,3),puntosDeSalud = 120, energia = 100, ataqueBasico = golpeGaren,ataqueEspecial = rabiaDemaciana)
+
+
+
+program juego {
+	game.addVisual(galio)
+	game.addVisualCharacter(atrox)
+	game.addVisual(portal)
+	game.width(16) 
+	game.height(8)
+	game.title("LeagueOfDimentions") 
+	game.boardGround("fondo.jpg")
+	game.start() 
+ 
+}   

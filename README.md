@@ -2,14 +2,13 @@
 
 ![capturaJuego](assets/capturaJuego.png)
 
-#### Grupo: Nombre del Grupo
+#### Grupo: ADP
 
 Integrantes:
 
-- Juana Azurduy
-- Alicia Moreau
-- Joe Balachi
-- Benedict Arnold
+- Erik Ponzio
+- Diego Barrientos
+- Contardo Juan Pablo
 
 #### Descripción e instrucciones
 
