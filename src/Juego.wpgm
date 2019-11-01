@@ -5,7 +5,10 @@ import Ataques.*
 import NPCs.*
 
 // NPCs Categoria.
-const galio = new NPC (image = "Galio-NPC.png", position = game.at(2,2))
+const galio = new NPC (image = "Galio-NPC.png", position = game.at(2,2), dialogo = [])
+const galioDiag = new NPC (image = "Metal_Sign.png", position = game.at(2,0), dialogo = ["Bienvenido aventurero", "un placer conocerte. 1/5" , "Presta atencion porque esto lo repetire solo una vez. 2/5" ,
+	 																				"Tus experimentos te trajeron" , "hasta el mundo de Runan. 3/5" , "Actualmente estamos" , "siendo atacados por 3 entes (...) 4/5",
+	 																				"Asi que podrias ayudarnos a salvar nuestro mundo, para eso atraviesa el portal, suerte. 5/5"])
 
 
 
@@ -21,11 +24,13 @@ const portal =  new  Personaje (nombreDelPersonaje = "PortalVioleta",image = "Po
 
 program juego {
 	game.addVisual(galio)
+	game.addVisual(galioDiag)
 	game.addVisualCharacter(atrox)
+    keyboard.t().onPressDo {(atrox.hablarConElNPC(game.uniqueCollider(atrox)))}
 	game.addVisual(portal)
 	game.width(16) 
 	game.height(8)
-	game.title("LeagueOfDimentions") 
+	game.title("ADP") 
 	game.boardGround("fondo.jpg")
 	game.start() 
  

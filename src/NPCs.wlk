@@ -1,5 +1,5 @@
 class NPC {
 	const property image
-	var property position
-	const property dialogo = []
+	const property position
+	const property dialogo 
 }
