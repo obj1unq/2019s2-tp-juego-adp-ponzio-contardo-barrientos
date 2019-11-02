@@ -1,0 +1,19 @@
+import wollok.game.*
+import Boton.*
+import Personaje.*
+import Mundo.*
+import Ataques.* 
+import NPCs.*
+
+const botonStart = new Boton(image = "BotonStart.png", position = game.at(5,6) )
+// const MenuDelJuego = new Mundo(contenidoDelMundo = )
+
+program MenuADP {
+	game.addVisual(botonStart)
+	keyboard.enter().onPressDo {botonStart.pasarAlSiguienteMenu()}
+	game.width(12) 
+	game.height(12)
+	game.title("Menu ADP") 
+	game.boardGround("FondoMenuPrincipal.jpg")
+	game.start() 
+}

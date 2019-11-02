@@ -34,4 +34,4 @@ program juego {
 	game.boardGround("fondo.jpg")
 	game.start() 
  
-}   
+}    
