@@ -1,3 +1,5 @@
+import wollok.game.*
+
 class MundosDelJuego {
 	const property listaDeMundos
 	
@@ -7,6 +9,22 @@ class MundosDelJuego {
 }
 
 class Mundo {
-	const property contenidoDelMundo
+	//const property contenidoDelMundo
+	const  elementosDelMundo
+	const  titulo
+	const  fondo
+	method asignarPersonajesEnJuego(){
+		if(not elementosDelMundo.isEmpty()){
+			elementosDelMundo.forEach({personaje => game.addVisual(personaje)})
+		}
+	}
+	
+	method cargarTitulo(){
+		game.title(titulo) 
+	}
+	
+	method cargarFondo(){
+		game.boardGround(fondo) 
+	}
 }
 

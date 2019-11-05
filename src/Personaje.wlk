@@ -32,12 +32,7 @@ class Personaje {
 	}
 	
 	method hablarConElNPC(npc){
-		if(npc.dialogo().isEmpty()){
-			game.say(self, "Parece que el NPC ya nos conto todo.")
-		}else{
-			game.say(npc, npc.dialogo().first())
-			npc.dialogo().remove(npc.dialogo().first())
-		}
+		npc.cargarDialogo()
 	}
 	
 }

@@ -3,34 +3,49 @@ import Personaje.*
 import Mundo.*
 import Ataques.* 
 import NPCs.*
+import Boton.*
 
 // NPCs Categoria.
 const galio = new NPC (image = "Galio-NPC.png", position = game.at(2,2), dialogo = [])
-const galioDiag = new NPC (image = "Metal_Sign.png", position = game.at(2,0), dialogo = ["Bienvenido aventurero", "un placer conocerte. 1/5" , "Presta atencion porque esto lo repetire solo una vez. 2/5" ,
-	 																				"Tus experimentos te trajeron" , "hasta el mundo de Runan. 3/5" , "Actualmente estamos" , "siendo atacados por 3 entes (...) 4/5",
-	 																				"Asi que podrias ayudarnos a salvar nuestro mundo, para eso atraviesa el portal, suerte. 5/5"])
+const galioDiag = new NPC (image = "Metal_Sign.png", position = game.at(2,0), dialogo = dialogoInicial)
+
+// Dialogos
+const dialogoInicial = new Dialogo (image = "Dialogo.png", position = game.at(0,0))
 
 
-
-
-
-
-
+// Personajes
 const atrox = new Personaje (nombreDelPersonaje = "Atrox",image = "atrox.png", position = game.at(1,0), puntosDeSalud = 100, energia = 120, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
 const garen = new Personaje (nombreDelPersonaje = "Garen",image = "garen.png", position = game.at(1,2),puntosDeSalud = 120, energia = 100, ataqueBasico = golpeGaren,ataqueEspecial = rabiaDemaciana)
 const portal =  new  Personaje (nombreDelPersonaje = "PortalVioleta",image = "Portal-violeta.png", position = game.at(6,3),puntosDeSalud = 120, energia = 100, ataqueBasico = golpeGaren,ataqueEspecial = rabiaDemaciana)
 
 
+// Ataques basicos 
+
+const golpeAtrox = new Ataque (nombre = "Golpe Atrox" , energiaConsumida = 0 , danoCausado = 20)
+const golpeGaren = new Ataque (nombre = "Golpe Garen" , energiaConsumida = 0 , danoCausado = 15)
+
+// Habilidades Basicas
+
+const golpeteoDarking = new Ataque (nombre = "Golpeteo Darking" , energiaConsumida = 30 , danoCausado = 50)
+const rabiaDemaciana = new Ataque (nombre = "Rabia Demaciana" , energiaConsumida = 50 , danoCausado = 80)
+
+//  Habilidades Mejoradas 
+
+const menuInicial = new Mundo(elementosDelMundo = [botonStart,botonExit], titulo = "Menu ADP", fondo = "FondoMenuPrincipal.jpg")
+const lobby = new Mundo (elementosDelMundo = [galio, portal, galioDiag] , titulo = "ADP", fondo = "fondo.jpg")
+
+// Menu De Inicio.
+const botonStart = new Boton(image = "BotonStart.png", position = game.at(5,6))
+const botonExit = new Boton(image = "BotonSalir.png", position = game.at(5,5))
+
 
 program juego {
-	game.addVisual(galio)
-	game.addVisual(galioDiag)
-	game.addVisualCharacter(atrox)
-    keyboard.t().onPressDo {(atrox.hablarConElNPC(game.uniqueCollider(atrox)))}
-	game.addVisual(portal)
-	game.width(16) 
+	menuInicial.asignarPersonajesEnJuego()
+    menuInicial.cargarFondo()
+    menuInicial.cargarTitulo()
+    keyboard.e().onPressDo {atrox.hablarConElNPC(game.uniqueCollider(atrox))} 
+    keyboard.alt().onPressDo {game.removeVisual(dialogoInicial)}
+	game.width(16)
 	game.height(8)
-	game.title("ADP") 
-	game.boardGround("fondo.jpg")
-	game.start() 
+	game.start()
 }
