@@ -4,12 +4,14 @@ import Personaje.*
 import Mundo.*
 import Ataques.* 
 import NPCs.*
+// Menu De Inicio.
+const botonStart = new Boton(image = "BotonStart.png", position = game.at(5,6))
+const botonExit = new Boton(image = "BotonSalir.png", position = game.at(5,5))
 
-const botonStart = new Boton(image = "BotonStart.png", position = game.at(5,6) )
-// const MenuDelJuego = new Mundo(contenidoDelMundo = )
 
 program MenuADP {
 	game.addVisual(botonStart)
+	game.addVisual(botonExit)
 	keyboard.enter().onPressDo {botonStart.pasarAlSiguienteMenu()}
 	game.width(12) 
 	game.height(12)

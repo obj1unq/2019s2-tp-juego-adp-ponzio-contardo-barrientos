@@ -33,5 +33,4 @@ program juego {
 	game.title("ADP") 
 	game.boardGround("fondo.jpg")
 	game.start() 
- 
-}    
+}
