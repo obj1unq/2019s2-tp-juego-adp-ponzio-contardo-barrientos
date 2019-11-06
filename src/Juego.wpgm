@@ -31,8 +31,8 @@ const rabiaDemaciana = new Ataque (nombre = "Rabia Demaciana" , energiaConsumida
 
 //  Habilidades Mejoradas 
 
-const menuInicial = new Mundo(elementosDelMundo = [botonStart,botonExit], titulo = "Menu ADP", fondo = "FondoMenuPrincipal.jpg")
-const lobby = new Mundo (elementosDelMundo = [galio, portal, galioDiag] , titulo = "ADP", fondo = "fondo.jpg")
+const menuInicial = new Mundo(elementosDelMundo = [botonStart, botonExit], titulo = "Menu ADP", fondo = "FondoMenuPrincipal.jpg" , dimensiones = (12 -> 12), personajePrincipal = atrox)
+const lobby = new Mundo (elementosDelMundo = [galio, portal, galioDiag] , titulo = "ADP", fondo = "fondo.jpg" , dimensiones = (16 -> 8), personajePrincipal = atrox)
 
 // Menu De Inicio.
 const botonStart = new Boton(image = "BotonStart.png", position = game.at(5,6))
@@ -40,12 +40,10 @@ const botonExit = new Boton(image = "BotonSalir.png", position = game.at(5,5))
 
 
 program juego {
-	menuInicial.asignarPersonajesEnJuego()
-    menuInicial.cargarFondo()
-    menuInicial.cargarTitulo()
-    keyboard.e().onPressDo {atrox.hablarConElNPC(game.uniqueCollider(atrox))} 
-    keyboard.alt().onPressDo {game.removeVisual(dialogoInicial)}
-	game.width(16)
-	game.height(8)
+	lobby.asignarPersonajesEnJuego()
+    lobby.cargarFondo()
+    lobby.cargarTitulo()
+    lobby.cargarDimensiones()
+    lobby.comandosDelNivel()
 	game.start()
 }
