@@ -38,7 +38,7 @@ class Mundo {
 	method comandosDelNivel(){
 		keyboard.e().onPressDo {personajePrincipal.hablarConElNPC(game.uniqueCollider(personajePrincipal))}
     	keyboard.alt().onPressDo {game.removeVisual(game.uniqueCollider(personajePrincipal).dialogo())}
-    	game.addVisualCharacter(personajePrincipal)
+    	game.addVisualCharacter(personajePrincipal) 
 	}
 }
 

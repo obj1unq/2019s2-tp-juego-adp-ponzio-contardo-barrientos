@@ -7,7 +7,7 @@ import Boton.*
 
 // NPCs Categoria.
 const galio = new NPC (image = "Galio-NPC.png", position = game.at(2,2), dialogo = [])
-const galioDiag = new NPC (image = "Metal_Sign.png", position = game.at(2,0), dialogo = dialogoInicial)
+const galioDiag = new NPC (image = "Metal_Sign.png", position = galio.position().down(2), dialogo = dialogoInicial)
 
 // Dialogos
 const dialogoInicial = new Dialogo (image = "Dialogo.png", position = game.at(0,0))
