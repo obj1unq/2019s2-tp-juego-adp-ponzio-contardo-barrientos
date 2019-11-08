@@ -2,15 +2,21 @@ import Ataques.*
 import NPCs.*
 import wollok.game.*
 
-class Personaje {
-	var property puntosDeSalud
-	var property position
-	var property nombreDelPersonaje
-	var property energia
+class Puntero {
 	var property image
+	var property position
+	
+	method interacturaCon_(boton){
+		boton.ejecutarAccion()
+	}
+}
+
+class Personaje inherits Puntero {
+	var property puntosDeSalud
+	var property nombreDelPersonaje
 	var ataqueEspecial
 	const ataqueBasico
-	
+	var property energia
 	
 	method usarAtaqueBasico(personaje) {
 		personaje.aplicarAtaque(ataqueBasico)
@@ -31,11 +37,19 @@ class Personaje {
 		ataqueEspecial = nuevaHabilidad
 	}
 	
-	method hablarConElNPC(npc){
+	override method interacturaCon_(npc){
 		npc.cargarDialogo()
 	}
 	
 }
+
+// Personajes
+const atrox = new Personaje (nombreDelPersonaje = "Atrox",image = "atrox.png", position = game.at(1,0), puntosDeSalud = 100, energia = 120, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
+const portal =  new  Personaje (nombreDelPersonaje = "PortalVioleta",image = "Portal-violeta.png", position = game.at(6,3),puntosDeSalud = 120, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
+
+const punteroMenu = new Puntero(image = "Puntero.png", position = game.at(6,1))
+
+
 
 
 
