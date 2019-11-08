@@ -53,3 +53,4 @@ const punteroMenu = new Puntero(image = "Puntero.png", position = game.at(6,1))
 
 
 
+

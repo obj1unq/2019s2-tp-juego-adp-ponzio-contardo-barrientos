@@ -66,9 +66,16 @@ object lobbyUno inherits Nivel {
 	
 	method cargarTodo(){
 		game.clear()
-		self.asignarElementos_EnElNivel([fondoLobbyUno, galio])
+		self.asignarElementos_EnElNivel([fondoLobbyUno, galio, galioDiag])
 		self.asignarPersonajePrincipal_AlNivel(atrox)
 		self.comandosDelNivel(atrox)
 	}
+}
+
+// Objeto informador de errores (Invisible)
+object informadorDeErrores {
+	const property image = "CeldaVacia.png"
+	const property position = game.at(12,0)
+
 }
 
