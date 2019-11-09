@@ -39,7 +39,7 @@ class Nivel {
 	
 	method comandosDelNivel(personajePrincipal){
 		keyboard.e().onPressDo {personajePrincipal.interacturaCon_(game.uniqueCollider(personajePrincipal))}
-    	keyboard.alt().onPressDo {game.removeVisual(game.uniqueCollider(personajePrincipal).dialogo())}
+    	keyboard.alt().onPressDo {personajePrincipal.pasarAlSiguienteDialogo_(game.uniqueCollider(personajePrincipal))}
 	}
 }
 

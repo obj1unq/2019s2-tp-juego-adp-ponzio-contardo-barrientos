@@ -41,6 +41,10 @@ class Personaje inherits Puntero {
 		npc.cargarDialogo()
 	}
 	
+	method pasarAlSiguienteDialogo_(npc){
+		npc.pasarAlSiguienteDialogo_()
+	}
+	
 }
 
 // Personajes

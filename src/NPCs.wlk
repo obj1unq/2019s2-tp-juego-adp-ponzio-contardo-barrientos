@@ -6,7 +6,13 @@ class NPC {
 	const property dialogo 
 	
 	method cargarDialogo() {
-		game.addVisual(dialogo)
+		game.addVisual(dialogo.first())
+	}
+	
+	method pasarAlSiguienteDialogo_() {
+		game.removeVisual(dialogo.first())
+		dialogo.remove(dialogo.first())
+		self.cargarDialogo()
 	}
 }
 
@@ -18,9 +24,9 @@ class Dialogo {
 
 // NPCs Categoria.
 const galio = new NPC (image = "Galio-NPC.png", position = game.at(2,2), dialogo = 1)
-const galioDiag = new NPC (image = "CeldaVacia.png", position = galio.position().down(2), dialogo = dialogoInicial)
+const galioDiag = new NPC (image = "CeldaVacia.png", position = galio.position().down(2), dialogo = [dialogoGalioUno, dialogoGalioDos, dialogoGalioTres])
 
 // Dialogos
-const dialogoInicial = new Dialogo (image = "dialog1.png", position = game.at(0,0))
-
-
+const dialogoGalioUno = new Dialogo (image = "GalioDialogoUno.png", position = game.at(0,0))
+const dialogoGalioDos = new Dialogo (image = "GalioDialogoDos.png", position = game.at(0,0))
+const dialogoGalioTres = new Dialogo (image = "GalioDialogoTres.png", position = game.at(0,0))
