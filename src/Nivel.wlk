@@ -21,7 +21,7 @@ class OrganizadorDeNiveles {
 	}
 }
 
-const organizador = new OrganizadorDeNiveles(listaDeNiveles = [menuPrincipal, lobbyUno])
+const organizador = new OrganizadorDeNiveles(listaDeNiveles = [menuPrincipal,aguasEstancadas])
 
 
 class Nivel {
@@ -38,8 +38,11 @@ class Nivel {
 	}
 	
 	method comandosDelNivel(personajePrincipal){
-		keyboard.e().onPressDo {personajePrincipal.interacturaCon_(game.uniqueCollider(personajePrincipal))}
+		keyboard.control().onPressDo {personajePrincipal.interacturaCon_(game.uniqueCollider(personajePrincipal))}
     	keyboard.alt().onPressDo {personajePrincipal.pasarAlSiguienteDialogo_(game.uniqueCollider(personajePrincipal))}
+    	keyboard.e().onPressDo {personajePrincipal.usarAtaqueBasicoContra_(game.uniqueCollider(personajePrincipal))}
+    	keyboard.r().onPressDo {personajePrincipal.usarHabilidadEspecialContra_(game.uniqueCollider(personajePrincipal))}
+    	keyboard.c().onPressDo {personajePrincipal.cambiarASiguienteModo()}
 	}
 }
 
@@ -71,6 +74,20 @@ object lobbyUno inherits Nivel {
 		self.comandosDelNivel(atrox)
 	}
 }
+
+object aguasEstancadas inherits Nivel {
+	method cargarTodo(){
+		game.clear()
+		self.asignarElementos_EnElNivel([fondoAguasEstancadas, nautilus])
+		self.asignarPersonajePrincipal_AlNivel(atrox)
+		self.comandosDelNivel(atrox)
+	}
+
+}
+
+
+
+
 
 // Objeto informador de errores (Invisible)
 object informadorDeErrores {

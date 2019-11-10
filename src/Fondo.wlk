@@ -7,3 +7,4 @@ class Fondo {
 
 const fondoMenu = new Fondo(image = "dragon-elder.png" , position = game.at(0,0))
 const fondoLobbyUno = new Fondo(image = "FondoLobbyUno.png" , position = game.at(0,0))
+const fondoAguasEstancadas = new Fondo(image = "FondoAguasEstancadas.png" , position = game.at(0,0))
