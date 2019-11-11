@@ -23,7 +23,7 @@ class Dialogo {
 
 
 // NPCs Categoria.
-const galio = new NPC (image = "Galio-NPC.png", position = game.at(2,2), dialogo = 1)
+const galio = new NPC (image = "Galio-NPC.png", position = game.at(2,2), dialogo = [])
 const galioDiag = new NPC (image = "CeldaVacia.png", position = galio.position().down(2), dialogo = [dialogoGalioUno, dialogoGalioDos, dialogoGalioTres])
 
 

@@ -61,6 +61,10 @@ class Personaje inherits Puntero {
 		npc.cargarDialogo()
 	}
 	
+	method cruzarElPortal(portal){
+		portal.cruzarElPortal()
+	}
+	
 	method pasarAlSiguienteDialogo_(npc){
 		npc.pasarAlSiguienteDialogo_()
 	}
@@ -99,14 +103,12 @@ object modoAtaque {
 }
 
 
+
 // Personajes
-const atrox = new Personaje (image = "atroxUno.png", position = game.at(1,0), puntosDeSalud = 100, energia = 120, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
+const atrox = new Personaje (image = "atrox.png", position = game.at(1,0), puntosDeSalud = 100, energia = 120, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
 const nautilus = new Personaje (image = "nautilus.png", position = game.at(2,0), puntosDeSalud = 200, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
-
-const portal =  new  Personaje (image = "Portal-violeta.png", position = game.at(6,3),puntosDeSalud = 120, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
-
-const punteroMenu = new Puntero(image = "Puntero.png", position = game.at(6,1))
-
+const punteroMenu = new Puntero(image = "Puntero.png", position = game.at(7,1))
+const punteroMenuSeleccion = new Puntero(image = "Puntero.png", position = game.at(10,5))
 
 
 

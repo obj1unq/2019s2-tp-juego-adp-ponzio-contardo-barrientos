@@ -1,14 +1,67 @@
 import wollok.game.*
 import Nivel.*
+import Personaje.*
 
 class Boton {
-	const property image
-	const property position
-	
 	method ejecutarAccion(){
-		organizador.pasarAlSiguienteNivel()
+		organizador.pasarAlSiguienteNivel()	
 	}
 }
 
-const botonStart = new Boton(image = "BotonStart.png", position = game.at(6,1))
-const botonExit = new Boton(image = "BotonSalir.png", position = game.at(7,1))
+object botonSeleccionAatrox inherits Boton {
+	const property image =  "AatroxIcono.png"
+	const property position = game.at(8,5)		
+}
+
+object botonSeleccionJax inherits Boton {
+	const property image =  "JaxIcono.png"
+	const property position = game.at(8,4)
+}
+
+object botonSeleccionChogath inherits Boton {
+	const property image =  "ChogathIcono.png"
+	const property position = game.at(8,2)
+}
+
+
+object botonIniciarMedio inherits Boton {
+	const property image =  "CeldaVacia.png"
+	const property position = game.at(5,1)
+}
+
+object botonIniciarIzquierda inherits Boton {
+	const property image =  "BotonIniciar.png"
+	const property position = game.at(4,1)
+}
+
+object botonIniciarDerecha inherits Boton {
+	const property image =  "CeldaVacia.png"
+	const property position = game.at(6,1)
+}
+
+object botonSalirIzquierda inherits Boton {
+	const property image =  "BotonSalir.png"
+	const property position = game.at(8,1)
+	
+	override method ejecutarAccion(){
+		game.stop()
+	}
+}
+
+object botonSalirMedio inherits Boton {
+	const property image =  "CeldaVacia.png"
+	const property position = game.at(9,1)
+	
+	override method ejecutarAccion(){
+		game.stop()
+	}
+}
+
+object botonSalirDerecha inherits Boton {
+	const property image =  "CeldaVacia.png"
+	const property position = game.at(10,1)
+	
+	override method ejecutarAccion(){
+		game.stop()
+	}
+}

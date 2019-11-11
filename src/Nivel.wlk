@@ -3,6 +3,7 @@ import NPCs.*
 import wollok.game.*
 import Fondo.*
 import Boton.*
+import Portal.*
 
 class OrganizadorDeNiveles {
 	const listaDeNiveles
@@ -19,9 +20,10 @@ class OrganizadorDeNiveles {
 	method cargarNivel(){
 		listaDeNiveles.first().cargarTodo()
 	}
+	
 }
 
-const organizador = new OrganizadorDeNiveles(listaDeNiveles = [menuPrincipal,aguasEstancadas])
+const organizador = new OrganizadorDeNiveles(listaDeNiveles = [menuPrincipal,menuDeSeleccionDePersonaje,lobbyUno, aguasEstancadas])
 
 
 class Nivel {
@@ -43,6 +45,7 @@ class Nivel {
     	keyboard.e().onPressDo {personajePrincipal.usarAtaqueBasicoContra_(game.uniqueCollider(personajePrincipal))}
     	keyboard.r().onPressDo {personajePrincipal.usarHabilidadEspecialContra_(game.uniqueCollider(personajePrincipal))}
     	keyboard.c().onPressDo {personajePrincipal.cambiarASiguienteModo()}
+    	keyboard.control().onPressDo {personajePrincipal.cruzarElPortal(game.uniqueCollider(personajePrincipal))}
 	}
 }
 
@@ -54,12 +57,14 @@ class Menu inherits Nivel {
 	
 }
 
+
 object menuPrincipal inherits Menu {
 	
-
+	
 	method cargarTodo(){
-		game.clear()
-		self.asignarElementos_EnElNivel([fondoMenu, botonStart])
+		
+//		game.schedule(3000, {sound.reproducir()})
+		self.asignarElementos_EnElNivel([fondoMenu, botonIniciarMedio, botonIniciarDerecha, botonIniciarIzquierda, botonSalirIzquierda, botonSalirMedio, botonSalirDerecha])
 		self.asignarPersonajePrincipal_AlNivel(punteroMenu)
 		self.comandosDelNivel(punteroMenu)
 	}
@@ -69,7 +74,7 @@ object lobbyUno inherits Nivel {
 	
 	method cargarTodo(){
 		game.clear()
-		self.asignarElementos_EnElNivel([fondoLobbyUno, galio, galioDiag])
+		self.asignarElementos_EnElNivel([fondoLobbyUno, galio, galioDiag, portalVioleta])
 		self.asignarPersonajePrincipal_AlNivel(atrox)
 		self.comandosDelNivel(atrox)
 	}
@@ -85,6 +90,19 @@ object aguasEstancadas inherits Nivel {
 
 }
 
+object menuDeSeleccionDePersonaje inherits Menu {
+	
+	method cargarTodo(){
+		self.asignarElementos_EnElNivel([fondoMenuSeleccion, botonSeleccionAatrox, botonSeleccionJax, botonSeleccionChogath])
+		self.asignarPersonajePrincipal_AlNivel(punteroMenuSeleccion)
+		self.comandosDelNivel(punteroMenuSeleccion)
+	}
+}
+
+
+
+
+
 
 
 
@@ -95,4 +113,5 @@ object informadorDeErrores {
 	const property position = game.at(12,0)
 
 }
+
 
