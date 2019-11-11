@@ -35,7 +35,7 @@ class Personaje inherits Puntero {
 
 	}
 	
-	method tieneSuficienteEnergia(ataque) = ataque.energiaConsumida() <= self.energia()
+	method tieneSuficienteEnergia(ataque) = ataque.energiaConsumida() <= energia
 
 	method usarHabilidadEspecialContra_(personaje) {
 		if(not self.estaEnModoDefensivo() and self.tieneSuficienteEnergia(ataqueEspecial)) {
