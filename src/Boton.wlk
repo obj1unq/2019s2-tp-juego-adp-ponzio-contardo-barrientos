@@ -4,7 +4,7 @@ import Personaje.*
 
 class Boton {
 	method ejecutarAccion(){
-		organizador.pasarAlSiguienteNivel()	
+		organizador.pasarAlSiguienteNivel()
 	}
 }
 

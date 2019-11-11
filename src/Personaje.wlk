@@ -15,7 +15,7 @@ class Personaje inherits Puntero {
 	var property puntosDeSalud
 	var ataqueEspecial
 	const ataqueBasico
-	var energia
+	var property energia
 	var modoActual = modoDefensa
 	
 	method cambiarASiguienteModo(){
@@ -35,15 +35,15 @@ class Personaje inherits Puntero {
 
 	}
 	
-	method tieneSuficienteEnergia() = true
+	method tieneSuficienteEnergia(ataque) = ataque.energiaConsumida() <= self.energia()
 
 	method usarHabilidadEspecialContra_(personaje) {
-		if(not self.estaEnModoDefensivo() and self.tieneSuficienteEnergia()) {
+		if(not self.estaEnModoDefensivo() and self.tieneSuficienteEnergia(ataqueEspecial)) {
 			energia = energia - ataqueEspecial.energiaConsumida()
 			personaje.recibirDanio(ataqueEspecial)
 			self.eliminarEnemigo(personaje)
 		} 
-		else if(not self.tieneSuficienteEnergia()){
+		else if(not self.tieneSuficienteEnergia(ataqueEspecial)){
 			  game.say(self, "No tengo suficiente energia")
 		} 
 		else {game.say(self, "Necesito estar en modo ataque")}

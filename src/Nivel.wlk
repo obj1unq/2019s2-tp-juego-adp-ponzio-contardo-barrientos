@@ -6,24 +6,31 @@ import Boton.*
 import Portal.*
 
 class OrganizadorDeNiveles {
-	const listaDeNiveles
+	var listaDeNiveles
 	
 	method pasarAlSiguienteNivel(){
 		listaDeNiveles.remove(listaDeNiveles.first())
-		self.actualizar()
+		self.cargarNivel()
 	}
 	
 	method actualizar(){
 		self.cargarNivel()
+		
 	}
 	
 	method cargarNivel(){
 		listaDeNiveles.first().cargarTodo()
 	}
 	
+		method cargarListaDeNiveles(lista){
+		listaDeNiveles = lista
+	}
 }
 
-const organizador = new OrganizadorDeNiveles(listaDeNiveles = [menuPrincipal,menuDeSeleccionDePersonaje,lobbyUno, aguasEstancadas])
+object organizador inherits OrganizadorDeNiveles{
+		
+}
+
 
 
 class Nivel {
