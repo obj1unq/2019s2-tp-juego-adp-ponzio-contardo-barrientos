@@ -1,4 +1,5 @@
 import wollok.game.*
+import Nivel.*
 
 class NPC {
 	const property image
@@ -6,7 +7,7 @@ class NPC {
 	const property dialogo 
 	
 	method cargarDialogo() {
-		game.addVisual(dialogo.first())
+		organizador.pasarAlSiguienteNivel()
 	}
 	
 	method pasarAlSiguienteDialogo_() {

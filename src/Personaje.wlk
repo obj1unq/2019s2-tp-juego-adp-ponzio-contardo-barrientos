@@ -1,6 +1,7 @@
 import Ataques.*
 import NPCs.*
 import wollok.game.*
+import Nivel.*
 
 class Puntero {
 	var property image
@@ -8,6 +9,10 @@ class Puntero {
 	
 	method interacturaCon_(boton){
 		boton.ejecutarAccion()
+	}
+	
+	method moverseEnDir(dir){
+		position = dir
 	}
 }
 
@@ -76,6 +81,10 @@ class Personaje inherits Puntero {
 	}
 	
 	method estaMuerto(personaje) = personaje.puntosDeSalud() <= 0
+	
+	method escucharAlgo(npc){// Prueba
+		game.onCollideDo(npc, game.say(npc, "Tengo algo para contarte"))
+	}
 	
 	
 }
