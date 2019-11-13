@@ -2,6 +2,7 @@ import Ataques.*
 import NPCs.*
 import wollok.game.*
 import Nivel.*
+import Boton.*
 
 class Puntero {
 	var property image
@@ -11,9 +12,14 @@ class Puntero {
 		boton.ejecutarAccion()
 	}
 	
-	method moverseEnDir(dir){
-		position = dir
+	method moverseEnDir(dir,limitesGenerales,limitesEsp){
+		if (not limitesGenerales.contains(dir) and limitesEsp.contains(dir)) {position = dir}
 	}
+	
+	method cambiarImagen(imagen){
+		image = imagen
+	}
+
 }
 
 class Personaje inherits Puntero {
@@ -82,7 +88,11 @@ class Personaje inherits Puntero {
 	
 	method estaMuerto(personaje) = personaje.puntosDeSalud() <= 0
 	
-	method escucharAlgo(npc){// Prueba
+	override method moverseEnDir(dir, limites, limitesEspecificos){
+		if (not limites.contains(dir) and not limitesEspecificos.contains(dir)) {position = dir}
+	}
+	
+	method escucharAlgo(npc){// Prueba todavia no lo hice andar
 		game.onCollideDo(npc, game.say(npc, "Tengo algo para contarte"))
 	}
 	
@@ -116,8 +126,8 @@ object modoAtaque {
 // Personajes
 const atrox = new Personaje (image = "atrox.png", position = game.at(1,0), puntosDeSalud = 100, energia = 120, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
 const nautilus = new Personaje (image = "nautilus.png", position = game.at(2,0), puntosDeSalud = 200, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
-const punteroMenu = new Puntero(image = "Puntero.png", position = game.at(7,1))
-const punteroMenuSeleccion = new Puntero(image = "Puntero.png", position = game.at(10,5))
+const punteroMenu = new Puntero(image = "seleccionInicial.png", position = game.at(4,1))
+const punteroMenuSeleccion = new Puntero(image = "SeleccionadorPersonaje.png", position = game.at(8,6))
 
 
 

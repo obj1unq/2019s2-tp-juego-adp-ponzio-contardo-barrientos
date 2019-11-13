@@ -65,3 +65,13 @@ object botonSalirDerecha inherits Boton {
 		game.stop()
 	}
 }
+
+object celdaConeccion {
+	const property image = "CeldaVacia.png"
+	const property position = game.at(7,1)
+}
+
+object celdaInvisible {
+	const property image = "CeldaVacia.png"
+	const property position = game.at(8,3)
+}
