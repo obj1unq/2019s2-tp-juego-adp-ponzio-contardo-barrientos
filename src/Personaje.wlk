@@ -13,14 +13,24 @@ class Puntero {
 	}
 	
 	method moverseEnDir(dir,limitesGenerales,limitesEsp){
-		if (not limitesGenerales.contains(dir) and limitesEsp.contains(dir)) {position = dir}
+		if (not limitesGenerales.contains(dir) and limitesEsp.contains(dir)) {
+		position = dir
+		}
 	}
 	
+	method moverseEnSeleccion(dir,limitesGenerales,limitesEsp){
+		if (not limitesGenerales.contains(dir) and limitesEsp.contains(dir)) {
+			position = dir
+			game.whenCollideDo(celdaInvisible, {puntero => self.cambiarImagen("CeldaVacia.png")})
+			game.whenCollideDo(menuDeSeleccionDePersonaje.botonesVisibles().anyOne(), {puntero => self.cambiarImagen("SeleccionadorPersonaje.png")})
+			}
+		}
+		
 	method cambiarImagen(imagen){
 		image = imagen
 	}
-
 }
+	
 
 class Personaje inherits Puntero {
 	var property puntosDeSalud
@@ -127,7 +137,7 @@ object modoAtaque {
 const atrox = new Personaje (image = "atrox.png", position = game.at(1,0), puntosDeSalud = 100, energia = 120, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
 const nautilus = new Personaje (image = "nautilus.png", position = game.at(2,0), puntosDeSalud = 200, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
 const punteroMenu = new Puntero(image = "seleccionInicial.png", position = game.at(4,1))
-const punteroMenuSeleccion = new Puntero(image = "SeleccionadorPersonaje.png", position = game.at(8,6))
+const punteroMenuSeleccion = new Puntero(image = "SeleccionadorPersonaje.png", position = game.at(8,5))
 
 
 

@@ -50,11 +50,11 @@ class Nivel {
 		
 	}
 	
-	method comandosDeMenu(puntero, dirIzq, dirDer){	
-		keyboard.enter().onPressDo {puntero.interacturaCon_(game.uniqueCollider(puntero))}
-    	keyboard.left().onPressDo{puntero.moverseEnDir(dirIzq, self.limites(), self.limitesEspecificos() )}
-    	keyboard.right().onPressDo{puntero.moverseEnDir(dirDer, self.limites(), self.limitesEspecificos())}
-	}
+	// method comandosDeMenu(puntero, boton){	
+	//	keyboard.enter().onPressDo {puntero.interacturaCon_(game.uniqueCollider(puntero))}
+    //	keyboard.left().onPressDo{puntero.moverseEnDir(boton.position(), self.limites(), self.limitesEspecificos())}
+    //	keyboard.right().onPressDo{puntero.moverseEnDir(boton.position().right(4), self.limites(), self.limitesEspecificos())}
+	//}
 	
 	method comandosDelNivel(personajePrincipal){
     	keyboard.e().onPressDo {personajePrincipal.usarAtaqueBasicoContra_(game.uniqueCollider(personajePrincipal))}
@@ -68,11 +68,11 @@ class Nivel {
     	keyboard.alt().onPressDo {personaje.pasarAlSiguienteDialogo_(game.uniqueCollider(personaje))}
     }
  
-    method comandosDeMovimiento(objeto){
-    	keyboard.up().onPressDo{objeto.moverseEnDir(objeto.position().up(1), self.limites(), self.limitesEspecificos())}
-    	keyboard.down().onPressDo{objeto.moverseEnDir(objeto.position().down(1), self.limites(), self.limitesEspecificos())}
-    	keyboard.left().onPressDo{objeto.moverseEnDir(objeto.position().left(1), self.limites(), self.limitesEspecificos())}
-    	keyboard.right().onPressDo{objeto.moverseEnDir(objeto.position().right(1), self.limites(), self.limitesEspecificos())}
+    method comandosDeMovimiento(personaje){
+    	keyboard.up().onPressDo{personaje.moverseEnDir(personaje.position().up(1), self.limites(), self.limitesEspecificos())}
+    	keyboard.down().onPressDo{personaje.moverseEnDir(personaje.position().down(1), self.limites(), self.limitesEspecificos())}
+    	keyboard.left().onPressDo{personaje.moverseEnDir(personaje.position().left(1), self.limites(), self.limitesEspecificos())}
+    	keyboard.right().onPressDo{personaje.moverseEnDir(personaje.position().right(1), self.limites(), self.limitesEspecificos())}
     	}
     	
     method asignarLimites(botones){
@@ -104,26 +104,34 @@ class NivelDialogo inherits Nivel{
 
 object menuPrincipal inherits Nivel {
 	
+	method comandosDeMenu(puntero, boton){	
+		keyboard.enter().onPressDo {puntero.interacturaCon_(game.uniqueCollider(puntero))}
+    	keyboard.left().onPressDo{puntero.moverseEnDir(boton.position(), self.limites(), self.limitesEspecificos())}
+    	keyboard.right().onPressDo{puntero.moverseEnDir(boton.position().right(4), self.limites(), self.limitesEspecificos())}
+	}
+	
 	method cargarTodo(){
 		
 //		game.schedule(3000, {sound.reproducir()})
-		self.asignarElementos_EnElNivel([fondoMenu, botonIniciarMedio, botonIniciarDerecha, botonIniciarIzquierda, botonSalirIzquierda, botonSalirMedio, botonSalirDerecha, celdaConeccion])
+		self.asignarElementos_EnElNivel([fondoMenu, botonIniciarMedio, botonIniciarDerecha, botonIniciarIzquierda, botonSalirIzquierda, botonSalirMedio, botonSalirDerecha, celdaConeccion, celdaInvisible])
 		self.asignarPersonajePrincipal_AlNivel(punteroMenu)
 		self.asignarLimites([botonIniciarIzquierda, botonSalirIzquierda,celdaConeccion])
-		self.comandosDeMenu(punteroMenu, botonIniciarIzquierda.position(), botonSalirIzquierda.position())	
+		self.comandosDeMenu(punteroMenu, botonIniciarIzquierda)	
 	}
 }
 
 object menuDeSeleccionDePersonaje inherits Nivel {
 	
-	override method comandosDeMenu(punteroMenuSeleccion){
-		keyboard.enter().onPressDo {punteroMenuSeleccion.interacturaCon_(game.uniqueCollider(punteroMenuSeleccion))}
-    	keyboard.up().onPressDo{punteroMenuSeleccion.moverseEnDir(punteroMenuSeleccion.position().up(1), self.limites(), self.limitesEspecificos())}
-    	keyboard.down().onPressDo{punteroMenuSeleccion.moverseEnDir(punteroMenuSeleccion.position().down(1), self.limites(), self.limitesEspecificos())}
+	const property botonesVisibles = [botonSeleccionAatrox, botonSeleccionJax, botonSeleccionChogath]
+	
+	method comandosDeMenu(puntero){
+		keyboard.enter().onPressDo {puntero.interacturaCon_(game.uniqueCollider(puntero))}
+    	keyboard.up().onPressDo{puntero.moverseEnSeleccion(puntero.position().up(1), self.limites(), self.limitesEspecificos())}
+    	keyboard.down().onPressDo{puntero.moverseEnSeleccion(puntero.position().down(1), self.limites(), self.limitesEspecificos())}
 	}
 	
 	method cargarTodo(){
-		
+		game.clear()
 		self.asignarElementos_EnElNivel([fondoMenuSeleccion, botonSeleccionAatrox, botonSeleccionJax, botonSeleccionChogath,celdaInvisible])
 		self.asignarPersonajePrincipal_AlNivel(punteroMenuSeleccion)
 		self.asignarLimites([botonSeleccionAatrox, botonSeleccionJax, botonSeleccionChogath,celdaInvisible])
