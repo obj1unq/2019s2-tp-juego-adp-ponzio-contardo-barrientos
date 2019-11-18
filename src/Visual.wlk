@@ -1,22 +1,31 @@
 import wollok.game.*
 
 class Visual {
-	const property image
+	var property image
 	var property position
 	
 	method cambiarPosicion(posicion){
 		position = posicion
 	}
 	
-	method caerHastaElFinal(personaje){ 
+	method cambiarImagen(imagen, objeto){
+		if (game.colliders(self).contains(objeto)){
+			image = imagen
+		}
+		else {
+			image = "espacioErroneo.png"
+		}
+	}
+	
+	method caerHastaElFinal(personaje){
 		if (position.y() > 0){
+			// personaje.objetoActual().clear()
 			game.removeVisual(self)
 			position = position.down(1)
 			game.addVisual(self)
 		}
 		else {
 			game.removeTickEvent("objetoEnCaida")
-			personaje.objetoActual().clear()
 		}
 	}
 }
@@ -36,11 +45,13 @@ const espacioALlenar3 = new Visual(image = "espacioErroneo.png", position = game
 const espacioALlenar4 = new Visual(image = "espacioErroneo.png", position = game.at(8,0) )
 const espacioALlenar5 = new Visual(image = "espacioErroneo.png", position = game.at(10,0) )
 const espacioALlenar6 = new Visual(image = "espacioErroneo.png", position = game.at(12,0) )
-const inventario = new Visual(image = "Inventario.png", position = game.at(0,6))
+const inventarioVisual = new Visual(image = "Inventario.png", position = game.at(0,6))
 
 // Elementos nivel logica
 
-const banana = new Visual(image = "banana.png",position = game.at(5,5))
+const banana = new Visual(image = "Potasio.png",position = game.at(5,5))
 const litio = new Visual(image = "Litio.png", position = game.at (10,4))
+const litio2 = new Visual(image = "Litio2.png", position = game.at (2,3))
 const oxigeno = new Visual(image = "Oxigeno.png", position = game.at (7,4))
-const uranio = new Visual(image = "Uranio.png", position = game.at (12,6))
+const oxigeno2 = new Visual(image = "Oxigeno2.png", position = game.at (2,1))
+const uranio = new Visual(image = "Uranio.png", position = game.at (10,5))

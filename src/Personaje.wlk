@@ -38,7 +38,7 @@ class Personaje inherits Puntero {
 	const ataqueBasico
 	var property energia
 	var modoActual = modoDefensa
-	var property objetoActual = []
+	var property inventario = []
 	
 	method cambiarASiguienteModo(){
 		if(self.estaEnModoDefensivo()){
@@ -80,15 +80,7 @@ class Personaje inherits Puntero {
 	}
 	
 	override method interacturaCon_(npc){
-		npc.cargarDialogo()
-	}
-	
-	method cruzarElPortal(portal){
-		portal.cruzarElPortal()
-	}
-	
-	method pasarAlSiguienteDialogo_(npc){
-		npc.pasarAlSiguienteDialogo_()
+		organizador.pasarAlSiguienteNivel()
 	}
 	
 	method eliminarEnemigo(personaje){
@@ -107,9 +99,9 @@ class Personaje inherits Puntero {
 		game.onCollideDo(npc, game.say(npc, "Tengo algo para contarte"))
 	}
 	
-	method agarrar(objeto, nivel){
-		if (objetoActual.isEmpty() and nivel.objetosParaAgarrar().contains(objeto)){
-			objetoActual = [objeto]
+	method agarrar(objeto,nivel){
+		if (nivel.objetosParaAgarrar().contains(objeto) and inventario.isEmpty()){
+			inventario.add(objeto)
 			game.removeVisual(objeto)
 			objeto.cambiarPosicion(game.at(0,6))
 			game.addVisual(objeto)
@@ -119,20 +111,18 @@ class Personaje inherits Puntero {
 		}
 	}
 	
-	method soltar(){
-		if (not objetoActual.isEmpty()){ // and objetos.size() == 0
-			game.removeVisual(objetoActual.first())
-			objetoActual.first().cambiarPosicion(self.position())
-			game.addVisual(objetoActual.first())
-			game.onTick(1000,"objetoEnCaida", {=> objetoActual.first().caerHastaElFinal(self)})
-			// objetoActual.clear()
+	method soltar(objeto){
+		if (not inventario.isEmpty()){ // and objetos.size() == 0
+			game.removeVisual(inventario.first())
+			objeto.cambiarPosicion(self.position())
+			game.addVisual(objeto)
+			game.onTick(300,"objetoEnCaida", {=> objeto.caerHastaElFinal(self)})
+			inventario.clear()
 		}
 		else {
-			game.say(self, "No puedo arrojarlo aca")
+			game.say(self, "No tengo un objeto para soltar")
 		}
-	}
-	
-	
+	}	
 }
 
 object modoDefensa {

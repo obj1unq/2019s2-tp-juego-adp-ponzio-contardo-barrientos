@@ -38,7 +38,7 @@ class Nivel {
 	
 	const property limites = limitesGenerales // El personaje no va a poder exceder estas coord. ya que son las de borde 
 	const property limitesEspecificos = [] // El personaje solamente se va a poder mover en las coord de esta lista
-	const property objetosParaAgarrar = [banana, litio, oxigeno, uranio] // Objetos a utilizar en el nivel de Logica
+	var property objetosParaAgarrar = [banana, litio, oxigeno, uranio,oxigeno2, litio2] // Objetos a utilizar en el nivel de Logica
 	
 	method asignarElementos_EnElNivel(elementosDelNivel){
 		if(not elementosDelNivel.isEmpty()){
@@ -55,7 +55,6 @@ class Nivel {
     	keyboard.e().onPressDo {personajePrincipal.usarAtaqueBasicoContra_(game.uniqueCollider(personajePrincipal))}
     	keyboard.r().onPressDo {personajePrincipal.usarHabilidadEspecialContra_(game.uniqueCollider(personajePrincipal))}
     	keyboard.c().onPressDo {personajePrincipal.cambiarASiguienteModo()}
-    	keyboard.control().onPressDo {personajePrincipal.cruzarElPortal(game.uniqueCollider(personajePrincipal))}
 	}
     		
     method comandosDeDialogo(personaje){
@@ -75,15 +74,22 @@ class Nivel {
 	}
 	
 	method comandosConObjetos(personaje){
-    	keyboard.z().onPressDo{personaje.agarrar(game.uniqueCollider(personaje), self)}
-    	keyboard.a().onPressDo{personaje.soltar()}		
+    	keyboard.p().onPressDo{self.reiniciarPuzzle()}	
+    	keyboard.z().onPressDo{personaje.agarrar(game.colliders(personaje).anyOne(), self)}	
+		keyboard.a().onPressDo{personaje.soltar(personaje.inventario().first())}  //personaje.inventario().first()
+    }
+	
+	method reiniciarPuzzle(){
+		self.objetosParaAgarrar().forEach({objeto => game.removeVisual(objeto)})
+		objetosParaAgarrar.forEach({objeto => objeto.cambiarPosicion(posicionesOriginales.anyOne())})
+		self.asignarElementos_EnElNivel(objetosParaAgarrar)
 	}
 }
 
 class NivelDialogo inherits Nivel{
 	var property dialogos 
 	
-	override method comandosDelNivel(atrox){
+	override method comandosDeDialogo(atrox){
 		keyboard.alt().onPressDo {self.pasarAlSiguienteDialogo()}
 	}
 	
@@ -149,7 +155,6 @@ object lobbyUno inherits Nivel {
 		game.clear()
 		self.asignarElementos_EnElNivel([fondoLobbyUno, galio, galioDiag])
 		self.asignarPersonajePrincipal_AlNivel(atrox)
-		self.comandosDelNivel(atrox)
 		self.comandosDeMovimiento(atrox)
 		self.comandosDeDialogo(atrox)
 	}
@@ -175,7 +180,7 @@ object dialogoNPC1 inherits NivelDialogo{
 		self.asignarElementos_EnElNivel([fondoLobbyUno, galio, galioDiag, portalVioleta])
 		self.asignarPersonajePrincipal_AlNivel(atrox)
 		self.asignarDialogos([dialogoGalioUno,dialogoGalioDos,dialogoGalioTres])
-		self.comandosDelNivel(atrox)
+		self.comandosDeDialogo(atrox)
 		game.addVisual(dialogos.first())
 	}
 }
@@ -211,21 +216,32 @@ object dialogoNPC3 inherits NivelDialogo{
 		self.asignarElementos_EnElNivel([fondoNivelLogica, brand, brandDiag])
 		self.asignarPersonajePrincipal_AlNivel(atrox)
 		self.asignarDialogos([brandDialogoUno,brandDialogoDos, brandDialogoTres, brandDialogoCuatro])
-		self.comandosDelNivel(atrox)
+		self.comandosDeDialogo(atrox)
 		game.addVisual(dialogos.first())
 	}
 }
 
 object nivelLogicaBIS inherits Nivel{
 	
+	override method limites(){
+		return limitesLogica
+	}
+	
 	method cargarTodo(){
 		game.clear()
-		self.asignarElementos_EnElNivel([fondoNivelLogica, espacioALlenar, inventario, espacioALlenar2, espacioALlenar3,espacioALlenar4,espacioALlenar5,espacioALlenar6, banana, litio, oxigeno, uranio])
+		self.asignarElementos_EnElNivel([fondoNivelLogica, espacioALlenar, inventarioVisual, espacioALlenar2, espacioALlenar3,espacioALlenar4,espacioALlenar5,
+		espacioALlenar6, banana, litio, oxigeno, uranio, oxigeno2, litio2])
 		self.asignarPersonajePrincipal_AlNivel(atrox)
 		self.comandosDelNivel(atrox)
 		self.comandosDeMovimiento(atrox)
 		self.comandosDeDialogo(atrox)
 		self.comandosConObjetos(atrox)
+		game.onCollideDo(uranio, {urn => espacioALlenar.cambiarImagen("espacioCorrecto.png", uranio)})
+		game.onCollideDo(oxigeno, {urn => espacioALlenar2.cambiarImagen("espacioCorrecto.png", oxigeno)})
+		game.onCollideDo(litio, {urn => espacioALlenar3.cambiarImagen("espacioCorrecto.png", litio)})
+		game.onCollideDo(litio2, {urn => espacioALlenar4.cambiarImagen("espacioCorrecto.png", litio2)})
+		game.onCollideDo(oxigeno2, {urn => espacioALlenar5.cambiarImagen("espacioCorrecto.png", oxigeno2)})
+		game.onCollideDo(banana, {urn => espacioALlenar6.cambiarImagen("espacioCorrecto.png", banana)})
 	}
 }
 
