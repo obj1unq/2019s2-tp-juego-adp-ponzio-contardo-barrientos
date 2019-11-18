@@ -107,27 +107,28 @@ class Personaje inherits Puntero {
 		game.onCollideDo(npc, game.say(npc, "Tengo algo para contarte"))
 	}
 	
-	method agarrar(objeto){
-		if (objetoActual.isEmpty()){
+	method agarrar(objeto, nivel){
+		if (objetoActual.isEmpty() and nivel.objetosParaAgarrar().contains(objeto)){
 			objetoActual = [objeto]
 			game.removeVisual(objeto)
 			objeto.cambiarPosicion(game.at(0,6))
 			game.addVisual(objeto)
 		}
 		else{
-			game.say(self, "Ya tengo un objeto")
+			game.say(self, "No puedo agarrar este objeto")
 		}
 	}
 	
 	method soltar(){
-		if (not objetoActual.isEmpty()){
+		if (not objetoActual.isEmpty()){ // and objetos.size() == 0
 			game.removeVisual(objetoActual.first())
 			objetoActual.first().cambiarPosicion(self.position())
 			game.addVisual(objetoActual.first())
-			objetoActual.clear()
+			game.onTick(1000,"objetoEnCaida", {=> objetoActual.first().caerHastaElFinal(self)})
+			// objetoActual.clear()
 		}
 		else {
-			game.say(self, "No tengo ningun objeto")
+			game.say(self, "No puedo arrojarlo aca")
 		}
 	}
 	

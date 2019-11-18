@@ -1,7 +1,7 @@
 import Personaje.*
 import NPCs.*
 import wollok.game.*
-import Fondo.*
+import Visual.*
 import Boton.*
 import Portal.*
 import Limites.*
@@ -38,6 +38,7 @@ class Nivel {
 	
 	const property limites = limitesGenerales // El personaje no va a poder exceder estas coord. ya que son las de borde 
 	const property limitesEspecificos = [] // El personaje solamente se va a poder mover en las coord de esta lista
+	const property objetosParaAgarrar = [banana, litio, oxigeno, uranio] // Objetos a utilizar en el nivel de Logica
 	
 	method asignarElementos_EnElNivel(elementosDelNivel){
 		if(not elementosDelNivel.isEmpty()){
@@ -74,7 +75,7 @@ class Nivel {
 	}
 	
 	method comandosConObjetos(personaje){
-    	keyboard.z().onPressDo{personaje.agarrar(game.uniqueCollider(personaje))}
+    	keyboard.z().onPressDo{personaje.agarrar(game.uniqueCollider(personaje), self)}
     	keyboard.a().onPressDo{personaje.soltar()}		
 	}
 }
@@ -181,7 +182,7 @@ object dialogoNPC1 inherits NivelDialogo{
 
 
 
-object aguasEstancadas inherits Nivel {
+object aguasEstancadas inherits Nivel { // Lo saque de la lista de niveles para probar el que estaba haciendo (volver a agregarlo)
 	method cargarTodo(){
 		game.clear()
 		self.asignarElementos_EnElNivel([fondoAguasEstancadas, nautilus])
@@ -216,6 +217,7 @@ object dialogoNPC3 inherits NivelDialogo{
 }
 
 object nivelLogicaBIS inherits Nivel{
+	
 	method cargarTodo(){
 		game.clear()
 		self.asignarElementos_EnElNivel([fondoNivelLogica, espacioALlenar, inventario, espacioALlenar2, espacioALlenar3,espacioALlenar4,espacioALlenar5,espacioALlenar6, banana, litio, oxigeno, uranio])
