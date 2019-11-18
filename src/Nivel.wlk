@@ -36,8 +36,8 @@ object organizador inherits OrganizadorDeNiveles{
 
 class Nivel {
 	
-	const property limites = limitesGenerales
-	const property limitesEspecificos = []
+	const property limites = limitesGenerales // El personaje no va a poder exceder estas coord. ya que son las de borde 
+	const property limitesEspecificos = [] // El personaje solamente se va a poder mover en las coord de esta lista
 	
 	method asignarElementos_EnElNivel(elementosDelNivel){
 		if(not elementosDelNivel.isEmpty()){
@@ -49,12 +49,6 @@ class Nivel {
 		game.addVisual(personajePrincipal)
 		
 	}
-	
-	// method comandosDeMenu(puntero, boton){	
-	//	keyboard.enter().onPressDo {puntero.interacturaCon_(game.uniqueCollider(puntero))}
-    //	keyboard.left().onPressDo{puntero.moverseEnDir(boton.position(), self.limites(), self.limitesEspecificos())}
-    //	keyboard.right().onPressDo{puntero.moverseEnDir(boton.position().right(4), self.limites(), self.limitesEspecificos())}
-	//}
 	
 	method comandosDelNivel(personajePrincipal){
     	keyboard.e().onPressDo {personajePrincipal.usarAtaqueBasicoContra_(game.uniqueCollider(personajePrincipal))}
@@ -78,10 +72,15 @@ class Nivel {
     method asignarLimites(botones){
 		botones.forEach({boton => limitesEspecificos.add(boton.position())})
 	}
+	
+	method comandosConObjetos(personaje){
+    	keyboard.z().onPressDo{personaje.agarrar(game.uniqueCollider(personaje))}
+    	keyboard.a().onPressDo{personaje.soltar()}		
+	}
 }
 
 class NivelDialogo inherits Nivel{
-	var property dialogos = [dialogoGalioUno, dialogoGalioDos, dialogoGalioTres]
+	var property dialogos 
 	
 	override method comandosDelNivel(atrox){
 		keyboard.alt().onPressDo {self.pasarAlSiguienteDialogo()}
@@ -98,6 +97,10 @@ class NivelDialogo inherits Nivel{
 			self.cargarDialogo()
 		}
 		else organizador.pasarAlSiguienteNivel()
+	}
+	
+	method asignarDialogos(diags){
+		dialogos = diags
 	}
 }
 
@@ -170,6 +173,7 @@ object dialogoNPC1 inherits NivelDialogo{
 		game.clear()
 		self.asignarElementos_EnElNivel([fondoLobbyUno, galio, galioDiag, portalVioleta])
 		self.asignarPersonajePrincipal_AlNivel(atrox)
+		self.asignarDialogos([dialogoGalioUno,dialogoGalioDos,dialogoGalioTres])
 		self.comandosDelNivel(atrox)
 		game.addVisual(dialogos.first())
 	}
@@ -186,6 +190,41 @@ object aguasEstancadas inherits Nivel {
 		self.comandosDeMovimiento(atrox)
 	}
 
+}
+
+object nivelLogica inherits Nivel{
+	method cargarTodo(){
+		game.clear()
+		self.asignarElementos_EnElNivel([fondoNivelLogica, brand, brandDiag])
+		self.asignarPersonajePrincipal_AlNivel(atrox)
+		self.comandosDelNivel(atrox)
+		self.comandosDeMovimiento(atrox)
+		self.comandosDeDialogo(atrox)
+	}
+}
+
+object dialogoNPC3 inherits NivelDialogo{
+	
+	method cargarTodo(){
+		game.clear()
+		self.asignarElementos_EnElNivel([fondoNivelLogica, brand, brandDiag])
+		self.asignarPersonajePrincipal_AlNivel(atrox)
+		self.asignarDialogos([brandDialogoUno,brandDialogoDos, brandDialogoTres, brandDialogoCuatro])
+		self.comandosDelNivel(atrox)
+		game.addVisual(dialogos.first())
+	}
+}
+
+object nivelLogicaBIS inherits Nivel{
+	method cargarTodo(){
+		game.clear()
+		self.asignarElementos_EnElNivel([fondoNivelLogica, espacioALlenar, inventario, espacioALlenar2, espacioALlenar3,espacioALlenar4,espacioALlenar5,espacioALlenar6, banana, litio, oxigeno, uranio])
+		self.asignarPersonajePrincipal_AlNivel(atrox)
+		self.comandosDelNivel(atrox)
+		self.comandosDeMovimiento(atrox)
+		self.comandosDeDialogo(atrox)
+		self.comandosConObjetos(atrox)
+	}
 }
 
 // Objeto informador de errores (Invisible)

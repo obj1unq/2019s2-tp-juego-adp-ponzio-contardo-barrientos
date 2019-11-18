@@ -6,7 +6,7 @@ import Nivel.*
 
 
 program juego {
-    organizador.cargarListaDeNiveles([menuPrincipal,menuDeSeleccionDePersonaje,lobbyUno, dialogoNPC1, lobbyUnoBIS, aguasEstancadas])
+    organizador.cargarListaDeNiveles([menuPrincipal,menuDeSeleccionDePersonaje,lobbyUno, dialogoNPC1, lobbyUnoBIS, nivelLogica, dialogoNPC3, nivelLogicaBIS])
     organizador.actualizar()
     game.addVisual(informadorDeErrores)
     game.errorReporter(informadorDeErrores)

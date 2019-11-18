@@ -38,6 +38,7 @@ class Personaje inherits Puntero {
 	const ataqueBasico
 	var property energia
 	var modoActual = modoDefensa
+	var property objetoActual = []
 	
 	method cambiarASiguienteModo(){
 		if(self.estaEnModoDefensivo()){
@@ -104,6 +105,30 @@ class Personaje inherits Puntero {
 	
 	method escucharAlgo(npc){// Prueba todavia no lo hice andar
 		game.onCollideDo(npc, game.say(npc, "Tengo algo para contarte"))
+	}
+	
+	method agarrar(objeto){
+		if (objetoActual.isEmpty()){
+			objetoActual = [objeto]
+			game.removeVisual(objeto)
+			objeto.cambiarPosicion(game.at(0,6))
+			game.addVisual(objeto)
+		}
+		else{
+			game.say(self, "Ya tengo un objeto")
+		}
+	}
+	
+	method soltar(){
+		if (not objetoActual.isEmpty()){
+			game.removeVisual(objetoActual.first())
+			objetoActual.first().cambiarPosicion(self.position())
+			game.addVisual(objetoActual.first())
+			objetoActual.clear()
+		}
+		else {
+			game.say(self, "No tengo ningun objeto")
+		}
 	}
 	
 	
