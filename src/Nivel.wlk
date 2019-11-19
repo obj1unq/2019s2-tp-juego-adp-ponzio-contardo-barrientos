@@ -223,16 +223,30 @@ object dialogoNPC3 inherits NivelDialogo{
 
 object nivelLogicaBIS inherits Nivel{
 	
+	var property numerosTiempo = [sesenta,cincuentaYNueve,cincuentaYOcho,cincuentaYSiete,cincuentaYSeis,cincuentaYCinco,cincuentaYCuatro,cincuentaYTres,cincuentaYDos]
+	
 	override method limites(){
 		return limitesLogica
+	}
+	
+	method restarTiempo(personaje){
+		if (numerosTiempo.size() > 1){
+			game.removeVisual(numerosTiempo.first())
+			numerosTiempo.remove(numerosTiempo.first())
+			game.addVisual(numerosTiempo.first())	
+		}
+		else{
+			game.removeVisual(numerosTiempo.first())
+			game.removeTickEvent("countDown")
+			game.say(personaje, "Se termino el tiempo")
+		}
 	}
 	
 	method cargarTodo(){
 		game.clear()
 		self.asignarElementos_EnElNivel([fondoNivelLogica, espacioALlenar, inventarioVisual, espacioALlenar2, espacioALlenar3,espacioALlenar4,espacioALlenar5,
-		espacioALlenar6, banana, litio, oxigeno, uranio, oxigeno2, litio2])
+		espacioALlenar6, banana, litio, oxigeno, uranio, oxigeno2, litio2, barraTiempo, sesenta])
 		self.asignarPersonajePrincipal_AlNivel(atrox)
-		self.comandosDelNivel(atrox)
 		self.comandosDeMovimiento(atrox)
 		self.comandosDeDialogo(atrox)
 		self.comandosConObjetos(atrox)
@@ -242,6 +256,7 @@ object nivelLogicaBIS inherits Nivel{
 		game.onCollideDo(litio2, {urn => espacioALlenar4.cambiarImagen("espacioCorrecto.png", litio2)})
 		game.onCollideDo(oxigeno2, {urn => espacioALlenar5.cambiarImagen("espacioCorrecto.png", oxigeno2)})
 		game.onCollideDo(banana, {urn => espacioALlenar6.cambiarImagen("espacioCorrecto.png", banana)})
+		game.onTick(1500, "countDown", {=> self.restarTiempo(atrox)})
 	}
 }
 
