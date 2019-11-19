@@ -1,10 +1,6 @@
 import wollok.game.*
 import Nivel.*
 
-
-
-
-
 program juego {
     organizador.cargarListaDeNiveles([menuPrincipal,menuDeSeleccionDePersonaje,lobbyUno, dialogoNPC1, lobbyUnoBIS, nivelLogica, dialogoNPC3, nivelLogicaBIS])
     organizador.actualizar()

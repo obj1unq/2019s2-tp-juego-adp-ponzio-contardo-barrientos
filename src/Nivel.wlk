@@ -38,7 +38,7 @@ class Nivel {
 	
 	const property limites = limitesGenerales // El personaje no va a poder exceder estas coord. ya que son las de borde 
 	const property limitesEspecificos = [] // El personaje solamente se va a poder mover en las coord de esta lista
-	var property objetosParaAgarrar = [banana, litio, oxigeno, uranio,oxigeno2, litio2] // Objetos a utilizar en el nivel de Logica
+	var property objetosParaAgarrar = [banana, litio, oxigeno, uranio,oxigeno2, litio2,calavera,moneda,oro ,oxido,pirata] // Objetos a utilizar en el nivel de Logica
 	
 	method asignarElementos_EnElNivel(elementosDelNivel){
 		if(not elementosDelNivel.isEmpty()){
@@ -245,7 +245,7 @@ object nivelLogicaBIS inherits Nivel{
 	method cargarTodo(){
 		game.clear()
 		self.asignarElementos_EnElNivel([fondoNivelLogica, espacioALlenar, inventarioVisual, espacioALlenar2, espacioALlenar3,espacioALlenar4,espacioALlenar5,
-		espacioALlenar6, banana, litio, oxigeno, uranio, oxigeno2, litio2, barraTiempo, sesenta])
+		espacioALlenar6, banana, litio, oxigeno, uranio, oxigeno2, litio2, barraTiempo, sesenta, calavera,moneda,oro ,oxido,pirata])
 		self.asignarPersonajePrincipal_AlNivel(atrox)
 		self.comandosDeMovimiento(atrox)
 		self.comandosDeDialogo(atrox)

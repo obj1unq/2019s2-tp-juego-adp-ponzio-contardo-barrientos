@@ -24,6 +24,12 @@ class Visual {
 			position = position.down(1)
 			game.addVisual(self)
 		}
+		else if (game.colliders(self).size() > 1) {
+			game.removeVisual(self)
+			position = position.up(1)
+			game.addVisual(self)
+			game.removeTickEvent("objetoEnCaida")
+		}
 		else {
 			game.removeTickEvent("objetoEnCaida")
 		}
@@ -55,6 +61,11 @@ const litio2 = new Visual(image = "Litio2.png", position = game.at (2,3))
 const oxigeno = new Visual(image = "Oxigeno.png", position = game.at (7,4))
 const oxigeno2 = new Visual(image = "Oxigeno2.png", position = game.at (2,1))
 const uranio = new Visual(image = "Uranio.png", position = game.at (10,5))
+const calavera = new Visual(image = "Calavera.png", position = game.at (3,4))
+const moneda = new Visual(image = "Moneda.png", position = game.at (11,5))
+const oro = new Visual(image = "Oro.png", position = game.at (6,2))
+const oxido = new Visual(image = "Oxido.png", position = game.at (7,5))
+const pirata = new Visual(image = "Pirata.png", position = game.at (9,3))
 
 const barraTiempo = new Visual(image="barraTiempo.png", position = game.at(0,0))
 const sesenta = new Visual(image="60.png", position = game.at(0,5))
