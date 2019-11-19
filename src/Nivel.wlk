@@ -121,8 +121,6 @@ object menuPrincipal inherits Nivel {
 	}
 	
 	method cargarTodo(){
-		
-//		game.schedule(3000, {sound.reproducir()})
 		self.asignarElementos_EnElNivel([fondoMenu, botonIniciarMedio, botonIniciarDerecha, botonIniciarIzquierda, botonSalirIzquierda, botonSalirMedio, botonSalirDerecha, celdaConeccion, celdaInvisible])
 		self.asignarPersonajePrincipal_AlNivel(punteroMenu)
 		self.asignarLimites([botonIniciarIzquierda, botonSalirIzquierda,celdaConeccion])
@@ -188,12 +186,23 @@ object dialogoNPC1 inherits NivelDialogo{
 
 
 object aguasEstancadas inherits Nivel { // Lo saque de la lista de niveles para probar el que estaba haciendo (volver a agregarlo)
+	var tuberiaDelNivel = []
+	const aguaParaNivel = []
+	
+	override method limites(){
+		return limitesAguasEstancadas
+	}
+	
 	method cargarTodo(){
 		game.clear()
 		self.asignarElementos_EnElNivel([fondoAguasEstancadas, nautilus])
 		self.asignarPersonajePrincipal_AlNivel(atrox)
 		self.comandosDelNivel(atrox)
 		self.comandosDeMovimiento(atrox)
+	}
+	
+	method colocarAgua(){
+			
 	}
 
 }

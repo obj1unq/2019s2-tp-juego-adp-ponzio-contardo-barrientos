@@ -4,6 +4,8 @@ import Nivel.*
 import laGrietaDelInvocador.*
 
 program juego {
+//<<<<<<< HEAD
+
 //    organizador.cargarListaDeNiveles([menuPrincipal,menuDeSeleccionDePersonaje,lobbyUno, dialogoNPC1, lobbyUnoBIS, nivelLogica, dialogoNPC3, nivelLogicaBIS])
 //    organizador.actualizar()
 //    game.addVisual(informadorDeErrores)
@@ -12,6 +14,17 @@ program juego {
 //    game.width(14) 
 //	game.height(7)
 //	game.start()
+
+//=======
+//    organizador.cargarListaDeNiveles([menuPrincipal,menuDeSeleccionDePersonaje,lobbyUno, dialogoNPC1, lobbyUnoBIS, aguasEstancadas ,nivelLogica, dialogoNPC3, nivelLogicaBIS])
+//    organizador.actualizar()
+//    game.addVisual(informadorDeErrores)
+//    game.errorReporter(informadorDeErrores)
+//    game.title("Aventura De Portales")
+//    game.width(14) 
+//	game.height(7)
+//	game.start()
+//>>>>>>> branch 'master' of https://github.com/obj1unq/2019s2-tp-juego-adp-ponzio-contardo-barrientos.git
 	
 	laGrietaDelInvocador.iniciar()
 }

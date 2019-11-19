@@ -41,14 +41,12 @@ class Personaje inherits Puntero {
 	var property inventario = []
 	
 	method cambiarASiguienteModo(){
-		if(self.estaEnModoDefensivo()){
-			modoActual = modoAtaque
-		}
-		else {modoActual = modoDefensa}
+		modoActual = modoActual.siguienteModo()
 	}
 	
-	method estaEnModoDefensivo() = (modoActual == modoDefensa)
-	
+	method estaEnModoDefensivo(){
+		return modoActual == modoDefensa
+	}
 	method usarAtaqueBasicoContra_(personaje) {
 		if(not self.estaEnModoDefensivo()) {
 			personaje.recibirDanio(ataqueBasico)
@@ -126,25 +124,22 @@ class Personaje inherits Puntero {
 }
 
 object modoDefensa {
+	const siguienteModo = modoAtaque
 	
-	method regeneracionDeEnergia(){
-		
-	}
+	method regeneracionDeEnergia() = 5
 	
-	method regeneracionDeVida(){
+	method regeneracionDeVida() = 10
 		
-	}
 }
 
 object modoAtaque {
+	const siguienteModo = modoDefensa
 	
-	method regeneracionDeEnergia(){
-		
-	}
+	method regeneracionDeEnergia() = 15
 	
-	method regeneracionDeVida(){
+	
+	method regeneracionDeVida() = 5
 		
-	}
 }
 
 
