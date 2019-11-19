@@ -256,7 +256,7 @@ object nivelLogicaBIS inherits Nivel{
 		game.onCollideDo(litio2, {urn => espacioALlenar4.cambiarImagen("espacioCorrecto.png", litio2)})
 		game.onCollideDo(oxigeno2, {urn => espacioALlenar5.cambiarImagen("espacioCorrecto.png", oxigeno2)})
 		game.onCollideDo(banana, {urn => espacioALlenar6.cambiarImagen("espacioCorrecto.png", banana)})
-		game.onTick(1000, "countDown", {=> self.restarTiempo(atrox)})
+		game.onTick(1200, "countDown", {=> self.restarTiempo(atrox)})
 	}
 }
 
