@@ -187,6 +187,7 @@ object dialogoNPC1 inherits NivelDialogo{
 
 object aguasEstancadas inherits Nivel { // Lo saque de la lista de niveles para probar el que estaba haciendo (volver a agregarlo)
 	var tuberiaDelNivel = []
+	const aguaParaNivel = []
 	
 	override method limites(){
 		return limitesAguasEstancadas
