@@ -185,26 +185,17 @@ object dialogoNPC1 inherits NivelDialogo{
 
 
 
-object aguasEstancadas inherits Nivel { // Lo saque de la lista de niveles para probar el que estaba haciendo (volver a agregarlo)
-	var tuberiaDelNivel = []
-	const aguaParaNivel = []
-	
-	override method limites(){
-		return limitesAguasEstancadas
-	}
-	
+object aguasEstancadas inherits Nivel { 
+	const listaDeEnemigos = [nautilus,gankplank]
+	override method limites() = limitesAguasEstancadas
 	method cargarTodo(){
 		game.clear()
-		self.asignarElementos_EnElNivel([fondoAguasEstancadas, nautilus])
+		self.asignarElementos_EnElNivel([fondoAguasEstancadas, nautilus, gankplank])
 		self.asignarPersonajePrincipal_AlNivel(atrox)
 		self.comandosDelNivel(atrox)
 		self.comandosDeMovimiento(atrox)
+		listaDeEnemigos.forEach({enemigo => enemigo.mover_Veces(4)})
 	}
-	
-	method colocarAgua(){
-			
-	}
-
 }
 
 object nivelLogica inherits Nivel{
@@ -268,6 +259,17 @@ object nivelLogicaBIS inherits Nivel{
 		game.onTick(1200, "countDown", {=> self.restarTiempo(atrox)})
 	}
 }
+
+
+
+
+
+
+object grietaDelInvocador inherits Nivel{
+	
+	
+}
+
 
 // Objeto informador de errores (Invisible)
 object informadorDeErrores {

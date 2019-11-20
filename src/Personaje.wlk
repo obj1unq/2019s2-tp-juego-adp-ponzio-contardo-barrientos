@@ -123,6 +123,26 @@ class Personaje inherits Puntero {
 	}	
 }
 
+
+class Enemigo inherits Personaje {
+	
+	method moverseASiguientePosicion(){
+    	self.position(game.at( position.x() - 1, position.y() - 1 ))
+	}
+	
+	method mover_Veces(cantidad){
+		game.onTick(2000, "Mover Enemigo", {self.moverseASiguientePosicion()})
+		game.schedule((cantidad * 2000) - 1, {game.removeTickEvent("Mover Enemigo")})
+	}
+}
+
+
+
+
+
+
+
+
 object modoDefensa {
 	const siguienteModo = modoAtaque
 	
@@ -146,7 +166,8 @@ object modoAtaque {
 
 // Personajes
 const atrox = new Personaje (image = "atrox.png", position = game.at(1,0), puntosDeSalud = 100, energia = 120, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
-const nautilus = new Personaje (image = "nautilus.png", position = game.at(2,0), puntosDeSalud = 200, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
+const nautilus = new Enemigo (image = "nautilus.png", position = game.at(9,6), puntosDeSalud = 200, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
+const gankplank = new Enemigo (image = "Gankplank.png", position = game.at(8,5), puntosDeSalud = 200, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
 const punteroMenu = new Puntero(image = "seleccionInicial.png", position = game.at(4,1))
 const punteroMenuSeleccion = new Puntero(image = "SeleccionadorPersonaje.png", position = game.at(8,5))
 
