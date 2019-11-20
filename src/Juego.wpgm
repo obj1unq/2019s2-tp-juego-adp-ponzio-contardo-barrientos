@@ -1,4 +1,5 @@
 import wollok.game.*
+import Personaje.*
 import Nivel.*
 
 import laGrietaDelInvocador.*
@@ -9,6 +10,7 @@ program juego {
     game.addVisual(informadorDeErrores)
 	game.errorReporter(informadorDeErrores)
     game.title("Aventura De Portales")
+    game.showAttributes(atrox)
     game.width(14) 
 	game.height(7)
 	game.start()

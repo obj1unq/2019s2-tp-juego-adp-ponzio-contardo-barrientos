@@ -84,6 +84,11 @@ class Nivel {
 		objetosParaAgarrar.forEach({objeto => objeto.cambiarPosicion(posicionesOriginales.anyOne())})
 		self.asignarElementos_EnElNivel(objetosParaAgarrar)
 	}
+	
+	method regenracionDeVidaYEnergia(personaje){
+		personaje.recibirEnergia(personaje.modoActual().regeneracionDeEnergia())
+		personaje.recibirCuracion(personaje.modoActual().regeneracionDeVida())
+	}
 }
 
 class NivelDialogo inherits Nivel{
@@ -181,20 +186,21 @@ object dialogoNPC1 inherits NivelDialogo{
 		self.comandosDeDialogo(atrox)
 		game.addVisual(dialogos.first())
 	}
-}
+} 
 
 
 
 object aguasEstancadas inherits Nivel { 
-	const listaDeEnemigos = [nautilus,gankplank]
+	const listaDeEnemigos = [nautilus,pyke,graves]
 	override method limites() = limitesAguasEstancadas
 	method cargarTodo(){
 		game.clear()
-		self.asignarElementos_EnElNivel([fondoAguasEstancadas, nautilus, gankplank])
+		self.asignarElementos_EnElNivel([fondoAguasEstancadas, nautilus,pyke,graves])
 		self.asignarPersonajePrincipal_AlNivel(atrox)
 		self.comandosDelNivel(atrox)
 		self.comandosDeMovimiento(atrox)
 		listaDeEnemigos.forEach({enemigo => enemigo.mover_Veces(4)})
+		game.onTick(10000, "Regeneracion", {self.regenracionDeVidaYEnergia(atrox)})
 	}
 }
 
@@ -210,7 +216,7 @@ object nivelLogica inherits Nivel{
 }
 
 object dialogoNPC3 inherits NivelDialogo{
-	
+	 
 	method cargarTodo(){
 		game.clear()
 		self.asignarElementos_EnElNivel([fondoNivelLogica, brand, brandDiag])

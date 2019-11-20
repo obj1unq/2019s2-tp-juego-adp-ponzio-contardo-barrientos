@@ -35,25 +35,36 @@ class Puntero {
 class Personaje inherits Puntero {
 	var property puntosDeSalud
 	var ataqueEspecial
-	const ataqueBasico
+	const property ataqueBasico
 	var property energia
-	var modoActual = modoDefensa
+	var property modoActual = modoAtaque
 	var property inventario = []
 	
 	method cambiarASiguienteModo(){
 		modoActual = modoActual.siguienteModo()
 	}
-	
+		
 	method estaEnModoDefensivo(){
 		return modoActual == modoDefensa
 	}
+	
+	
 	method usarAtaqueBasicoContra_(personaje) {
 		if(not self.estaEnModoDefensivo()) {
 			personaje.recibirDanio(ataqueBasico)
+			self.recibirDanio(personaje.ataqueBasico())
 			self.eliminarEnemigo(personaje)
+			self.eliminarPersonajeActual()
 		} else { game.say(self, "Necesito estar en modo ataque") }
 
 	}
+	
+	method eliminarPersonajeActual(){
+		if(self.estaMuerto(self)){
+			game.stop()
+		}
+	}	
+
 	
 	method tieneSuficienteEnergia(ataque) = ataque.energiaConsumida() <= energia
 
@@ -61,7 +72,9 @@ class Personaje inherits Puntero {
 		if(not self.estaEnModoDefensivo() and self.tieneSuficienteEnergia(ataqueEspecial)) {
 			energia = energia - ataqueEspecial.energiaConsumida()
 			personaje.recibirDanio(ataqueEspecial)
+			self.recibirDanio(personaje.ataqueBasico())
 			self.eliminarEnemigo(personaje)
+			self.eliminarPersonajeActual()
 		} 
 		else if(not self.tieneSuficienteEnergia(ataqueEspecial)){
 			  game.say(self, "No tengo suficiente energia")
@@ -120,7 +133,17 @@ class Personaje inherits Puntero {
 		else {
 			game.say(self, "No tengo un objeto para soltar")
 		}
-	}	
+	}
+	
+	method recibirEnergia(cantidad) {
+		energia = (energia + cantidad).min(120)
+		self.energia()
+	}
+	
+	method recibirCuracion(cantidad) {
+		puntosDeSalud = (puntosDeSalud + cantidad).min(100)
+		self.puntosDeSalud()
+	}
 }
 
 
@@ -134,6 +157,8 @@ class Enemigo inherits Personaje {
 		game.onTick(2000, "Mover Enemigo", {self.moverseASiguientePosicion()})
 		game.schedule((cantidad * 2000) - 1, {game.removeTickEvent("Mover Enemigo")})
 	}
+	
+	
 }
 
 
@@ -144,7 +169,7 @@ class Enemigo inherits Personaje {
 
 
 object modoDefensa {
-	const siguienteModo = modoAtaque
+	const property siguienteModo = modoAtaque
 	
 	method regeneracionDeEnergia() = 5
 	
@@ -153,7 +178,7 @@ object modoDefensa {
 }
 
 object modoAtaque {
-	const siguienteModo = modoDefensa
+	const property siguienteModo = modoDefensa
 	
 	method regeneracionDeEnergia() = 15
 	
@@ -164,10 +189,13 @@ object modoAtaque {
 
 
 
+
+
 // Personajes
 const atrox = new Personaje (image = "atrox.png", position = game.at(1,0), puntosDeSalud = 100, energia = 120, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
 const nautilus = new Enemigo (image = "nautilus.png", position = game.at(9,6), puntosDeSalud = 200, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
-const gankplank = new Enemigo (image = "Gankplank.png", position = game.at(8,5), puntosDeSalud = 200, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
+const pyke = new Enemigo (image = "Pyke.png", position = game.at(5,5), puntosDeSalud = 200, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
+const graves = new Enemigo (image = "Graves.png", position = game.at(7,8), puntosDeSalud = 200, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
 const punteroMenu = new Puntero(image = "seleccionInicial.png", position = game.at(4,1))
 const punteroMenuSeleccion = new Puntero(image = "SeleccionadorPersonaje.png", position = game.at(8,5))
 
