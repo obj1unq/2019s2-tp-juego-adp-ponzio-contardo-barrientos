@@ -5,12 +5,14 @@ import Nivel.*
 import laGrietaDelInvocador.*
 
 program juego {
-    organizador.cargarListaDeNiveles([dialogoNPC3,nivelLogicaBIS, aguasEstancadas])
-    organizador.actualizar()
-    game.addVisual(informadorDeErrores)
-	game.errorReporter(informadorDeErrores)
-    game.title("Aventura De Portales")
-    game.width(14) 
-	game.height(7)
-	game.start()
+//    organizador.cargarListaDeNiveles([dialogoNPC3,nivelLogicaBIS, aguasEstancadas])
+//    organizador.actualizar()
+//    game.addVisual(informadorDeErrores)
+//	game.errorReporter(informadorDeErrores)
+//    game.title("Aventura De Portales")
+//    game.width(14) 
+//	game.height(7)
+//	game.start()
+
+	GrietaDelInvocador.iniciar()
 } 
