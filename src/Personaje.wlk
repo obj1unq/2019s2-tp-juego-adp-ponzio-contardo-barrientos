@@ -63,6 +63,7 @@ class Personaje inherits Perso {
 	
 	method usarAtaqueBasicoContra_(personaje) {
 		if(not self.estaEnModoDefensivo()) {
+			game.sound("AatroxAtaqueBasico.mp3")
 			personaje.recibirDanio(ataqueBasico)
 			self.recibirDanio(personaje.ataqueBasico())
 			self.eliminarEnemigo(personaje)
@@ -81,6 +82,7 @@ class Personaje inherits Perso {
 
 	method usarHabilidadEspecialContra_(personaje) {
 		if(not self.estaEnModoDefensivo() and self.tieneSuficienteEnergia(ataqueEspecial)) {
+			game.sound("AatroxHabilidad.mp3")
 			energia = energia - ataqueEspecial.energiaConsumida()
 			personaje.recibirDanio(ataqueEspecial)
 			self.recibirDanio(personaje.ataqueBasico())

@@ -57,8 +57,8 @@ class Nivel {
 	}
 	
 	method comandosDelNivel(personajePrincipal){
-    	keyboard.e().onPressDo {personajePrincipal.usarAtaqueBasicoContra_(game.uniqueCollider(personajePrincipal))}
-    	keyboard.r().onPressDo {personajePrincipal.usarHabilidadEspecialContra_(game.uniqueCollider(personajePrincipal))}
+    	keyboard.e().onPressDo {personajePrincipal.usarAtaqueBasicoContra_(game.uniqueCollider(personajePrincipal)) }
+    	keyboard.r().onPressDo {personajePrincipal.usarHabilidadEspecialContra_(game.uniqueCollider(personajePrincipal)) }
     	keyboard.c().onPressDo {personajePrincipal.cambiarASiguienteModo()}
 	}
     		
@@ -136,7 +136,7 @@ class NivelDialogo inherits Nivel{
 object menuPrincipal inherits Nivel {
 	
 	method comandosDeMenu(puntero, boton){	
-		keyboard.enter().onPressDo {puntero.interacturaCon_(game.uniqueCollider(puntero))}
+		keyboard.enter().onPressDo {puntero.interacturaCon_(game.uniqueCollider(puntero)) game.sound("PunteroClick.mp3")}
     	keyboard.left().onPressDo{puntero.moverseEnDir(boton.position(), self.limites(), self.limitesEspecificos())}
     	keyboard.right().onPressDo{puntero.moverseEnDir(boton.position().right(4), self.limites(), self.limitesEspecificos())}
 	}
@@ -220,7 +220,7 @@ object aguasEstancadas inherits Nivel {
 	
 	method cargarTodo(){
 		game.clear()
-		self.asignarElementos_EnElNivel([fondoAguasEstancadas, nautilus,pyke,graves])
+		self.asignarElementos_EnElNivel([fondoAguasEstancadas, nautilus,pyke,graves,signoVida, signoEnergia, signoModoCombateOn])
 		self.asignarPersonajePrincipal_AlNivel(atrox)
 		self.comandosDelNivel(atrox)
 		self.comandosDeMovimiento(atrox)

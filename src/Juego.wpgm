@@ -5,7 +5,7 @@ import Nivel.*
 import laGrietaDelInvocador.*
 
 program juego {
-    organizador.cargarListaDeNiveles([menuPrincipal,menuDeSeleccionDePersonaje,lobbyUno, dialogoNPC1, lobbyUnoBIS, nivelLogica, dialogoNPC3, nivelLogicaBIS])
+    organizador.cargarListaDeNiveles([menuPrincipal,aguasEstancadas])
     organizador.actualizar()
     game.addVisual(informadorDeErrores)
 	game.errorReporter(informadorDeErrores)

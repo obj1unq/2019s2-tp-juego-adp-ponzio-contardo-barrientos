@@ -77,3 +77,9 @@ const cincuentaYCinco = new Visual(image = "55.png", position = game.at(0,5))
 const cincuentaYCuatro = new Visual(image = "54.png", position = game.at(0,5))
 const cincuentaYTres = new Visual(image = "53.png", position = game.at(0,5))
 const cincuentaYDos = new Visual(image = "52.png", position = game.at(0,5))
+
+const signoVida = new Visual(image = "IconoSalud.png", position = game.at(6,0))
+const signoEnergia = new Visual(image = "IconoEnergia.png", position = game.at(8,0))
+const signoModoCombateOn = new Visual(image = "ModoPeleaOn.png", position = game.at(10,0))
+const signoModoCombateOff = new Visual(image = "ModoPeleaOff.png", position = game.at(10,0))
+
