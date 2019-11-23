@@ -9,12 +9,8 @@ class Visual {
 	}
 	
 	method cambiarImagen(imagen, objeto){
-		if (game.colliders(self).contains(objeto)){
-			image = imagen
-		}
-		else {
-			image = "espacioErroneo.png"
-		}
+		if (game.colliders(self).contains(objeto)){image = imagen}
+		else {image = "espacioErroneo.png"}
 	}
 	
 	method caerHastaElFinal(personaje){
@@ -42,6 +38,8 @@ const fondoLobbyUno = new Visual(image = "FondoLobbyUno.png" , position = game.a
 const fondoAguasEstancadas = new Visual(image = "FondoAguasEstancadas.png" , position = game.at(0,0))
 
 const fondoNivelLogica = new Visual(image = "nivelMatFondo.png", position = game.at(0,0))
+const fondoFinalMalo = new Visual(image = "fondoFinalMalo.png", position = game.at(0,0))
+const fondoFinalBueno = new Visual(image = "finalBueno.png", position = game.at(0,0))
 
 // Celdas Nivel Logica 
 
@@ -77,6 +75,57 @@ const cincuentaYCinco = new Visual(image = "55.png", position = game.at(0,5))
 const cincuentaYCuatro = new Visual(image = "54.png", position = game.at(0,5))
 const cincuentaYTres = new Visual(image = "53.png", position = game.at(0,5))
 const cincuentaYDos = new Visual(image = "52.png", position = game.at(0,5))
+const cincuentaYUno = new Visual(image = "51.png", position = game.at(0,5))
+const cincuenta = new Visual(image = "50.png", position = game.at(0,5))
+const cuarentaYNueve = new Visual(image = "49.png", position = game.at(0,5))
+const cuarentaYOcho = new Visual(image = "48.png", position = game.at(0,5))
+const cuarentaYSiete = new Visual(image = "47.png", position = game.at(0,5))
+const cuarentaYSeis = new Visual(image = "46.png", position = game.at(0,5))
+const cuarentaYCinco = new Visual(image = "45.png", position = game.at(0,5))
+const cuarentaYCuatro = new Visual(image = "44.png", position = game.at(0,5))
+const cuarentaYTres = new Visual(image = "43.png", position = game.at(0,5))
+const cuarentaYDos = new Visual(image = "42.png", position = game.at(0,5))
+const cuarentaYUno = new Visual(image = "41.png", position = game.at(0,5))
+const cuarenta = new Visual(image = "40.png", position = game.at(0,5))
+const treintaYNueve = new Visual(image = "39.png", position = game.at(0,5))
+const treintaYOcho = new Visual(image = "38.png", position = game.at(0,5))
+const treintaYSiete = new Visual(image = "37.png", position = game.at(0,5))
+const treintaYSeis = new Visual(image = "36.png", position = game.at(0,5))
+const treintaYCinco = new Visual(image = "35.png", position = game.at(0,5))
+const treintaYCuatro = new Visual(image = "34.png", position = game.at(0,5))
+const treintaYTres = new Visual(image = "33.png", position = game.at(0,5))
+const treintaYDos = new Visual(image = "32.png", position = game.at(0,5))
+const treintaYUno = new Visual(image = "31.png", position = game.at(0,5))
+const treinta = new Visual(image = "30.png", position = game.at(0,5))
+const veintinueve = new Visual(image = "29.png", position = game.at(0,5))
+const veintiocho = new Visual(image = "28.png", position = game.at(0,5))
+const veintisiete = new Visual(image = "27.png", position = game.at(0,5))
+const veintiseis = new Visual(image = "26.png", position = game.at(0,5))
+const veinticinco = new Visual(image = "25.png", position = game.at(0,5))
+const veinticuatro = new Visual(image = "24.png", position = game.at(0,5))
+const veintitres = new Visual(image = "23.png", position = game.at(0,5))
+const veintidos = new Visual(image = "22.png", position = game.at(0,5))
+const veintiuno = new Visual(image = "21.png", position = game.at(0,5))
+const veinte = new Visual(image = "20.png", position = game.at(0,5))
+const diecinueve = new Visual(image = "19.png", position = game.at(0,5))
+const dieciocho = new Visual(image = "18.png", position = game.at(0,5))
+const diecisiete = new Visual(image = "17.png", position = game.at(0,5))
+const dieciseis = new Visual(image = "16.png", position = game.at(0,5))
+const quince = new Visual(image = "15.png", position = game.at(0,5))
+const catorce = new Visual(image = "14.png", position = game.at(0,5))
+const trece = new Visual(image = "13.png", position = game.at(0,5))
+const doce = new Visual(image = "12.png", position = game.at(0,5))
+const once = new Visual(image = "11.png", position = game.at(0,5))
+const diez = new Visual(image = "10.png", position = game.at(0,5))
+const nueve = new Visual(image = "9.png", position = game.at(0,5))
+const ocho = new Visual(image = "8.png", position = game.at(0,5))
+const siete = new Visual(image = "7.png", position = game.at(0,5))
+const seis = new Visual(image = "6.png", position = game.at(0,5))
+const cinco = new Visual(image = "5.png", position = game.at(0,5))
+const cuatro = new Visual(image = "4.png", position = game.at(0,5))
+const tres = new Visual(image = "3.png", position = game.at(0,5))
+const dos = new Visual(image = "2.png", position = game.at(0,5))
+const uno = new Visual(image = "1.png", position = game.at(0,5))
 
 const signoVida = new Visual(image = "IconoSalud.png", position = game.at(6,0))
 const signoEnergia = new Visual(image = "IconoEnergia.png", position = game.at(8,0))

@@ -258,22 +258,28 @@ object dialogoNPC3 inherits NivelDialogo{
 
 object nivelLogicaBIS inherits Nivel{
 	
-	var property numerosTiempo = [sesenta,cincuentaYNueve,cincuentaYOcho,cincuentaYSiete,cincuentaYSeis,cincuentaYCinco,cincuentaYCuatro,cincuentaYTres,cincuentaYDos]
+	var property numerosTiempo = countDown60
+	const property celdasALlenar = [espacioALlenar,espacioALlenar2,espacioALlenar3,espacioALlenar4,espacioALlenar5,espacioALlenar6]
 	
-	override method limites(){
-		return limitesLogica
+	override method limites(){return limitesLogica}
+	
+	method analizarJugada(celdas){
+		if ( celdas.all({celda => (celda.image() == "espacioCorrecto.png")}) ){
+			finalBueno.cargarTodo()
+		}
 	}
 	
 	method restarTiempo(personaje){
 		if (numerosTiempo.size() > 1){
 			game.removeVisual(numerosTiempo.first())
 			numerosTiempo.remove(numerosTiempo.first())
-			game.addVisual(numerosTiempo.first())	
+			game.addVisual(numerosTiempo.first())
+			self.analizarJugada(celdasALlenar)	
 		}
 		else{
 			game.removeVisual(numerosTiempo.first())
 			game.removeTickEvent("countDown")
-			game.say(personaje, "Se termino el tiempo")
+			finalMalo.cargarTodo()
 		}
 	}
 	
@@ -286,12 +292,44 @@ object nivelLogicaBIS inherits Nivel{
 		self.comandosDeDialogo(atrox)
 		self.comandosConObjetos(atrox)
 		game.onCollideDo(uranio, {urn => espacioALlenar.cambiarImagen("espacioCorrecto.png", uranio)})
-		game.onCollideDo(oxigeno, {urn => espacioALlenar2.cambiarImagen("espacioCorrecto.png", oxigeno)})
-		game.onCollideDo(litio, {urn => espacioALlenar3.cambiarImagen("espacioCorrecto.png", litio)})
-		game.onCollideDo(litio2, {urn => espacioALlenar4.cambiarImagen("espacioCorrecto.png", litio2)})
-		game.onCollideDo(oxigeno2, {urn => espacioALlenar5.cambiarImagen("espacioCorrecto.png", oxigeno2)})
-		game.onCollideDo(banana, {urn => espacioALlenar6.cambiarImagen("espacioCorrecto.png", banana)})
-		game.onTick(1200, "countDown", {=> self.restarTiempo(atrox)})
+		game.onCollideDo(oxigeno, {oxg => espacioALlenar2.cambiarImagen("espacioCorrecto.png", oxigeno)})
+		game.onCollideDo(litio, {lit => espacioALlenar3.cambiarImagen("espacioCorrecto.png", litio)})
+		game.onCollideDo(litio2, {lit => espacioALlenar4.cambiarImagen("espacioCorrecto.png", litio2)})
+		game.onCollideDo(oxigeno2, {oxg => espacioALlenar5.cambiarImagen("espacioCorrecto.png", oxigeno2)})
+		game.onCollideDo(banana, {bnn=> espacioALlenar6.cambiarImagen("espacioCorrecto.png", banana)})
+		game.onTick(1000, "countDown", {=> self.restarTiempo(atrox)})
+	}
+}
+
+object finalMalo inherits NivelDialogo{
+	
+	override method comandosDeDialogo(atrox){
+		keyboard.alt().onPressDo {game.stop()}
+	}
+	 
+	method cargarTodo(){
+		game.clear()
+		self.asignarElementos_EnElNivel([fondoFinalMalo])
+		self.asignarPersonajePrincipal_AlNivel(atrox)
+		self.asignarDialogos([brandDialogoMalo])
+		self.comandosDeDialogo(atrox)
+		game.addVisual(dialogos.first())
+	}
+}
+
+object finalBueno inherits NivelDialogo{
+	
+	override method comandosDeDialogo(atrox){
+		keyboard.alt().onPressDo {game.stop()}
+	}
+	 
+	method cargarTodo(){
+		game.clear()
+		self.asignarElementos_EnElNivel([fondoFinalBueno])
+		self.asignarPersonajePrincipal_AlNivel(atrox)
+		self.asignarDialogos([brandDialogoBueno])
+		self.comandosDeDialogo(atrox)
+		game.addVisual(dialogos.first())
 	}
 }
 
