@@ -39,19 +39,17 @@ class Puntero {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////// PERSONAJE ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Perso inherits Puntero{
+
+
+
+
+class Personaje inherits Puntero{
+	var property puntosDeSalud
+	var property energia
 	var property modoActual = modoAtaque
 	var property inventario = []
 	var ataqueEspecial
 	const property ataqueBasico
-}
-
-
-
-class Personaje inherits Perso {
-	var property puntosDeSalud
-	var property energia
-
 	
 	method cambiarASiguienteModo(){
 		modoActual = modoActual.siguienteModo()
@@ -151,7 +149,7 @@ class Personaje inherits Perso {
 	}
 	
 	method recibirEnergia(cantidad) {
-		energia = (energia + cantidad).min(120)
+		energia = (energia + cantidad).min(100)
 		self.energia()
 	}
 	
@@ -208,7 +206,7 @@ object modoAtaque {
 ///////////////////////////////////////////////// PERSONAJES ///////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const atrox = new Personaje (image = "atrox.png", position = game.at(1,0), puntosDeSalud = 100, energia = 120, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
+const atrox = new Personaje (image = "AtroxMovimiento.png", position = game.at(1,0), puntosDeSalud = 100, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
 const nautilus = new Enemigo (image = "nautilus.png", position = game.at(9,6), puntosDeSalud = 200, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
 const pyke = new Enemigo (image = "Pyke.png", position = game.at(5,5), puntosDeSalud = 200, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
 const graves = new Enemigo (image = "Graves.png", position = game.at(7,8), puntosDeSalud = 200, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)

@@ -5,6 +5,7 @@ import Visual.*
 import Boton.*
 import Portal.*
 import Limites.*
+import Medidor.*
 object organizador inherits OrganizadorDeNiveles{
 		
 }
@@ -214,19 +215,30 @@ object dialogoNPC1 inherits NivelDialogo{
 
 object aguasEstancadas inherits Nivel { 
 	const listaDeEnemigos = [nautilus,pyke,graves]
+	const numeroVida = signoVida.valoresDelMedidor()
+	const numerosEnergia = signoEnergia.valoresDelMedidor()
 	override method limites() = limitesAguasEstancadas
 	
 	
 	
 	method cargarTodo(){
 		game.clear()
-		self.asignarElementos_EnElNivel([fondoAguasEstancadas, nautilus,pyke,graves,signoVida, signoEnergia, signoModoCombateOn])
+		self.asignarElementos_EnElNivel([fondoAguasEstancadas, nautilus,pyke,graves,signoVida, signoEnergia, signoModoCombateOn,signoVida.valorActual() , signoEnergia.valorActual()])
 		self.asignarPersonajePrincipal_AlNivel(atrox)
 		self.comandosDelNivel(atrox)
 		self.comandosDeMovimiento(atrox)
 		listaDeEnemigos.forEach({enemigo => enemigo.mover_Veces(4)})
 		game.onTick(10000, "Regeneracion", {self.regenracionDeVidaYEnergia(atrox)})
+		
+		game.onTick(3000, "ActualizacionContador", {
+			game.removeVisual(signoVida.valorActual())
+			game.removeVisual(signoEnergia.valorActual())
+			signoVida.actualizarValorActual(atrox.puntosDeSalud())
+			signoEnergia.actualizarValorActual(atrox.energia())
+			game.addVisual(signoVida.valorActual()) 
+			game.addVisual(signoEnergia.valorActual())})
 	}
+	
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
