@@ -179,6 +179,7 @@ object lobbyUno inherits Nivel {
 		self.asignarPersonajePrincipal_AlNivel(atrox)
 		self.comandosDeMovimiento(atrox)
 		self.comandosDeDialogo(atrox)
+		game.showAttributes(atrox)
 	}
 }
 
@@ -214,6 +215,9 @@ object dialogoNPC1 inherits NivelDialogo{
 object aguasEstancadas inherits Nivel { 
 	const listaDeEnemigos = [nautilus,pyke,graves]
 	override method limites() = limitesAguasEstancadas
+	
+	
+	
 	method cargarTodo(){
 		game.clear()
 		self.asignarElementos_EnElNivel([fondoAguasEstancadas, nautilus,pyke,graves])

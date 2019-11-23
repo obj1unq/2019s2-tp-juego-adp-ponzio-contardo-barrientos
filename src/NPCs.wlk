@@ -7,17 +7,14 @@ import Nivel.*
 
 class NPC {
 	const property image
-	const property position
-	const property dialogo 
+	const property position 
 	
 	method cargarSiguienteParte() {
 		organizador.pasarAlSiguienteNivel()
 	}
 	
 	method pasarAlSiguienteDialogo_() {
-		game.removeVisual(dialogo.first())
-		dialogo.remove(dialogo.first())
-		self.cargarDialogo()
+		self.cargarSiguienteParte()
 	}
 }
 

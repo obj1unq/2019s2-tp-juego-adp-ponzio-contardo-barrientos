@@ -11,6 +11,7 @@ import Boton.*
 class Puntero {
 	var property image
 	var property position
+
 	
 	method interacturaCon_(boton){
 		boton.ejecutarAccion()
@@ -38,14 +39,19 @@ class Puntero {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////// PERSONAJE ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-class Personaje inherits Puntero {
-	var property puntosDeSalud
-	var ataqueEspecial
-	const property ataqueBasico
-	var property energia
+class Perso inherits Puntero{
 	var property modoActual = modoAtaque
 	var property inventario = []
+	var ataqueEspecial
+	const property ataqueBasico
+}
+
+
+
+class Personaje inherits Perso {
+	var property puntosDeSalud
+	var property energia
+
 	
 	method cambiarASiguienteModo(){
 		modoActual = modoActual.siguienteModo()

@@ -13,4 +13,4 @@ program juego {
     game.width(14) 
 	game.height(7)
 	game.start()
-}
+} 
