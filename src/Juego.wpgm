@@ -15,5 +15,4 @@ program juego {
     game.width(14) 
 	game.height(7)
 	menuDeSelccionDeModo.confg()
-	game.start()
 } 

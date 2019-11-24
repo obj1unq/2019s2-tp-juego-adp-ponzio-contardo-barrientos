@@ -32,14 +32,14 @@ class Visual {
 	}
 }
 
+
 const fondoMenu = new Visual(image = "FondoMenuPrincipal.png" , position = game.at(0,0))
 const fondoMenuSeleccion = new Visual(image = "FondoMenuSeleccion1.png" , position = game.at(0,0))
 const fondoLobbyUno = new Visual(image = "FondoLobbyUno.png" , position = game.at(0,0))
 const fondoAguasEstancadas = new Visual(image = "FondoAguasEstancadas.png" , position = game.at(0,0))
 
 const fondoNivelLogica = new Visual(image = "nivelMatFondo.png", position = game.at(0,0))
-const fondoFinalMalo = new Visual(image = "fondoFinalMalo.png", position = game.at(0,0))
-const fondoFinalBueno = new Visual(image = "finalBueno.png", position = game.at(0,0))
+const fondoFinal = new Visual(image = "fondoFinal.png", position = game.at(0,0))
 
 // Celdas Nivel Logica 
 
@@ -127,8 +127,8 @@ const tres = new Visual(image = "3.png", position = game.at(0,5))
 const dos = new Visual(image = "2.png", position = game.at(0,5))
 const uno = new Visual(image = "1.png", position = game.at(0,5))
 
-const signoVida = new Visual(image = "IconoSalud.png", position = game.at(6,0))
-const signoEnergia = new Visual(image = "IconoEnergia.png", position = game.at(8,0))
+
+
 const signoModoCombateOn = new Visual(image = "ModoPeleaOn.png", position = game.at(10,0))
 const signoModoCombateOff = new Visual(image = "ModoPeleaOff.png", position = game.at(10,0))
 
