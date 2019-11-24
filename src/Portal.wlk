@@ -1,11 +1,21 @@
 import wollok.game.*
 import Nivel.*
 
-object portalVioleta {
-	const property image =  "Portal-Violeta.png"
-	const property position = game.at(5,3)
-	
+class Portal {
 	method cargarSiguienteParte() {
 		organizador.pasarAlSiguienteNivel()
 	}
+}
+
+
+object portalVioleta inherits Portal {
+	const property image =  "Portal-Violeta.png"
+	const property position = game.at(5,3)
+	
+}
+
+object portalDorado inherits Portal {
+	const property image =  "Portal-Dorado.png"
+	const property position = game.at(7,6)
+	
 }

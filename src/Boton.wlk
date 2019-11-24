@@ -1,12 +1,30 @@
 import wollok.game.*
 import Nivel.*
 import Personaje.*
+import Ataques.*
+import Portal.*
 
 class Boton {
-	method ejecutarAccion(){
+	method cargarSiguienteParte(){
 		organizador.pasarAlSiguienteNivel()
 	}
 }
+object botonAssenso inherits Boton {
+	const property image =  "botonAssenso.png"
+	var   property position = game.at(-1,-1)		
+	
+	override method cargarSiguienteParte(){
+		atrox.cambiarAspecto()
+		atrox.mejorarHabilidadEspecial(furiaDarking)
+		atrox.actualizarPersonajeEnNivel()
+		game.sound("Assenso.mp3")
+		game.addVisual(portalDorado)
+	}
+	
+	method fijarNuevaPosicion(posicion){
+		position = posicion
+	}
+} 
 
 object botonSeleccionAatrox inherits Boton {
 	const property image =  "AatroxIcono.png"
@@ -43,7 +61,7 @@ object botonSalirIzquierda inherits Boton {
 	const property image =  "BotonSalir.png"
 	const property position = game.at(8,1)
 	
-	override method ejecutarAccion(){
+	override method cargarSiguienteParte(){
 		game.stop()
 	}
 }
@@ -52,7 +70,7 @@ object botonSalirMedio inherits Boton {
 	const property image =  "CeldaVacia.png"
 	const property position = game.at(9,1)
 	
-	override method ejecutarAccion(){
+	override method cargarSiguienteParte(){
 		game.stop()
 	}
 }
@@ -61,7 +79,7 @@ object botonSalirDerecha inherits Boton {
 	const property image =  "CeldaVacia.png"
 	const property position = game.at(10,1)
 	
-	override method ejecutarAccion(){
+	override method cargarSiguienteParte(){
 		game.stop()
 	}
 }

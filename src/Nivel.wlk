@@ -104,7 +104,7 @@ class Nivel {
 class NivelDialogo inherits Nivel{
 	var property dialogos 
 	
-	override method comandosDeDialogo(atrox){
+	override method comandosDeDialogo(personaje){
 		keyboard.alt().onPressDo {self.pasarAlSiguienteDialogo()}
 	}
 	
@@ -119,6 +119,32 @@ class NivelDialogo inherits Nivel{
 			self.cargarDialogo()
 		}
 		else organizador.pasarAlSiguienteNivel()
+	}
+	
+	method asignarDialogos(diags){
+		dialogos = diags
+	}
+}
+
+class NivelConDialogosInternos inherits Nivel {
+	var property dialogos 
+	
+	override method comandosDeDialogo(personaje){
+		keyboard.control().onPressDo {personaje.interacturaCon_(game.uniqueCollider(personaje))}
+		keyboard.alt().onPressDo {self.pasarAlSiguienteDialogo()}
+	}
+	
+	method cargarDialogo() {
+		game.addVisual(dialogos.first())
+	}
+	
+	method pasarAlSiguienteDialogo() {
+		if (dialogos.size() > 1){
+			game.removeVisual(dialogos.first())
+			dialogos.remove(dialogos.first())
+			self.cargarDialogo()
+		}
+		else game.removeVisual(dialogos.first())
 	}
 	
 	method asignarDialogos(diags){
@@ -212,33 +238,70 @@ object dialogoNPC1 inherits NivelDialogo{
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////// NIVEL ESPECIAL ///////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+object dialogoInicioAguasEstancadas inherits NivelDialogo{
+	 
+	method cargarTodo(){
+		game.clear()
+		self.asignarElementos_EnElNivel([fondoAguasEstancadasDialogo])
+		self.asignarPersonajePrincipal_AlNivel(atrox)
+		self.asignarDialogos([pykePresentacion,gravesNautilusPresentacion])
+		self.comandosDeDialogo(atrox)
+		game.addVisual(dialogos.first())
+	}
+}
 
-object aguasEstancadas inherits Nivel { 
+object aguasEstancadas inherits NivelConDialogosInternos { 
 	const listaDeEnemigos = [nautilus,pyke,graves]
 	const numeroVida = signoVida.valoresDelMedidor()
 	const numerosEnergia = signoEnergia.valoresDelMedidor()
-	override method limites() = limitesAguasEstancadas
 	
+	override method limites() = limitesAguasEstancadas
 	
 	
 	method cargarTodo(){
 		game.clear()
-		self.asignarElementos_EnElNivel([fondoAguasEstancadas, nautilus,pyke,graves,signoVida, signoEnergia, signoModoCombateOn,signoVida.valorActual() , signoEnergia.valorActual()])
+		game.sound("Maldicion.mp3")
+		self.asignarElementos_EnElNivel([fondoAguasEstancadas, botonAssenso ,signoVida, nautilus, pyke, graves, signoEnergia, modoAtaque ,signoVida.valorActual() , signoEnergia.valorActual()])
 		self.asignarPersonajePrincipal_AlNivel(atrox)
 		self.comandosDelNivel(atrox)
 		self.comandosDeMovimiento(atrox)
+		self.comandosDeDialogo(atrox)
+		self.asignarDialogos([gravesNautilusDialogo])
 		listaDeEnemigos.forEach({enemigo => enemigo.mover_Veces(4)})
-		game.onTick(10000, "Regeneracion", {self.regenracionDeVidaYEnergia(atrox)})
-		
-		game.onTick(3000, "ActualizacionContador", {
-			game.removeVisual(signoVida.valorActual())
-			game.removeVisual(signoEnergia.valorActual())
-			signoVida.actualizarValorActual(atrox.puntosDeSalud())
-			signoEnergia.actualizarValorActual(atrox.energia())
-			game.addVisual(signoVida.valorActual()) 
-			game.addVisual(signoEnergia.valorActual())})
+		game.onTick(2000, "Regeneracion", {self.regenracionDeVidaYEnergia(atrox)})
+		game.onTick(500, "Actualizacion Contador", {self.actualizarLosContadores()})
+		game.onTick(2000, "Venganza", {self.actualizarPosicionDe_Y_(graves, nautilus, pyke, "Venganza")})
+		game.onTick(2000, "El assenso del darking", {self.prepararAssenso("El assenso del darking")})
 	}
 	
+	
+	method actualizarLosContadores() {
+		game.removeVisual(signoVida.valorActual())
+		game.removeVisual(signoEnergia.valorActual())
+		signoVida.actualizarValorActual(atrox.puntosDeSalud())
+		signoEnergia.actualizarValorActual(atrox.energia())
+		game.addVisual(signoVida.valorActual())
+		game.addVisual(signoEnergia.valorActual())
+	}
+	
+	method actualizarPosicionDe_Y_(enemigoUno, enemigoDos, enemigoMuerto, nombreDelEvento) {
+		if(not game.allVisuals().contains(enemigoMuerto)){
+			enemigoUno.mover_Veces(2)
+			enemigoDos.mover_Veces(1)
+			game.addVisual(dialogos.first())
+			game.removeTickEvent(nombreDelEvento)
+		}
+	}
+	
+	method losEnemigosFuerosDerrivados() = listaDeEnemigos.all({enemigo => not game.allVisuals().contains(enemigo)})
+
+	
+	method prepararAssenso(nombreDelEvento) {
+		if(self.losEnemigosFuerosDerrivados()){
+			botonAssenso.fijarNuevaPosicion(game.at(6,5))
+			game.removeTickEvent(nombreDelEvento)
+		}
+	}
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

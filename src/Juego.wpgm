@@ -5,7 +5,7 @@ import Nivel.*
 import laGrietaDelInvocador.*
 
 program juego {
-    organizador.cargarListaDeNiveles([aguasEstancadas])
+    organizador.cargarListaDeNiveles([dialogoInicioAguasEstancadas, aguasEstancadas,nivelLogicaBIS])
     organizador.actualizar()
     game.addVisual(informadorDeErrores)
 	game.errorReporter(informadorDeErrores)
@@ -13,4 +13,4 @@ program juego {
     game.width(14) 
 	game.height(7)
 	game.start()
-} 
+}  

@@ -107,7 +107,7 @@ const cuatroVida = new Numero(image = "4.png", position = signoVida.position().d
 const tresVida = new Numero(image = "3.png", position = signoVida.position().down(1),  valor = 3)
 const dosVida = new Numero(image = "2.png", position = signoVida.position().down(1),  valor = 2)
 const unoVida = new Numero(image = "1.png", position = signoVida.position().down(1),  valor = 1)
-
+const ceroVida = new Numero(image = "0.png", position = signoVida.position().down(1),  valor = 0)
 
 // Numeros Medidor De Energia
 const cienEnergia = new Numero(image = "100.png", position = signoEnergia.position().down(1),  valor = 100)
@@ -210,3 +210,4 @@ const cuatroEnergia = new Numero(image = "4.png", position = signoEnergia.positi
 const tresEnergia = new Numero(image = "3.png", position = signoEnergia.position().down(1),  valor = 3)
 const dosEnergia = new Numero(image = "2.png", position = signoEnergia.position().down(1),  valor = 2)
 const unoEnergia = new Numero(image = "1.png", position = signoEnergia.position().down(1),  valor = 1)
+const ceroEnergia = new Numero(image = "0.png", position = signoEnergia.position().down(1),  valor = 0)

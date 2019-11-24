@@ -38,7 +38,6 @@ const galio = new NPC (image = "Galio-NPC.png", position = game.at(2,2))
 const galioDiag = new NPC (image = "CeldaVacia.png", position = galio.position().down(1).right(1))
 const brand = new NPC (image = "BrandNPC.png", position = game.at(2,2))
 const brandDiag = new NPC (image = "CeldaVacia.png", position = brand.position().down(1).right(1))
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////// DIALOGOS ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -55,4 +54,6 @@ const brandDialogoCuatro = new Dialogo (image = "brandDialogo4.png", position = 
 const brandDialogoMalo = new Dialogo (image = "finalMaloDiag.png", position = game.at(0,0))
 const brandDialogoBueno = new Dialogo (image = "finalBuenoDiag.png", position = game.at(0,0))
 
-
+const pykePresentacion = new Dialogo (image = "PykeDialogoUno.png", position = game.at(0,0))
+const gravesNautilusPresentacion = new Dialogo (image = "NautilusGravesDialogoUno.png", position = game.at(0,0))
+const gravesNautilusDialogo = new Dialogo (image = "GravesDialogoUno.png", position = game.at(0,0))

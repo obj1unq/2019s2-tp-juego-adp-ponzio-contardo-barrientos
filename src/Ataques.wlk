@@ -21,3 +21,5 @@ const golpeAtrox = new Ataque (nombre = "Golpe Atrox" , energiaConsumida = 0 , d
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const golpeteoDarking = new Ataque (nombre = "Golpeteo Darking" , energiaConsumida = 30 , danioCausado = 50)
+const furiaDarking = new Ataque (nombre = "Furia Darking" , energiaConsumida = 20 , danioCausado = 40)
+ 

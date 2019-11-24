@@ -30,14 +30,14 @@ class Visual {
 			game.removeTickEvent("objetoEnCaida")
 		}
 	}
-}
+} 
 
 
 const fondoMenu = new Visual(image = "FondoMenuPrincipal.png" , position = game.at(0,0))
 const fondoMenuSeleccion = new Visual(image = "FondoMenuSeleccion1.png" , position = game.at(0,0))
 const fondoLobbyUno = new Visual(image = "FondoLobbyUno.png" , position = game.at(0,0))
 const fondoAguasEstancadas = new Visual(image = "FondoAguasEstancadas.png" , position = game.at(0,0))
-
+const fondoAguasEstancadasDialogo = new Visual(image = "AguasEstancadasFondo.png" , position = game.at(0,0))
 const fondoNivelLogica = new Visual(image = "nivelMatFondo.png", position = game.at(0,0))
 const fondoFinalMalo = new Visual(image = "fondoFinalMalo.png", position = game.at(0,0))
 const fondoFinalBueno = new Visual(image = "finalBueno.png", position = game.at(0,0))
@@ -130,6 +130,5 @@ const uno = new Visual(image = "1.png", position = game.at(0,5))
 
 
 
-const signoModoCombateOn = new Visual(image = "ModoPeleaOn.png", position = game.at(10,0))
-const signoModoCombateOff = new Visual(image = "ModoPeleaOff.png", position = game.at(10,0))
+
 

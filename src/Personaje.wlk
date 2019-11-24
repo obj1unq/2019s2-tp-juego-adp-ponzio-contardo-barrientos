@@ -14,7 +14,7 @@ class Puntero {
 
 	
 	method interacturaCon_(boton){
-		boton.ejecutarAccion()
+		boton.cargarSiguienteParte()
 	}
 	
 	method moverseEnDir(dir,limitesGenerales,limitesEsp){
@@ -52,11 +52,18 @@ class Personaje inherits Puntero{
 	const property ataqueBasico
 	
 	method cambiarASiguienteModo(){
+		game.removeVisual(modoActual)
 		modoActual = modoActual.siguienteModo()
+		game.addVisual(modoActual)
 	}
 		
 	method estaEnModoDefensivo(){
 		return modoActual == modoDefensa
+	}
+	
+	method actualizarPersonajeEnNivel() {
+		game.removeVisual(self)
+		game.addVisual(self)
 	}
 	
 	method usarAtaqueBasicoContra_(personaje) {
@@ -102,11 +109,6 @@ class Personaje inherits Puntero{
 	method mejorarHabilidadEspecial(nuevaHabilidad) {
 		ataqueEspecial = nuevaHabilidad
 	}
-	
-	override method interacturaCon_(npc){
-		npc.cargarSiguienteParte()
-	}
-	
 	method eliminarEnemigo(personaje){
 		if(self.estaMuerto(personaje)){
 			game.removeVisual(personaje)
@@ -157,6 +159,10 @@ class Personaje inherits Puntero{
 		puntosDeSalud = (puntosDeSalud + cantidad).min(100)
 		self.puntosDeSalud()
 	}
+	
+	method cambiarAspecto() {
+		image = "AtroxMoviminetoAssendido.png"
+	}
 }
 
 
@@ -175,7 +181,7 @@ class Enemigo inherits Personaje {
 		game.schedule((cantidad * 2000) - 1, {game.removeTickEvent("Mover Enemigo")})
 	}
 	
-	
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -185,6 +191,8 @@ class Enemigo inherits Personaje {
 
 object modoDefensa {
 	const property siguienteModo = modoAtaque
+	const property image = "ModoPeleaOff.png"
+	const property position = game.at(13,1)
 	
 	method regeneracionDeEnergia() = 5
 	
@@ -194,6 +202,8 @@ object modoDefensa {
 
 object modoAtaque {
 	const property siguienteModo = modoDefensa
+	const property image = "ModoPeleaOn.png"
+	const property position = game.at(13,1)
 	
 	method regeneracionDeEnergia() = 15
 	
@@ -201,6 +211,7 @@ object modoAtaque {
 	method regeneracionDeVida() = 5
 		
 }
+
 
 // IMPLEMENTACION //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////// PERSONAJES ///////////////////////////////////////////////////////////////////////////////////

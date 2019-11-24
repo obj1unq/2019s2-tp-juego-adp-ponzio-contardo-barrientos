@@ -12,7 +12,7 @@ object signoVida inherits Medidor {
 	var property image = "IconoSalud.png"
 	var property position = game.at(13,6)
 	var property valorActual = cienVida
-	const property valoresDelMedidor = [unoVida, dosVida, tresVida, cuatroVida, cincoVida, seisVida, sieteVida, ochoVida, nueveVida, diezVida,
+	const property valoresDelMedidor = [ceroVida,unoVida, dosVida, tresVida, cuatroVida, cincoVida, seisVida, sieteVida, ochoVida, nueveVida, diezVida,
 							   onceVida, doceVida, treceVida, catorceVida, quinceVida, dieciseisVida, diecisieteVida, dieciochoVida, diecinueveVida, veinteVida,
 							   veintiunoVida, veintidosVida, veintitresVida, veinticuatroVida, veinticincoVida, veintiseisVida, veintisieteVida, veintiochoVida, veintinueveVida, treintaVida,
 							   treintaunoVida, treintadosVida, treintatresVida, treintacuatroVida, treintacincoVida, treintaseisVida, treintasieteVida, treintaochoVida, treintanueveVida, cuarentaVida,
@@ -39,9 +39,9 @@ object signoEnergia inherits Medidor {
 	var property image = "IconoEnergia.png"
 	var property position = game.at(13,4)
 	var property valorActual = cienEnergia
-	const property valoresDelMedidor = [unoEnergia, dosEnergia, tresEnergia, cuatroEnergia, cincoEnergia, seisEnergia, sieteEnergia, ochoEnergia, nueveEnergia, diezEnergia,
+	const property valoresDelMedidor = [ceroEnergia,unoEnergia, dosEnergia, tresEnergia, cuatroEnergia, cincoEnergia, seisEnergia, sieteEnergia, ochoEnergia, nueveEnergia, diezEnergia,
 							   onceEnergia, doceEnergia, treceEnergia, catorceEnergia, quinceEnergia, dieciseisEnergia, diecisieteEnergia, dieciochoEnergia, diecinueveEnergia, veinteEnergia,
-							   veintiunoEnergia, veintidosVida, veintitresVida, veinticuatroVida, veinticincoVida, veintiseisVida, veintisieteVida, veintiochoVida, veintinueveVida, treintaVida,
+							   veintiunoEnergia, veintidosEnergia, veintitresEnergia, veinticuatroEnergia, veinticincoEnergia, veintiseisEnergia, veintisieteEnergia, veintiochoEnergia, veintinueveEnergia, treintaEnergia,
 							   treintaunoEnergia, treintadosEnergia, treintatresEnergia, treintacuatroEnergia, treintacincoEnergia, treintaseisEnergia, treintasieteEnergia, treintaochoEnergia, treintanueveEnergia, cuarentaEnergia,
 							   cuarentaunoEnergia, cuarentadosEnergia, cuarentatresEnergia, cuarentacuatroEnergia, cuarentacincoEnergia, cuarentaseisEnergia, cuarentasieteEnergia, cuarentaochoEnergia, cuarentanueveEnergia, cincuentaEnergia,
 							   cincuentaunoEnergia, cincuentadosEnergia, cincuentatresEnergia, cincuentacuatroEnergia, cincuentacincoEnergia, cincuentaseisEnergia, cincuentasieteEnergia, cincuentaochoEnergia, cincuentanueveEnergia, sesentaEnergia,
