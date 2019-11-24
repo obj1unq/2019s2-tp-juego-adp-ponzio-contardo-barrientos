@@ -1,92 +1,59 @@
 import wollok.game.*
+import teclado.*
 
-object GrietaDelInvocador {
+object laGrieta {
+	
+	var property personaje 
 	
 	method iniciar() {
-		zonaPrincipal.confg()
-		teclado.confgLaGrietaDelInvocador()
-		game.start()
+		game.clear()
+		zonaPrincipal.confg(personaje)
 	}
 	
 	method irSiguienteZona(zona) {
 		game.clear()
-		zona.confg()
+		zona.confg(personaje)
 	}
 	
-}
-
-object teclado {
-	
-	method confgDeZonas() {
-		keyboard.c().onPressDo{ 
-			GrietaDelInvocador.irSiguienteZona(carrilSuperior)
-		}
-		keyboard.d().onPressDo{ 
-			GrietaDelInvocador.irSiguienteZona(carrilMedio)
-		}
-		keyboard.e().onPressDo{ 
-			GrietaDelInvocador.irSiguienteZona(carrilInferior)
-		}
-	}
-	
-	method confgDeCarriles() {
-		keyboard.a().onPressDo{ 
-			GrietaDelInvocador.irSiguienteZona(zonaPrincipal)
-		}
-		keyboard.b().onPressDo{ 
-			GrietaDelInvocador.irSiguienteZona(zonaFinal)
-		}
-	}
-	
-	method confgLaGrietaDelInvocador() {
-		keyboard.f().onPressDo{ game.schedule(3000, {game.stop()}) }
-	}
 }
 
 class Zona {
 	
 	var property fondo
-	var property ancho
-	var property alto
-	var property personajePrincipal
 	var property portales = []
 	var property enemigos = [] 
 	
-	method confg() {
-		game.title("la grieta del invocador")
+	method confg(personajePrincipal) {
 		game.boardGround(fondo)
-		game.width(ancho)
-		game.height(alto)
-		self.confgDeEnemigos()
-		self.confgDePortales()
-		self.confgDePersonajePrincipal()
+		self.confgDeEnemigos(personajePrincipal)
+		self.confgDePortales(personajePrincipal)
+		self.confgDePersonajePrincipal(personajePrincipal)
 	}
 	
 	method irSiguienteZona() {
 		teclado.confgDeZonas()
 	}
 	
-	method confgDePersonajePrincipal() {
+	method confgDePersonajePrincipal(personajePrincipal) {
 		game.addVisualCharacter(personajePrincipal)
 		enemigos.forEach({ enemigo => personajePrincipal.atacar(enemigo, self) })
 	}
 	
-	method confgDeEnemigos() {
+	method confgDeEnemigos(personajePrincipal) {
 		if( not enemigos.isEmpty() ) {
-			enemigos.forEach({ enemigo => game.addVisual(enemigo) })
-			enemigos.forEach({ enemigo => enemigo.moverseCada(3000) })
-			enemigos.forEach({ enemigo => enemigo.atacar(personajePrincipal, self) })
+			enemigos.forEach({
+				enemigo => game.addVisual(enemigo)
+				enemigo.moverseCada(3000)
+				enemigo.atacar(personajePrincipal, self)
+			})
 		}
 	}
 	
-	method confgDePortales() {
-		if( enemigos.isEmpty() ) {
-			portales.forEach({ 
-				portal => game.addVisual(portal)
-				portal.colisionasteCon_En_(personajePrincipal, self)
-			})
-		}
-			
+	method confgDePortales(personajePrincipal) {
+		portales.forEach({ 
+			portal => game.addVisual(portal) 
+			portal.colisionasteCon_En_(personajePrincipal, self)
+		})
 	}
 	
 	method eliminarEnemigo(enemigo) {
@@ -103,11 +70,11 @@ class Carril inherits Zona {
 }
 
 //	ZONAS DE LA GRIETA
-	var zonaPrincipal = new Zona( fondo = "zonaPrincipal.png" ,ancho = 14, alto = 7, personajePrincipal = darius, portales = [portalSuperior, portalMedio, portalInferior])
-	var zonaFinal = new Zona( fondo = "zonaFinal.png" ,ancho = 14, alto = 7, personajePrincipal = brand, portales = [], enemigos = [])
-	var carrilSuperior = new Carril( fondo = "carrilSuperior.png" ,ancho = 14, alto = 7, personajePrincipal = drMundo, portales = [portalPrincipal, portalFinal], enemigos = [enemigoCS])
-	var carrilMedio = new Carril( fondo = "carrilMedio.png" ,ancho = 14, alto = 7, personajePrincipal = maokai, portales = [portalPrincipal, portalFinal], enemigos = [enemigoCM])
-	var carrilInferior = new Carril( fondo = "carrilInferior.png" ,ancho = 14, alto = 7, personajePrincipal = darius, portales = [portalPrincipal, portalFinal], enemigos = [enemigoCI])
+	const zonaPrincipal = new Zona(fondo = "zonaPrincipal.png", portales = [portalSuperior, portalMedio, portalInferior], enemigos = [])
+	const zonaFinal = new Zona(fondo = "zonaFinal.png", portales = [], enemigos = [torre1, torre2, torre3, torre4])
+	const carrilSuperior = new Carril(fondo = "carrilSuperior.png", portales = [portalPrincipal, portalFinal], enemigos = [enemigoCS])
+	const carrilMedio = new Carril(fondo = "carrilMedio.png", portales = [portalPrincipal, portalFinal], enemigos = [enemigoCM])
+	const carrilInferior = new Carril(fondo = "carrilInferior.png", portales = [portalPrincipal, portalFinal], enemigos = [enemigoCI])
 
 class Portal {
 	
@@ -123,11 +90,11 @@ class Portal {
 
 // PORTALES
 
-const portalPrincipal = new Portal (image = "portal.png" , position = game.at(0,5), dialogo = "presione la tecla A para ir a la zona principal" )
+const portalPrincipal = new Portal (image = "portal.png" , position = game.at(6,0), dialogo = "presione la tecla Z para ir a la zona principal" )
 const portalSuperior = new Portal (image = "portal.png", position = game.at(2,5), dialogo = "presione la tecla C para ir al carril superior")
-const portalMedio = new Portal (image = "portal.png", position = game.at(10,5), dialogo = "presione la tecla D para ir al carril medio")
-const portalInferior = new Portal (image = "portal.png", position = game.at(12,1), dialogo = "presione la tecla E para ir al carril inferior")
-const portalFinal = new Portal (image = "portal.png", position = game.at(6,5), dialogo = "presione la tecla B para ir a la zona final")
+const portalMedio = new Portal (image = "portal.png", position = game.at(10,5), dialogo = "presione la tecla V para ir al carril medio")
+const portalInferior = new Portal (image = "portal.png", position = game.at(12,1), dialogo = "presione la tecla B para ir al carril inferior")
+const portalFinal = new Portal (image = "portal.png", position = game.at(6,5), dialogo = "presione la tecla X para ir a la zona final")
 
 class Personaje {
 	
@@ -170,7 +137,6 @@ const maokai = new Personaje(image = "maokaiDeFrente.png", position = game.origi
 
 class Enemigo inherits Personaje {
 	
-
 	method moveOn() {
     	const x = 0.randomUpTo(game.width() - 1).truncate(0)
     	const y = 0.randomUpTo(game.height() - 1).truncate(0)
@@ -195,12 +161,34 @@ class Enemigo inherits Personaje {
   override method morirse() {
   	game.removeVisual(self)
   }
+  
+  override method estasColicionandoCon_En_(portal, zona) {
+  	if( position == portal.position())
+  		position = game.center() 
+  }
 	
 }
 
 // ENEMIGOS 
 
-const enemigoCS = new Enemigo( image = "enemigo1.png", position = game.center(), vida = 30, danioDeAtaque = 10 )
-const enemigoCM = new Enemigo( image = "enemigo2.png", position = game.center(), vida = 30, danioDeAtaque = 10 )
-const enemigoCI = new Enemigo( image = "enemigo3.png", position = game.center(), vida = 100, danioDeAtaque = 100 )
+const enemigoCS = new Enemigo( image = "enemigo1.png", position = game.at(0,5), vida = 30, danioDeAtaque = 10 )
+const enemigoCM = new Enemigo( image = "enemigo2.png", position = game.at(6,5), vida = 30, danioDeAtaque = 10 )
+const enemigoCI = new Enemigo( image = "enemigo3.png", position = game.at(12,5), vida = 100, danioDeAtaque = 100 )
+
+class Torre inherits Enemigo {
+	 override method atacar(personaje, zona) {
+//	 	no atacan
+	 }
+	 
+	 override method moverseCada(tiempo) {
+//	 	no se mueven
+	 }
+}
+
+// TORRES
+
+const torre1 = new Torre(image = "torre1.png", position = game.at(11,1), vida = 50, danioDeAtaque = 0)
+const torre2 = new Torre(image = "torre2.png", position = game.at(4,5), vida = 100, danioDeAtaque = 0)
+const torre3 = new Torre(image = "nexo1.png", position = game.at(5,2), vida = 150, danioDeAtaque = 0)
+const torre4 = new Torre(image = "nexo2.png", position = game.at(11,5), vida = 200, danioDeAtaque = 0)
 

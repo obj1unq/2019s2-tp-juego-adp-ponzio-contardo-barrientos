@@ -3,16 +3,17 @@ import Personaje.*
 import Nivel.*
 
 import laGrietaDelInvocador.*
+import menusDeSeleccion.*
 
 program juego {
 //    organizador.cargarListaDeNiveles([dialogoNPC3,nivelLogicaBIS, aguasEstancadas])
 //    organizador.actualizar()
 //    game.addVisual(informadorDeErrores)
-//	game.errorReporter(informadorDeErrores)
+//	  game.errorReporter(informadorDeErrores)
 //    game.title("Aventura De Portales")
-//    game.width(14) 
-//	game.height(7)
-//	game.start()
 
-	GrietaDelInvocador.iniciar()
+    game.width(14) 
+	game.height(7)
+	menuDeSelccionDeModo.confg()
+	game.start()
 } 
