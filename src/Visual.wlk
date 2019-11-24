@@ -39,8 +39,7 @@ const fondoLobbyUno = new Visual(image = "FondoLobbyUno.png" , position = game.a
 const fondoAguasEstancadas = new Visual(image = "FondoAguasEstancadas.png" , position = game.at(0,0))
 const fondoAguasEstancadasDialogo = new Visual(image = "AguasEstancadasFondo.png" , position = game.at(0,0))
 const fondoNivelLogica = new Visual(image = "nivelMatFondo.png", position = game.at(0,0))
-const fondoFinalMalo = new Visual(image = "fondoFinalMalo.png", position = game.at(0,0))
-const fondoFinalBueno = new Visual(image = "finalBueno.png", position = game.at(0,0))
+const fondoFinal = new Visual(image = "fondoFinal.png", position = game.at(0,0))
 
 // Celdas Nivel Logica 
 

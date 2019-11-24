@@ -13,8 +13,13 @@ class Puntero {
 	var property position
 
 	
+<<<<<<< HEAD
 	method interacturaCon_(boton){
 		boton.cargarSiguienteParte()
+=======
+	method interactuarCon_(boton){
+		boton.ejecutarAccion()
+>>>>>>> branch 'master' of https://github.com/obj1unq/2019s2-tp-juego-adp-ponzio-contardo-barrientos.git
 	}
 	
 	method moverseEnDir(dir,limitesGenerales,limitesEsp){
@@ -109,6 +114,14 @@ class Personaje inherits Puntero{
 	method mejorarHabilidadEspecial(nuevaHabilidad) {
 		ataqueEspecial = nuevaHabilidad
 	}
+<<<<<<< HEAD
+=======
+	
+	override method interactuarCon_(npc){
+		npc.cargarSiguienteParte()
+	}
+	
+>>>>>>> branch 'master' of https://github.com/obj1unq/2019s2-tp-juego-adp-ponzio-contardo-barrientos.git
 	method eliminarEnemigo(personaje){
 		if(self.estaMuerto(personaje)){
 			game.removeVisual(personaje)

@@ -31,7 +31,7 @@ class OrganizadorDeNiveles {
 		listaDeNiveles.first().cargarTodo()
 	}
 	
-		method cargarListaDeNiveles(lista){
+	method cargarListaDeNiveles(lista){
 		listaDeNiveles = lista
 	}
 }
@@ -64,7 +64,7 @@ class Nivel {
 	}
     		
     method comandosDeDialogo(personaje){
-    	keyboard.control().onPressDo {personaje.interacturaCon_(game.uniqueCollider(personaje))}
+    	keyboard.control().onPressDo {personaje.interactuarCon_(game.uniqueCollider(personaje))}
     	keyboard.alt().onPressDo {personaje.pasarAlSiguienteDialogo_(game.uniqueCollider(personaje))}
     }
  
@@ -384,9 +384,9 @@ object finalMalo inherits NivelDialogo{
 	 
 	method cargarTodo(){
 		game.clear()
-		self.asignarElementos_EnElNivel([fondoFinalMalo])
+		self.asignarElementos_EnElNivel([fondoFinal])
 		self.asignarPersonajePrincipal_AlNivel(atrox)
-		self.asignarDialogos([brandDialogoMalo])
+		self.asignarDialogos([dragonDialogoMalo])
 		self.comandosDeDialogo(atrox)
 		game.addVisual(dialogos.first())
 	}
@@ -400,9 +400,8 @@ object finalBueno inherits NivelDialogo{
 	 
 	method cargarTodo(){
 		game.clear()
-		self.asignarElementos_EnElNivel([fondoFinalBueno])
-		self.asignarPersonajePrincipal_AlNivel(atrox)
-		self.asignarDialogos([brandDialogoBueno])
+		self.asignarElementos_EnElNivel([fondoFinal])
+		self.asignarDialogos([dragonDialogoBueno])
 		self.comandosDeDialogo(atrox)
 		game.addVisual(dialogos.first())
 	}
