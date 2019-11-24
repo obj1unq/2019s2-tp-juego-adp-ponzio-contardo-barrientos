@@ -52,7 +52,7 @@ const brandDialogoDos = new Dialogo (image = "brandDialogo2.png", position = gam
 const brandDialogoTres = new Dialogo (image = "brandDialogo3.png", position = game.at(0,0))
 const brandDialogoCuatro = new Dialogo (image = "brandDialogo4.png", position = game.at(0,0))
 
-const brandDialogoMalo = new Dialogo (image = "finalMaloDiag.png", position = game.at(0,0))
-const brandDialogoBueno = new Dialogo (image = "finalBuenoDiag.png", position = game.at(0,0))
+const dragonDialogoMalo = new Dialogo (image = "finalMaloDiag.png", position = game.at(0,0))
+const dragonDialogoBueno = new Dialogo (image = "finalBuenoDiag.png", position = game.at(0,0))
 
 

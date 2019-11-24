@@ -13,7 +13,7 @@ class Puntero {
 	var property position
 
 	
-	method interacturaCon_(boton){
+	method interactuarCon_(boton){
 		boton.ejecutarAccion()
 	}
 	
@@ -103,7 +103,7 @@ class Personaje inherits Puntero{
 		ataqueEspecial = nuevaHabilidad
 	}
 	
-	override method interacturaCon_(npc){
+	override method interactuarCon_(npc){
 		npc.cargarSiguienteParte()
 	}
 	
