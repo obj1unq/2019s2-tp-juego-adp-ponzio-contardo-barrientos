@@ -221,7 +221,6 @@ object dialogoNPC1 inherits NivelDialogo{
 	override method cargarTodo(personaje){
 		game.clear()
 		self.asignarElementos_EnElNivel([fondoLobbyUno, galio, galioDiag, portalVioleta])
-		self.asignarPersonajePrincipal_AlNivel(personaje)
 		self.asignarDialogos([dialogoGalioUno,dialogoGalioDos,dialogoGalioTres])
 		self.comandosDeDialogo(personaje)
 		game.addVisual(dialogos.first())

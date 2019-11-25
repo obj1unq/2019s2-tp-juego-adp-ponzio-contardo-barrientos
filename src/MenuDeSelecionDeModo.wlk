@@ -7,23 +7,13 @@ class Menu {
 	method confg() {
 		game.clear()
 		self.agregarVisuales()
-		self.agregarPuntero()
-		self.confgDelPuntero()
 		self.confgDeTeclado()
 	}
 	
 	method agregarVisuales() {
 		iconosDelMenu.forEach({ icono => game.addVisual(icono) })
 	}
-	
-	method agregarPuntero() {
-		game.addVisualCharacter(puntero)
-	}
-	
-	method confgDelPuntero() {
-		iconosDelMenu.forEach({ icono => puntero.colisionDelPuntero(icono) })
-	}
-	
+		
 	method confgDeTeclado()
 }
 
@@ -43,7 +33,7 @@ class SeleccionDePersonaje inherits Menu{
 
 // MENU DE SELECCION DE MODO
 
-const menuDeSelccionDeModo = new SeleccionDeModo(iconosDelMenu = [fondoSeleccionModoDeJuego, aventuraDePortales,laGrietaDelInvocador])
+const menuDeSelccionDeModo = new SeleccionDeModo(iconosDelMenu = [fondoSeleccionModoDeJuego])
 
 // MENU DE SELECCION DE PERSONAJES
 
@@ -52,14 +42,6 @@ const menuDeSeleccionDeLaGrieta = new SeleccionDePersonaje(iconosDelMenu = [fond
 class IconosDelMenu {
 	var property image 
 	var property position
-	const property dialogo
-	
-	method colicionasteConElPuntero(puntero) {
-		if( position == puntero.position() ){
-			teclado.confgDeMenuSP()
-			game.say(self, dialogo)
-		}	
-	}
 }
 
 class Fondo {
@@ -67,26 +49,11 @@ class Fondo {
 	var property position
 	
 }
-// MODOS DE JUEGO
-const fondoSeleccionModoDeJuego = new IconosDelMenu(image = "FondoSeleccionModoDeJuego.png", position = game.at(0,0),dialogo = "Elije un modo de juego")
-const fondoSeleccionPersoanje = new IconosDelMenu(image = "FondoSeleccionDePersoanjeD.png", position = game.at(0,0),dialogo = "Elije un personaje")
-
-
-const modoDeJuampa = new IconosDelMenu(image = "", position = game.center(), dialogo = "presiona la tecla Q para jugar el modo ...")
-const modoDeEric = new IconosDelMenu(image = "", position = game.center(), dialogo = "presiona la tecla W para jugar el modo ...")
-const laGrietaDelInvocador = new IconosDelMenu(image = "IconoGrietaDelInvocador.png", position = game.center().left(2), dialogo = "presiona la tecla E para jugar a la grieta del invocador")
-const aventuraDePortales = new IconosDelMenu(image = "ADP.png", position = game.center().right(2), dialogo = "presiona la tecla W para jugar a la grieta del invocador")
-
-object puntero {
-	var property image = "Puntero.png"
-	var property position = game.origin()
-	
-	method colisionDelPuntero(icono) {
-		game.onCollideDo(self, {parametro => icono.colicionasteConElPuntero(self) })
-	}
-}
+//FONDO
+const fondoSeleccionModoDeJuego = new Fondo(image = "FondoSeleccionModoDeJuego.png", position = game.at(0,0))
+const fondoSeleccionPersoanje = new Fondo(image = "FondoSeleccionDePersoanjeD.png", position = game.at(0,0))
 
 // INCONOS PARA EL MENU DE SELECCION DE PERSONAJE
-const iconoZac = new IconosDelMenu( image = "zacIcono.png", position = game.at(1,3), dialogo = "presiona la tecla A para jugar con Darius" )
-const iconoDrMundo = new IconosDelMenu( image = "drMundoIcono.png", position = game.at(6,3), dialogo = "presiona la tecla S para jugar con DrMundo" )
-const iconoMaokai = new IconosDelMenu( image = "maokaiIcono.png", position = game.at(11,3), dialogo = "presiona la tecla D para jugar con Maokai" )
+const iconoZac = new IconosDelMenu( image = "zacIcono.png", position = game.at(1,3))
+const iconoDrMundo = new IconosDelMenu( image = "drMundoIcono.png", position = game.at(6,3))
+const iconoMaokai = new IconosDelMenu( image = "maokaiIcono.png", position = game.at(11,3))
