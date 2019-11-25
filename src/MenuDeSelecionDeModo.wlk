@@ -72,10 +72,10 @@ const fondoSeleccionModoDeJuego = new IconosDelMenu(image = "FondoSeleccionModoD
 const fondoSeleccionPersoanje = new IconosDelMenu(image = "FondoSeleccionDePersonajeD.png", position = game.at(0,0),dialogo = "")
 
 
-const modoDeJuampa = new IconosDelMenu(image = "", position = game.center(), dialogo = "preciona la tecla Q para jugar el modo ...")
-const modoDeEric = new IconosDelMenu(image = "", position = game.center(), dialogo = "preciona la tecla W para jugar el modo ...")
-const laGrietaDelInvocador = new IconosDelMenu(image = "IconoGrietaDelInvocador.png", position = game.center().left(2), dialogo = "preciona la tecla E para jugar a la grieta del invocador")
-const aventuraDePortales = new IconosDelMenu(image = "ADP.png", position = game.center().right(2), dialogo = "preciona la tecla W para jugar a la grieta del invocador")
+const modoDeJuampa = new IconosDelMenu(image = "", position = game.center(), dialogo = "presiona la tecla Q para jugar el modo ...")
+const modoDeEric = new IconosDelMenu(image = "", position = game.center(), dialogo = "presiona la tecla W para jugar el modo ...")
+const laGrietaDelInvocador = new IconosDelMenu(image = "IconoGrietaDelInvocador.png", position = game.center().left(2), dialogo = "presiona la tecla E para jugar a la grieta del invocador")
+const aventuraDePortales = new IconosDelMenu(image = "ADP.png", position = game.center().right(2), dialogo = "presiona la tecla W para jugar a la grieta del invocador")
 
 object puntero {
 	var property image = "Puntero.png"
@@ -87,6 +87,6 @@ object puntero {
 }
 
 // INCONOS PARA EL MENU DE SELECCION DE PERSONAJE
-const iconoZac = new IconosDelMenu( image = "zacIcono.png", position = game.at(1,5), dialogo = "preciona la tecla A para jugar con Darius" )
-const iconoDrMundo = new IconosDelMenu( image = "drMundoIcono.png", position = game.at(6,5), dialogo = "preciona la tecla S para jugar con DrMundo" )
-const iconoMaokai = new IconosDelMenu( image = "maokaiIcono.png", position = game.at(11,5), dialogo = "preciona la tecla D para jugar con Maokai" )
+const iconoZac = new IconosDelMenu( image = "zacIcono.png", position = game.at(1,5), dialogo = "presiona la tecla A para jugar con Darius" )
+const iconoDrMundo = new IconosDelMenu( image = "drMundoIcono.png", position = game.at(6,5), dialogo = "presiona la tecla S para jugar con DrMundo" )
+const iconoMaokai = new IconosDelMenu( image = "maokaiIcono.png", position = game.at(11,5), dialogo = "presiona la tecla D para jugar con Maokai" )

@@ -2,6 +2,23 @@ import wollok.game.*
 import Teclado.*
 import MenuDeSelecionDeModo.*
 
+// LA GRIETA DEL INVOCADOR
+// el objetivo de este modo es derrotar a los enemigos de los 3 carriles y los de la zona final
+// la unica forma de lograrlo es derrotando a los enemigos en el siguiente orden
+// primero los del carril superior, segundo los del carril medio, tercero los del carril inferior y por ultimo los de la zona final
+// al derrotar a los enemigos de un carril el personaje recibe una bonificacion de vida y de ataque que le permitira eliminar a los enemigos del carril siguiente
+// al derrotar a todos los enemigos de los 3 carriles el personaje "evolucionara" y recibira una bonificacion mayor que le permitira eliminar a los enemigos de la zona final 
+
+// CONTROLES DE ESTE MODO
+// en el menu de seleccion de modo presionar la tecla E para jugar a la grieta del incocador
+// en el menu de seleccion de personaje presionar la tecla A para jugar con Zac, la S para jugar con DrMundo y la D para jugar con Maokai
+// en la zona principal aparecen los portales y al colisionar con alguno de ellos se activan los controles para ir hacia el carril superior, medio e inferior
+// presiona la tecla Z para ir a la zona principal, X para la zona final, C para el carril superior, V para el medio y B para el inferior
+// en los carriles aparecen los enemigos, el personaje seleciionado los ataca automaticamente al colisionar con alguno de ellos, de la misma forma los enemigos atacan al personaje
+// si los enemigos del carril son derrotados aparecen los portales para volver a la zona principal y para ir a la zona final
+// en la zona final no aparecen portales, solo enemigos "invencibles"
+// si los enemigos de la zona final son derrotado se completara el nivel y se volvera al menu de seleccion de modo
+
 object laGrieta {
 	
 	var property personaje 
@@ -98,8 +115,8 @@ class Carril inherits Zona {
 }
 
 //	ZONAS DE LA GRIETA
-	const zonaPrincipal = new Zona(image = "zonaprincipal.png", nombre = "zona principal", portales = [portalSuperior, portalMedio, portalInferior], enemigos = [])
-	const zonaFinal = new Zona(image = "zonafinal.png", nombre = "zona final", portales = [], enemigos = [enemigoZF1, enemigoZF2, enemigoZF3, enemigoZF4, enemigoZF5, enemigoZF6, enemigoZF7, enemigoZF8, enemigoZF9])
+	const zonaPrincipal = new Zona(image = "zonaprincipal1.png", nombre = "zona principal", portales = [portalSuperior, portalMedio, portalInferior], enemigos = [])
+	const zonaFinal = new Zona(image = "zonafinal1.png", nombre = "zona final", portales = [], enemigos = [enemigoZF1, enemigoZF2, enemigoZF3, enemigoZF4, enemigoZF5, enemigoZF6, enemigoZF7, enemigoZF8, enemigoZF9])
 	const carrilSuperior = new Carril(image = "carrilsuperior.png", nombre = "carril superior", portales = [portalPrincipal, portalFinal], enemigos = [enemigoCS1, enemigoCS2, enemigoCS3])
 	const carrilMedio = new Carril(image = "carrilmedio.png", nombre = "carril medio", portales = [portalPrincipal, portalFinal], enemigos = [enemigoCM1, enemigoCM2, enemigoCM3])
 	const carrilInferior = new Carril(image = "carrilinferior.png", nombre = "carril inferior", portales = [portalPrincipal, portalFinal], enemigos = [enemigoCI1, enemigoCI2, enemigoCI3])
@@ -120,8 +137,8 @@ class Portal {
 
 const portalPrincipal = new Portal (image = "portal.png" , position = game.at(6,0), dialogo = "presione la tecla Z para ir a la zona principal" )
 const portalFinal = new Portal (image = "portal.png", position = game.at(6,5), dialogo = "presione la tecla X para ir a la zona final")
-const portalSuperior = new Portal (image = "portal.png", position = game.at(2,5), dialogo = "presione la tecla C para ir al carril superior")
-const portalMedio = new Portal (image = "portal.png", position = game.at(10,5), dialogo = "presione la tecla V para ir al carril medio")
+const portalSuperior = new Portal (image = "portal.png", position = game.at(1,5), dialogo = "presione la tecla C para ir al carril superior")
+const portalMedio = new Portal (image = "portal.png", position = game.at(8,5), dialogo = "presione la tecla V para ir al carril medio")
 const portalInferior = new Portal (image = "portal.png", position = game.at(12,1), dialogo = "presione la tecla B para ir al carril inferior")
 
 class Personaje {
@@ -198,11 +215,11 @@ const imagenesDeMaokai = new DireccionDeImagenes(arriba = "maokaiDeEspalda.png",
 
 // PERSONAJES
 
-const zac = new Principal(image = "zacDeFrente.png", position = game.at(2,1), vida = 100, danioDeAtaque = 30, imagenEnPosAtaque = "zacAtacando.png", direccionDeImagenes = imagenesDeZac)
+const zac = new Principal(image = "zacDeFrente.png", position = game.at(1,1), vida = 100, danioDeAtaque = 30, imagenEnPosAtaque = "zacAtacando.png", direccionDeImagenes = imagenesDeZac)
 
-const drMundo = new Principal(image = "drMundoDeFrente.png", position = game.origin(), vida = 100, danioDeAtaque = 30, imagenEnPosAtaque = "drMundoAtacando.png", direccionDeImagenes = imagenesDeDrMundo)
+const drMundo = new Principal(image = "drMundoDeFrente.png", position = game.at(1,1), vida = 100, danioDeAtaque = 30, imagenEnPosAtaque = "drMundoAtacando.png", direccionDeImagenes = imagenesDeDrMundo)
 
-const maokai = new Principal(image = "maokaiDeFrente.png", position = game.origin(), vida = 100, danioDeAtaque = 30, imagenEnPosAtaque = "maokaiAtacando.png", direccionDeImagenes = imagenesDeMaokai)
+const maokai = new Principal(image = "maokaiDeFrente.png", position = game.at(1,1), vida = 100, danioDeAtaque = 30, imagenEnPosAtaque = "maokaiAtacando.png", direccionDeImagenes = imagenesDeMaokai)
 
 class Enemigo inherits Personaje {
 	

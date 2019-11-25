@@ -42,14 +42,12 @@ object teclado {
 	method confgDeCarriles() {
 		keyboard.z().onPressDo{ 
 			laGrieta.irSiguienteZona(zonaPrincipal)
-//			game.boardGround("zonaPrincipal.png")
-			personaje.position( game.at(2,1) )
+			personaje.position( game.at(1,1) )
 			self.confgDePersonajePrincipal()
 		}
 		keyboard.x().onPressDo{ 
 			laGrieta.irSiguienteZona(zonaFinal)
-//			game.boardGround("zonaFinal.png")
-			personaje.position( game.at(0,0) )
+			personaje.position( game.origin() )
 			self.confgDePersonajePrincipal()
 		}
 	}
@@ -57,24 +55,21 @@ object teclado {
 	method confgDeZonas() {
 		keyboard.c().onPressDo{ 
 			laGrieta.irSiguienteZona(carrilSuperior)
-//			game.boardGround("carrilSuperior.png")
-			personaje.position( game.at(2,0) )
+			personaje.position( game.origin() )
 			self.confgDePersonajePrincipal()
 			portalPrincipal.position( game.at(0,0) )
 			portalFinal.position( game.at(10,5) )
 		}
 		keyboard.v().onPressDo{ 
 			laGrieta.irSiguienteZona(carrilMedio)
-//			game.boardGround("carrilMedio.png")
-			personaje.position( game.at(2,0) )
+			personaje.position( game.origin() )
 			self.confgDePersonajePrincipal()
 			portalPrincipal.position( game.at(0,0) )
 			portalFinal.position( game.at(12,5) )
 		}
 		keyboard.b().onPressDo{ 
 			laGrieta.irSiguienteZona(carrilInferior)
-//			game.boardGround("carrillInferior.png")
-			personaje.position( game.at(2,0) )
+			personaje.position( game.origin() )
 			self.confgDePersonajePrincipal()
 			portalPrincipal.position( game.at(0,0) )
 			portalFinal.position( game.at(12,5) )
