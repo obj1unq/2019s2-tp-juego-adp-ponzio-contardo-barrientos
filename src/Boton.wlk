@@ -58,7 +58,7 @@ object botonSeleccionChogath inherits Boton {
 	const property position = game.at(8,2)
 	
 	override method asignarPersonajeAlOrganizador() {
-		organizador.personajeSeleccionado(atrox)
+		organizador.personajeSeleccionado(choGat)
 	}	
 	
 }
