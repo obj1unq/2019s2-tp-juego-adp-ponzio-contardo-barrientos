@@ -309,6 +309,7 @@ object nivelLogica inherits Nivel{
 		self.comandosDelNivel(personaje)
 		self.comandosDeMovimiento(personaje)
 		self.comandosDeDialogo(personaje)
+		// game.onCollideDo(brand, {psj => game.say(self, "Debo hablar con Brand")})
 	}
 }
 

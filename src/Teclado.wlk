@@ -9,8 +9,8 @@ object teclado {
 	var property personaje
 	
 	method confgDeSeleccionDeModo() {
-		
-		keyboard.w().onPressDo{ organizador.cargarListaDeNiveles([menuPrincipal, menuDeSeleccionDePersonaje, dialogoNPC1, lobbyUno, dialogoInicioAguasEstancadas, aguasEstancadas,  nivelLogica, dialogoNPC3, nivelLogicaBIS,finalBueno]) organizador.personajeSeleccionado(punteroMenu) organizador.actualizar()} 
+		//  dialogoNPC1, lobbyUno, dialogoInicioAguasEstancadas, aguasEstancadas,  nivelLogica, dialogoNPC3,
+		keyboard.w().onPressDo{ organizador.cargarListaDeNiveles([menuPrincipal, menuDeSeleccionDePersonaje,nivelLogica, nivelLogicaBIS,finalBueno]) organizador.personajeSeleccionado(punteroMenu) organizador.actualizar()} 
 		keyboard.e().onPressDo{ menuDeSeleccionDeLaGrieta.confg() } 
 	}
 	

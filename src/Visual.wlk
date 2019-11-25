@@ -33,6 +33,7 @@ class Visual {
 } 
 
 
+// FONDOS NIVELES
 const fondoMenu = new Visual(image = "FondoMenuPrincipal.png" , position = game.at(0,0))
 const fondoMenuSeleccion = new Visual(image = "FondoMenuSeleccion1.png" , position = game.at(0,0))
 const fondoLobbyUno = new Visual(image = "FondoLobbyUno.png" , position = game.at(0,0))

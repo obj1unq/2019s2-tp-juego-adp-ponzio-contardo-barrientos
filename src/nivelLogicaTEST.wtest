@@ -1,0 +1,35 @@
+import Nivel.*
+import wollok.game.*
+import Personaje.*
+import Visual.*
+
+test "El personaje principal puede moverse un casillero arriba"  {
+	nivelLogicaBIS.cargarTodo(atrox)
+	atrox.moverseEnDir(atrox.position().up(1), nivelLogicaBIS.limites(), nivelLogicaBIS.limitesEspecificos())
+	assert.that(atrox.position() == game.at(1,1))
+}
+
+test "El personaje no puede moverse un casillero hacia la izquierda desde donde inicia (excede el limite de movimiento)"{
+	nivelLogicaBIS.cargarTodo(atrox)
+	atrox.moverseEnDir(atrox.position().left(1), nivelLogicaBIS.limites(), nivelLogicaBIS.limitesEspecificos())
+	assert.that(atrox.position() == game.at(1,0))	
+}
+
+test "El personaje puede agarrar un objeto cuando colisiona con el"{
+	nivelLogicaBIS.cargarTodo(atrox)
+	atrox.moverseEnDir(atrox.position().up(2), nivelLogicaBIS.limites(), nivelLogicaBIS.limitesEspecificos())	
+	atrox.moverseEnDir(atrox.position().right(2), nivelLogicaBIS.limites(), nivelLogicaBIS.limitesEspecificos())
+	atrox.agarrar(litio2, nivelLogicaBIS )
+	assert.that(atrox.inventario().size() == 1)
+}
+
+test "Al tener un objeto agarrado no se puede agarrar otro"{
+	nivelLogicaBIS.cargarTodo(atrox)
+	atrox.moverseEnDir(atrox.position().up(2), nivelLogicaBIS.limites(), nivelLogicaBIS.limitesEspecificos())	
+	atrox.moverseEnDir(atrox.position().right(2), nivelLogicaBIS.limites(), nivelLogicaBIS.limitesEspecificos())
+	atrox.agarrar(litio2, nivelLogicaBIS )
+	atrox.moverseEnDir(atrox.position().down(2), nivelLogicaBIS.limites(), nivelLogicaBIS.limitesEspecificos())	
+	atrox.agarrar(oxigeno2, nivelLogicaBIS)	
+	assert.throwsException("No puedo agarrar este objeto")
+}
+
