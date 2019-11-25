@@ -1,5 +1,6 @@
 import wollok.game.*
-import teclado.*
+import teclado2.*
+import menusDeSeleccion2.*
 
 object laGrieta {
 	
@@ -18,25 +19,40 @@ object laGrieta {
 	
 	method confgDeZonas(zona) {
 		if( zona.enemigos().isEmpty() ) {
-//			personaje.restablecerVida()
+			if( zona.nombre() != zonaFinal.nombre() ) {
 			personaje.recibirBonificacion()
+			self.derrotaronALosEnemigosDeLosCarriles()
+			}
 		}
+	}
+	
+	method confgZonaFinal() {
+		if( zonaFinal.enemigos().isEmpty() ) {
+			game.schedule(3000, { game.say(personaje, "nivel superado") })
+			game.schedule(6000, { game.clear() menuDeSelccionDeModo.confg() })
+		}
+	}
+	
+	method derrotaronALosEnemigosDeLosCarriles() {
+		if( carrilSuperior.eliminaronATodosLosEnemigos() and carrilMedio.eliminaronATodosLosEnemigos() and carrilInferior.eliminaronATodosLosEnemigos())
+			personaje.evolucionar()
 	}
 	
 }
 
 class Zona {
 	
-	var property fondo
+	var property image
+	var property position = game.origin()
+	var property nombre
 	var property portales = []
 	var property enemigos = [] 
 	
 	method confg(personajePrincipal) {
-		game.boardGround(fondo)
+		game.addVisual(self)
 		self.confgDeEnemigos(personajePrincipal)
 		self.confgDePortales(personajePrincipal)
 		self.confgDePersonajePrincipal(personajePrincipal)
-//		self.confgDeZonaFinal()
 	}
 	
 	method irSiguienteZona() {
@@ -52,35 +68,26 @@ class Zona {
 		if( not enemigos.isEmpty() ) {
 			enemigos.forEach({
 				enemigo => game.addVisual(enemigo)
-				enemigo.moverseCada(3000)
+				enemigo.moverseCada(1500)
 				enemigo.atacar(personajePrincipal, self)
 			})
 		}
 	}
 	
 	method confgDePortales(personajePrincipal) {
-		if( enemigos.isEmpty() ) {
+		if( self.eliminaronATodosLosEnemigos() ) {
 			portales.forEach({ 
 			portal => game.addVisual(portal) 
 			portal.colisionasteCon_En_(personajePrincipal, self)
-//			self.bonificacionPara(personajePrincipal)
 			})
 		}
 	}
-	
-//	method bonificacionPara(personaje) {
-//		personaje.restablecerVida()
-//		personaje.recibirBonificacion()
-//	}
 	
 	method eliminarEnemigo(enemigo) {
 		enemigos.remove(enemigo)
 	}
 	
-//	method confgDeZonaFinal() {
-//		laGrieta.confgDeZonaFinal()
-//	}
-
+	method eliminaronATodosLosEnemigos() = enemigos.isEmpty()
 }
 
 class Carril inherits Zona {
@@ -91,11 +98,11 @@ class Carril inherits Zona {
 }
 
 //	ZONAS DE LA GRIETA
-	const zonaPrincipal = new Zona(fondo = "zonaPrincipal.png", portales = [portalSuperior, portalMedio, portalInferior], enemigos = [])
-	const zonaFinal = new Zona(fondo = "zonaFinal.png", portales = [], enemigos = [enemigoZF1, enemigoZF2, enemigoZF3, enemigoZF4, enemigoZF5, enemigoZF6, enemigoZF7, enemigoZF8, enemigoZF9])
-	const carrilSuperior = new Carril(fondo = "carrilSuperior.png", portales = [portalPrincipal, portalFinal], enemigos = [enemigoCS1, enemigoCS2, enemigoCS3])
-	const carrilMedio = new Carril(fondo = "carrilMedio.png", portales = [portalPrincipal, portalFinal], enemigos = [enemigoCM1, enemigoCM2, enemigoCM3])
-	const carrilInferior = new Carril(fondo = "carrilInferior.png", portales = [portalPrincipal, portalFinal], enemigos = [enemigoCI1, enemigoCI2, enemigoCI3])
+	const zonaPrincipal = new Zona(image = "zonaprincipal.png", nombre = "zona principal", portales = [portalSuperior, portalMedio, portalInferior], enemigos = [])
+	const zonaFinal = new Zona(image = "zonafinal.png", nombre = "zona final", portales = [], enemigos = [enemigoZF1, enemigoZF2, enemigoZF3, enemigoZF4, enemigoZF5, enemigoZF6, enemigoZF7, enemigoZF8, enemigoZF9])
+	const carrilSuperior = new Carril(image = "carrilsuperior.png", nombre = "carril superior", portales = [portalPrincipal, portalFinal], enemigos = [enemigoCS1, enemigoCS2, enemigoCS3])
+	const carrilMedio = new Carril(image = "carrilmedio.png", nombre = "carril medio", portales = [portalPrincipal, portalFinal], enemigos = [enemigoCM1, enemigoCM2, enemigoCM3])
+	const carrilInferior = new Carril(image = "carrilinferior.png", nombre = "carril inferior", portales = [portalPrincipal, portalFinal], enemigos = [enemigoCI1, enemigoCI2, enemigoCI3])
 
 class Portal {
 	
@@ -112,10 +119,10 @@ class Portal {
 // PORTALES
 
 const portalPrincipal = new Portal (image = "portal.png" , position = game.at(6,0), dialogo = "presione la tecla Z para ir a la zona principal" )
+const portalFinal = new Portal (image = "portal.png", position = game.at(6,5), dialogo = "presione la tecla X para ir a la zona final")
 const portalSuperior = new Portal (image = "portal.png", position = game.at(2,5), dialogo = "presione la tecla C para ir al carril superior")
 const portalMedio = new Portal (image = "portal.png", position = game.at(10,5), dialogo = "presione la tecla V para ir al carril medio")
 const portalInferior = new Portal (image = "portal.png", position = game.at(12,1), dialogo = "presione la tecla B para ir al carril inferior")
-const portalFinal = new Portal (image = "portal.png", position = game.at(6,5), dialogo = "presione la tecla X para ir a la zona final")
 
 class Personaje {
 	
@@ -139,14 +146,16 @@ class Principal inherits Personaje{
 
 	method recibirDanio(enemigo, zona) {
 		if(position == enemigo.position()) {
+			image = imagenEnPosAtaque
 			vida = vida - enemigo.danioDeAtaque()
-			if(vida <= 0) self.morirse()
+			if(vida <= 0) self.morirse(enemigo)
 		} 
 	}
 	
-	method morirse() {
+	method morirse(enemigo) {
 		game.removeVisual(self)
-		game.schedule(1500, { game.stop() })
+		game.say(enemigo, "este no es el camino correcto")
+		game.schedule(5000, { game.stop() })
 	}
 	
 	method estasColicionandoCon_En_(portal, zona) {
@@ -160,6 +169,16 @@ class Principal inherits Personaje{
 		vida = vida + 100
 		danioDeAtaque = danioDeAtaque + 30
 		game.say(self, " bonificacion recibida, vida + 100 y ataque + 30 ")
+	}
+	
+	method evolucionar() {
+		vida = 10000
+		danioDeAtaque = 10000
+		game.schedule(3000, { game.say(self, "eliminaste a los enemigos de los 3 carriles, recibes la bonificacion: vida = 10000,     ataque = 10000") })
+	}
+	
+	method cambiarImagenAPosAtaque() {
+		image = imagenEnPosAtaque
 	}
 	
 }
@@ -200,6 +219,7 @@ class Enemigo inherits Personaje {
   
   method recibirDanio(personajePrincipal, zona) {
 		if(position == personajePrincipal.position()) {
+			personajePrincipal.cambiarImagenAPosAtaque() //NO FUNCIONA :(
 			vida = vida - personajePrincipal.danioDeAtaque()
 			 if(vida <= 0) {
 			 	self.morirse(personajePrincipal, zona)
@@ -209,9 +229,10 @@ class Enemigo inherits Personaje {
   
   method morirse(personajePrincipal, zona) {
   	zona.eliminarEnemigo(self)
+  	game.removeVisual(self)
   	zona.confgDePortales(personajePrincipal)
   	laGrieta.confgDeZonas(zona)
-  	game.removeVisual(self)
+  	laGrieta.confgZonaFinal()
   }
   
   method estasColicionandoCon_En_(portal, zona) {
@@ -223,24 +244,24 @@ class Enemigo inherits Personaje {
 
 // ENEMIGOS 
 
-const enemigoCS1 = new Enemigo( image = "enemigo1.png", position = game.at(0,5), vida = 30, danioDeAtaque = 5)
-const enemigoCS2 = new Enemigo( image = "enemigo1.png", position = game.at(5,5), vida = 30, danioDeAtaque = 5)
-const enemigoCS3 = new Enemigo( image = "enemigo1.png", position = game.at(12,5), vida = 30, danioDeAtaque = 5)
+const enemigoCS1 = new Enemigo( image = "enemigo1.png", position = game.at(0,5), vida = 50, danioDeAtaque = 10)
+const enemigoCS2 = new Enemigo( image = "enemigo1.png", position = game.at(5,5), vida = 50, danioDeAtaque = 10)
+const enemigoCS3 = new Enemigo( image = "enemigo1.png", position = game.at(12,5), vida = 50, danioDeAtaque = 10)
 
-const enemigoCM1 = new Enemigo( image = "enemigo2.png", position = game.at(0,5), vida = 70, danioDeAtaque = 10)
-const enemigoCM2 = new Enemigo( image = "enemigo2.png", position = game.at(5,5), vida = 70, danioDeAtaque = 10)
-const enemigoCM3 = new Enemigo( image = "enemigo2.png", position = game.at(12,5), vida = 70, danioDeAtaque = 10)
+const enemigoCM1 = new Enemigo( image = "enemigo2.png", position = game.at(0,5), vida = 100, danioDeAtaque = 10)
+const enemigoCM2 = new Enemigo( image = "enemigo2.png", position = game.at(5,5), vida = 100, danioDeAtaque = 10)
+const enemigoCM3 = new Enemigo( image = "enemigo2.png", position = game.at(12,5), vida = 100, danioDeAtaque = 10)
 
-const enemigoCI1 = new Enemigo( image = "enemigo3.png", position = game.at(0,5), vida = 100, danioDeAtaque = 15)
-const enemigoCI2 = new Enemigo( image = "enemigo3.png", position = game.at(5,5), vida = 100, danioDeAtaque = 15)
-const enemigoCI3 = new Enemigo( image = "enemigo3.png", position = game.at(12,5), vida = 100, danioDeAtaque = 15)
+const enemigoCI1 = new Enemigo( image = "enemigo3.png", position = game.at(0,5), vida = 150, danioDeAtaque = 10)
+const enemigoCI2 = new Enemigo( image = "enemigo3.png", position = game.at(5,5), vida = 150, danioDeAtaque = 10)
+const enemigoCI3 = new Enemigo( image = "enemigo3.png", position = game.at(12,5), vida = 150, danioDeAtaque = 10)
 
-const enemigoZF1 = new Enemigo( image = "enemigo1.png", position = game.at(0,2), vida = 30, danioDeAtaque = 15)
-const enemigoZF2 = new Enemigo( image = "enemigo1.png", position = game.at(5,2), vida = 30, danioDeAtaque = 15)
-const enemigoZF3 = new Enemigo( image = "enemigo1.png", position = game.at(12,2), vida = 30, danioDeAtaque = 15)
-const enemigoZF4 = new Enemigo( image = "enemigo2.png", position = game.at(0,4), vida = 30, danioDeAtaque = 15)
-const enemigoZF5 = new Enemigo( image = "enemigo2.png", position = game.at(5,4), vida = 30, danioDeAtaque = 15)
-const enemigoZF6 = new Enemigo( image = "enemigo2.png", position = game.at(12,4), vida = 30, danioDeAtaque = 15)
-const enemigoZF7 = new Enemigo( image = "enemigo3.png", position = game.at(0,6), vida = 30, danioDeAtaque = 15)
-const enemigoZF8 = new Enemigo( image = "enemigo3.png", position = game.at(5,6), vida = 30, danioDeAtaque = 15)
-const enemigoZF9 = new Enemigo( image = "enemigo3.png", position = game.at(12,6), vida = 30, danioDeAtaque = 15)
+const enemigoZF1 = new Enemigo( image = "enemigo1.png", position = game.at(0,2), vida = 500, danioDeAtaque = 500)
+const enemigoZF2 = new Enemigo( image = "enemigo1.png", position = game.at(5,2), vida = 500, danioDeAtaque = 500)
+const enemigoZF3 = new Enemigo( image = "enemigo1.png", position = game.at(12,2), vida = 500, danioDeAtaque = 500)
+const enemigoZF4 = new Enemigo( image = "enemigo2.png", position = game.at(0,4), vida = 500, danioDeAtaque = 500)
+const enemigoZF5 = new Enemigo( image = "enemigo2.png", position = game.at(5,4), vida = 500, danioDeAtaque = 500)
+const enemigoZF6 = new Enemigo( image = "enemigo2.png", position = game.at(12,4), vida = 500, danioDeAtaque = 500)
+const enemigoZF7 = new Enemigo( image = "enemigo3.png", position = game.at(0,6), vida = 500, danioDeAtaque = 500)
+const enemigoZF8 = new Enemigo( image = "enemigo3.png", position = game.at(5,6), vida = 500, danioDeAtaque = 500)
+const enemigoZF9 = new Enemigo( image = "enemigo3.png", position = game.at(12,6), vida = 500, danioDeAtaque = 500)

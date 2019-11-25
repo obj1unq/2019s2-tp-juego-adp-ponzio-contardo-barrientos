@@ -2,30 +2,31 @@ import wollok.game.*
 import Personaje.*
 import Nivel.*
 
-import laGrietaDelInvocador.*
-import menusDeSeleccion.*
+import laGrietaDelInvocador2.*
+import menusDeSeleccion2.*
 
 program juego {
-<<<<<<< HEAD
-    organizador.cargarListaDeNiveles([dialogoInicioAguasEstancadas, aguasEstancadas,nivelLogicaBIS])
-    organizador.actualizar()
-    game.addVisual(informadorDeErrores)
-	game.errorReporter(informadorDeErrores)
+//<<<<<<< HEAD
+//    organizador.cargarListaDeNiveles([dialogoInicioAguasEstancadas, aguasEstancadas,nivelLogicaBIS])
+//    organizador.actualizar()
+//    game.addVisual(informadorDeErrores)
+//	game.errorReporter(informadorDeErrores)
     game.title("Aventura De Portales")
-=======
+//=======
 //    organizador.cargarListaDeNiveles([dialogoNPC3,nivelLogicaBIS, aguasEstancadas])
 //    organizador.actualizar()
 //    game.addVisual(informadorDeErrores)
 //	  game.errorReporter(informadorDeErrores)
 //    game.title("Aventura De Portales")
 
->>>>>>> branch 'master' of https://github.com/obj1unq/2019s2-tp-juego-adp-ponzio-contardo-barrientos.git
+//>>>>>>> branch 'master' of https://github.com/obj1unq/2019s2-tp-juego-adp-ponzio-contardo-barrientos.git
     game.width(14) 
 	game.height(7)
-<<<<<<< HEAD
+//<<<<<<< HEAD
+	menuDeSelccionDeModo.confg()
 	game.start()
 }  
-=======
-	menuDeSelccionDeModo.confg()
-} 
->>>>>>> branch 'master' of https://github.com/obj1unq/2019s2-tp-juego-adp-ponzio-contardo-barrientos.git
+//=======
+	
+//} 
+//>>>>>>> branch 'master' of https://github.com/obj1unq/2019s2-tp-juego-adp-ponzio-contardo-barrientos.git

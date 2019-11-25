@@ -1,6 +1,6 @@
 import wollok.game.*
-import laGrietaDelInvocador.*
-import teclado.*
+import laGrietaDelInvocador2.*
+import teclado2.*
 
 class Menu {
 	const iconosDelMenu = []

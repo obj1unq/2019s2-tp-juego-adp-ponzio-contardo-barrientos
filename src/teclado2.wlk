@@ -1,6 +1,6 @@
 import wollok.game.*
-import laGrietaDelInvocador.*
-import menusDeSeleccion.*
+import laGrietaDelInvocador2.*
+import menusDeSeleccion2.*
 
 object teclado {
 	
