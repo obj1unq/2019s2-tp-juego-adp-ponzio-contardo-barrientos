@@ -21,3 +21,5 @@ Z : Tomar elemento
 A : Arrojar elemento
 Ctrl: Interactuar con los NPC y portales
 Alt Izq: Pasar al siguiente dialogo 
+E = Ataque basico
+R = Habilidad
