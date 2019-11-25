@@ -6,7 +6,7 @@ import MenuDeSelecionDeModo.*
 
 object laGrieta {
 	
-	var property personaje 
+	var property personaje
 	
 	method iniciar() {
 		game.clear()
@@ -20,24 +20,32 @@ object laGrieta {
 	}
 	
 	method confgDeZonas(zona) {
-		if( zona.enemigos().isEmpty() ) {
-			if( zona.nombre() != zonaFinal.nombre() ) {
+		if( zona.eliminaronATodosLosEnemigos() ) {
+			if( zona != zonaFinal ) {
 			personaje.recibirBonificacion()
-			self.derrotaronALosEnemigosDeLosCarriles()
+			self.derrotaronALosEnemigosDeTodosLosCarriles()
 			}
 		}
 	}
 	
 	method confgZonaFinal() {
-		if( zonaFinal.enemigos().isEmpty() ) {
-			game.schedule(3000, { game.say(personaje, "nivel superado") })
-			game.schedule(6000, { game.clear() menuDeSelccionDeModo.confg() })
+		if( zonaFinal.eliminaronATodosLosEnemigos() ) {
+			game.schedule(1500, { game.say(personaje, "nivel superado") })
+			game.schedule(3000, { game.clear() menuDeSelccionDeModo.confg() })
 		}
 	}
 	
-	method derrotaronALosEnemigosDeLosCarriles() {
+	method derrotaronALosEnemigosDeTodosLosCarriles() {
 		if( carrilSuperior.eliminaronATodosLosEnemigos() and carrilMedio.eliminaronATodosLosEnemigos() and carrilInferior.eliminaronATodosLosEnemigos())
 			personaje.evolucionar()
+	}
+	
+	method reiniciarNivel() {
+		personaje.reiniciarPersonaje()
+		[enemigoCS1, enemigoCS2, enemigoCS3].forEach({ enemigo => carrilSuperior.agregarEnemigo(enemigo) })
+		[enemigoCM1, enemigoCM2, enemigoCM3].forEach({ enemigo => carrilMedio.agregarEnemigo(enemigo) })
+		[enemigoCI1, enemigoCI2, enemigoCI3].forEach({ enemigo => carrilInferior.agregarEnemigo(enemigo) })
+		[enemigoZF1, enemigoZF2, enemigoZF3, enemigoZF4, enemigoZF5, enemigoZF6, enemigoZF7, enemigoZF8, enemigoZF9].forEach({ enemigo => zonaFinal.agregarEnemigo(enemigo) })
 	}
 	
 }
@@ -67,10 +75,10 @@ class Zona {
 	}
 	
 	method confgDeEnemigos(personajePrincipal) {
-		if( not enemigos.isEmpty() ) {
+		if( not self.eliminaronATodosLosEnemigos() ) {
 			enemigos.forEach({
 				enemigo => game.addVisual(enemigo)
-				enemigo.moverseCada(1500)
+				enemigo.moverseCada(1000)
 				enemigo.atacar(personajePrincipal, self)
 			})
 		}
@@ -90,6 +98,10 @@ class Zona {
 	}
 	
 	method eliminaronATodosLosEnemigos() = enemigos.isEmpty()
+	
+	method agregarEnemigo(enemigo) {
+		enemigos.add(enemigo)
+	}
 }
 
 class Carril inherits Zona {
@@ -101,10 +113,10 @@ class Carril inherits Zona {
 
 //	ZONAS DE LA GRIETA
 	const zonaPrincipal = new Zona(image = "zonaprincipal1.png", nombre = "zona principal", portales = [portalSuperior, portalMedio, portalInferior], enemigos = [])
-	const zonaFinal = new Zona(image = "zonafinal1.png", nombre = "zona final", portales = [], enemigos = [enemigoZF1, enemigoZF2, enemigoZF3, enemigoZF4, enemigoZF5, enemigoZF6, enemigoZF7, enemigoZF8, enemigoZF9])
-	const carrilSuperior = new Carril(image = "carrilsuperior.png", nombre = "carril superior", portales = [portalPrincipal, portalFinal], enemigos = [enemigoCS1, enemigoCS2, enemigoCS3])
-	const carrilMedio = new Carril(image = "carrilmedio.png", nombre = "carril medio", portales = [portalPrincipal, portalFinal], enemigos = [enemigoCM1, enemigoCM2, enemigoCM3])
-	const carrilInferior = new Carril(image = "carrilinferior.png", nombre = "carril inferior", portales = [portalPrincipal, portalFinal], enemigos = [enemigoCI1, enemigoCI2, enemigoCI3])
+	const zonaFinal = new Zona(image = "zonafinal1.png", nombre = "zona final", portales = [], enemigos = [])
+	const carrilSuperior = new Carril(image = "carrilsuperior.png", nombre = "carril superior", portales = [portalPrincipal, portalFinal], enemigos = [])
+	const carrilMedio = new Carril(image = "carrilmedio.png", nombre = "carril medio", portales = [portalPrincipal, portalFinal], enemigos = [])
+	const carrilInferior = new Carril(image = "carrilinferior.png", nombre = "carril inferior", portales = [portalPrincipal, portalFinal], enemigos = [])
 
 class Portal {
 	
@@ -157,7 +169,7 @@ class Principal inherits Personaje{
 	method morirse(enemigo) {
 		game.removeVisual(self)
 		game.say(enemigo, "este no es el camino correcto")
-		game.schedule(5000, game.stop())
+		game.schedule(3000, game.stop())
 	}
 	
 	method estasColicionandoCon_En_(portal, zona) {
@@ -176,11 +188,16 @@ class Principal inherits Personaje{
 	method evolucionar() {
 		vida = 10000
 		danioDeAtaque = 10000
-		game.schedule(3000, { game.say(self, "eliminaste a los enemigos de los 3 carriles, recibes la bonificacion: vida = 10000,     ataque = 10000") })
+		game.schedule(2000, { game.say(self, "eliminaste a los enemigos de los 3 carriles, recibes la bonificacion: vida = 10000,     ataque = 10000") })
 	}
 	
 	method cambiarImagenAPosAtaque() {
 		image = imagenEnPosAtaque
+	}
+	
+	method reiniciarPersonaje() {
+		vida = 100
+		danioDeAtaque = 30
 	}
 	
 }
@@ -221,7 +238,7 @@ class Enemigo inherits Personaje {
   
   method recibirDanio(personajePrincipal, zona) {
 		if(position == personajePrincipal.position()) {
-			personajePrincipal.cambiarImagenAPosAtaque() //NO FUNCIONA :(
+//			personajePrincipal.cambiarImagenAPosAtaque() //
 			vida = vida - personajePrincipal.danioDeAtaque()
 			 if(vida <= 0) {
 			 	self.morirse(personajePrincipal, zona)

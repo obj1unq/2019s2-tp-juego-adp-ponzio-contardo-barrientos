@@ -16,18 +16,24 @@ object teclado {
 	
 	method confgDeMenuSP() {
 		keyboard.a().onPressDo{
+			
 			self.personaje(zac)
 			laGrieta.personaje(zac)
+			laGrieta.reiniciarNivel()
 			laGrieta.iniciar()
 		}
 		keyboard.s().onPressDo{
+			
 			self.personaje(drMundo)
 			laGrieta.personaje(drMundo) 
+			laGrieta.reiniciarNivel()
 			laGrieta.iniciar()
 		}
 		keyboard.d().onPressDo{
+			
 			self.personaje(maokai)
 			laGrieta.personaje(maokai)
+			laGrieta.reiniciarNivel()
 			laGrieta.iniciar()
 		}
 	}
