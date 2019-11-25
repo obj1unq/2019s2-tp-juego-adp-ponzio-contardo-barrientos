@@ -19,14 +19,11 @@ program juego {
 //	  game.errorReporter(informadorDeErrores)
 //    game.title("Aventura De Portales")
 
-//>>>>>>> branch 'master' of https://github.com/obj1unq/2019s2-tp-juego-adp-ponzio-contardo-barrientos.git
+
     game.width(14) 
 	game.height(7)
-//<<<<<<< HEAD
+
 	menuDeSelccionDeModo.confg()
 	game.start()
-}  
-//=======
-	
-//} 
-//>>>>>>> branch 'master' of https://github.com/obj1unq/2019s2-tp-juego-adp-ponzio-contardo-barrientos.git
+} 
+

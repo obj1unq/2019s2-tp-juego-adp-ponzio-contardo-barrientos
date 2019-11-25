@@ -4,7 +4,6 @@ import teclado2.*
 
 class Menu {
 	const iconosDelMenu = []
-	
 	method confg() {
 		game.clear()
 		self.agregarVisuales()
@@ -44,11 +43,11 @@ class SeleccionDePersonaje inherits Menu{
 
 // MENU DE SELECCION DE MODO
 
-const menuDeSelccionDeModo = new SeleccionDeModo(iconosDelMenu = [laGrietaDelInvocador])
+const menuDeSelccionDeModo = new SeleccionDeModo(iconosDelMenu = [fondoSeleccionModoDeJuego])
 
 // MENU DE SELECCION DE PERSONAJES
 
-const menuDeSeleccionDeLaGrieta = new SeleccionDePersonaje(iconosDelMenu = [iconoZac, iconoDrMundo, iconoMaokai])
+const menuDeSeleccionDeLaGrieta = new SeleccionDePersonaje(iconosDelMenu = [fondoSeleccionPersoanje,iconoZac, iconoDrMundo, iconoMaokai])
 
 class IconosDelMenu {
 	var property image 
@@ -63,7 +62,14 @@ class IconosDelMenu {
 	}
 }
 
+class Fondo {
+	var property image 
+	var property position
+	
+}
 // MODOS DE JUEGO
+const fondoSeleccionModoDeJuego = new Fondo(image = "FondoSeleccionModoDeJuego.png", position = game.at(0,0))
+const fondoSeleccionPersoanje = new Fondo(image = "FondoSeleccionDePersonajeD.png", position = game.at(0,0))
 
 const modoDeJuampa = new IconosDelMenu(image = "", position = game.center(), dialogo = "preciona la tecla Q para jugar el modo ...")
 const modoDeEric = new IconosDelMenu(image = "", position = game.center(), dialogo = "preciona la tecla W para jugar el modo ...")
