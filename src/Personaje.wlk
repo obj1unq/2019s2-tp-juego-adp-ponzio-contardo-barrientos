@@ -198,9 +198,9 @@ object modoDefensa {
 	const property image = "ModoPeleaOff.png"
 	const property position = game.at(13,1)
 	
-	method regeneracionDeEnergia() = 5
+	method regeneracionDeEnergia() = 20
 	
-	method regeneracionDeVida() = 10
+	method regeneracionDeVida() = 20
 		
 }
 
@@ -209,10 +209,10 @@ object modoAtaque {
 	const property image = "ModoPeleaOn.png"
 	const property position = game.at(13,1)
 	
-	method regeneracionDeEnergia() = 15
+	method regeneracionDeEnergia() = 20
 	
 	
-	method regeneracionDeVida() = 5
+	method regeneracionDeVida() = 10
 		
 }
 

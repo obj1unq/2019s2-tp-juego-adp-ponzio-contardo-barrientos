@@ -236,7 +236,6 @@ object dialogoInicioAguasEstancadas inherits NivelDialogo{
 	override method cargarTodo(personaje){
 		game.clear()
 		self.asignarElementos_EnElNivel([fondoAguasEstancadasDialogo])
-		self.asignarPersonajePrincipal_AlNivel(personaje)
 		self.asignarDialogos([pykePresentacion,gravesNautilusPresentacion])
 		self.comandosDeDialogo(personaje)
 		game.addVisual(dialogos.first())

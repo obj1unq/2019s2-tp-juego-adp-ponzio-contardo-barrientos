@@ -50,7 +50,7 @@ class Fondo {
 	
 }
 //FONDO
-const fondoSeleccionModoDeJuego = new Fondo(image = "FondoSeleccionModoDeJuego.png", position = game.at(0,0))
+const fondoSeleccionModoDeJuego = new Fondo(image = "FondoSeleccionModoDeJuego1.png", position = game.at(0,0))
 const fondoSeleccionPersoanje = new Fondo(image = "FondoSeleccionDePersoanjeD.png", position = game.at(0,0))
 
 // INCONOS PARA EL MENU DE SELECCION DE PERSONAJE

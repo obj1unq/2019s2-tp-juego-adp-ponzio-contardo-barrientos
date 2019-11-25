@@ -31,7 +31,7 @@ object laGrieta {
 	method confgZonaFinal() {
 		if( zonaFinal.eliminaronATodosLosEnemigos() ) {
 			game.schedule(1500, { game.say(personaje, "nivel superado") })
-			game.schedule(3000, { game.clear() menuDeSelccionDeModo.confg() })
+			game.schedule(3000, { game.stop() })
 		}
 	}
 	
@@ -41,7 +41,7 @@ object laGrieta {
 	}
 	
 	method reiniciarNivel() {
-		personaje.reiniciarPersonaje()
+		//personaje.reiniciarPersonaje()
 		[enemigoCS1, enemigoCS2, enemigoCS3].forEach({ enemigo => carrilSuperior.agregarEnemigo(enemigo) })
 		[enemigoCM1, enemigoCM2, enemigoCM3].forEach({ enemigo => carrilMedio.agregarEnemigo(enemigo) })
 		[enemigoCI1, enemigoCI2, enemigoCI3].forEach({ enemigo => carrilInferior.agregarEnemigo(enemigo) })
