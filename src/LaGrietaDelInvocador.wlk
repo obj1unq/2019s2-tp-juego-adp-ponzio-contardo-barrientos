@@ -40,14 +40,6 @@ object laGrieta {
 			personaje.evolucionar()
 	}
 	
-	method reiniciarNivel() {
-		//personaje.reiniciarPersonaje()
-		[enemigoCS1, enemigoCS2, enemigoCS3].forEach({ enemigo => carrilSuperior.agregarEnemigo(enemigo) })
-		[enemigoCM1, enemigoCM2, enemigoCM3].forEach({ enemigo => carrilMedio.agregarEnemigo(enemigo) })
-		[enemigoCI1, enemigoCI2, enemigoCI3].forEach({ enemigo => carrilInferior.agregarEnemigo(enemigo) })
-		[enemigoZF1, enemigoZF2, enemigoZF3, enemigoZF4, enemigoZF5, enemigoZF6, enemigoZF7, enemigoZF8, enemigoZF9].forEach({ enemigo => zonaFinal.agregarEnemigo(enemigo) })
-	}
-	
 }
 
 class Zona {
@@ -99,9 +91,6 @@ class Zona {
 	
 	method eliminaronATodosLosEnemigos() = enemigos.isEmpty()
 	
-	method agregarEnemigo(enemigo) {
-		enemigos.add(enemigo)
-	}
 }
 
 class Carril inherits Zona {
@@ -113,10 +102,10 @@ class Carril inherits Zona {
 
 //	ZONAS DE LA GRIETA
 	const zonaPrincipal = new Zona(image = "zonaprincipal1.png", nombre = "zona principal", portales = [portalSuperior, portalMedio, portalInferior], enemigos = [])
-	const zonaFinal = new Zona(image = "zonafinal1.png", nombre = "zona final", portales = [], enemigos = [])
-	const carrilSuperior = new Carril(image = "carrilsuperior.png", nombre = "carril superior", portales = [portalPrincipal, portalFinal], enemigos = [])
-	const carrilMedio = new Carril(image = "carrilmedio.png", nombre = "carril medio", portales = [portalPrincipal, portalFinal], enemigos = [])
-	const carrilInferior = new Carril(image = "carrilinferior.png", nombre = "carril inferior", portales = [portalPrincipal, portalFinal], enemigos = [])
+	const zonaFinal = new Zona(image = "zonafinal1.png", nombre = "zona final", portales = [], enemigos = [enemigoZF1, enemigoZF2, enemigoZF3, enemigoZF4, enemigoZF5, enemigoZF6, enemigoZF7, enemigoZF8, enemigoZF9])
+	const carrilSuperior = new Carril(image = "carrilsuperior.png", nombre = "carril superior", portales = [portalPrincipal, portalFinal], enemigos = [enemigoCS1, enemigoCS2, enemigoCS3])
+	const carrilMedio = new Carril(image = "carrilmedio.png", nombre = "carril medio", portales = [portalPrincipal, portalFinal], enemigos = [enemigoCM1, enemigoCM2, enemigoCM3])
+	const carrilInferior = new Carril(image = "carrilinferior.png", nombre = "carril inferior", portales = [portalPrincipal, portalFinal], enemigos = [enemigoCI1, enemigoCI2, enemigoCI3])
 
 class Portal {
 	
@@ -162,14 +151,16 @@ class Principal inherits Personaje{
 		if(position == enemigo.position()) {
 			image = imagenEnPosAtaque
 			vida = vida - enemigo.danioDeAtaque()
-			if(vida <= 0) self.morirse(enemigo)
+			if(vida <= 0) {
+				 self.morirse(enemigo)
+			}
 		} 
 	}
 	
 	method morirse(enemigo) {
 		game.removeVisual(self)
 		game.say(enemigo, "este no es el camino correcto")
-		game.schedule(3000, game.stop())
+		game.schedule(500, {game.stop()})
 	}
 	
 	method estasColicionandoCon_En_(portal, zona) {
@@ -193,11 +184,6 @@ class Principal inherits Personaje{
 	
 	method cambiarImagenAPosAtaque() {
 		image = imagenEnPosAtaque
-	}
-	
-	method reiniciarPersonaje() {
-		vida = 100
-		danioDeAtaque = 30
 	}
 	
 }
@@ -238,7 +224,6 @@ class Enemigo inherits Personaje {
   
   method recibirDanio(personajePrincipal, zona) {
 		if(position == personajePrincipal.position()) {
-//			personajePrincipal.cambiarImagenAPosAtaque() //
 			vida = vida - personajePrincipal.danioDeAtaque()
 			 if(vida <= 0) {
 			 	self.morirse(personajePrincipal, zona)
