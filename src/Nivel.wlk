@@ -213,6 +213,7 @@ object lobbyUno inherits Nivel {
 		self.comandosDelNivel(personaje)
 		self.comandosDeMovimiento(personaje)
 		self.comandosDeDialogo(personaje)
+		portalVioleta.informarMensaje(personaje)
 	}
 }
 
@@ -259,6 +260,7 @@ object aguasEstancadas inherits NivelConDialogosInternos {
 		self.comandosDeMovimiento(personaje)
 		self.comandosDeDialogo(personaje)
 		self.asignarDialogos([gravesNautilusDialogo])
+		botonAssenso.informarMensaje(personaje)
 		listaDeEnemigos.forEach({enemigo => enemigo.mover_Veces(4)})
 		game.onTick(2000, "Regeneracion", {self.regenracionDeVidaYEnergia(personaje)})
 		game.onTick(500, "Actualizacion Contador", {self.actualizarLosContadores(personaje)})

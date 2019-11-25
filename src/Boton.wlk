@@ -24,6 +24,10 @@ object botonAssenso inherits Boton {
 		game.addVisual(portalDorado)
 	}
 	
+	method informarMensaje(personaje){
+		game.onCollideDo(self, {psj => personaje.decirMensaje(self)})
+	}
+	
 	override method asignarPersonajeAlOrganizador(){}
 	
 	method fijarNuevaPosicion(posicion){

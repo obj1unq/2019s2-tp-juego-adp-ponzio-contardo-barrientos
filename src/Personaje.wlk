@@ -167,6 +167,12 @@ class Personaje inherits Puntero{
 	method cambiarAspecto() {
 		image = "AtroxMoviminetoAssendido.png"
 	}
+	
+	method decirMensaje(portal){
+		if (portal.position() == position){
+			game.say(self, "Presiona Ctrl para interactuar")
+		}
+	}
 }
 
 

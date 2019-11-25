@@ -5,6 +5,10 @@ class Portal {
 	method cargarSiguienteParte(personaje) {
 		organizador.pasarAlSiguienteNivel()
 	}
+	
+	method informarMensaje(personaje){
+		game.onCollideDo(self, {psj => personaje.decirMensaje(self)})
+	}
 }
 
 
