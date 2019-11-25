@@ -50,6 +50,7 @@ class Personaje inherits Puntero{
 	const sonidoAtaqueBasico
 	const sonidoHabilidad
 	var ataqueEspecial
+	const imagenAscendido
 	const property ataqueBasico
 	
 	method cambiarASiguienteModo(){
@@ -165,7 +166,7 @@ class Personaje inherits Puntero{
 	}
 	
 	method cambiarAspecto() {
-		image = "AtroxMoviminetoAssendido.png"
+		image = imagenAscendido
 	}
 	
 	method decirMensaje(portal){
@@ -227,11 +228,12 @@ object modoAtaque {
 ///////////////////////////////////////////////// PERSONAJES ///////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const atrox = new Personaje (image = "AtroxMovimiento.png", position = game.at(1,0), puntosDeSalud = 100, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking, sonidoHabilidad = "AatroxHabilidad.mp3" ,sonidoAtaqueBasico = "AatroxAtaqueBasico.mp3")
-const jax = new Personaje (image = "Jax.png", position = game.at(1,0), puntosDeSalud = 100, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking, sonidoHabilidad = "AatroxHabilidad.mp3" ,sonidoAtaqueBasico = "AatroxAtaqueBasico.mp3")
-const nautilus = new Enemigo (image = "nautilus.png", position = game.at(9,6), puntosDeSalud = 200, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking, sonidoHabilidad = "AatroxHabilidad.mp3" ,sonidoAtaqueBasico = "AatroxAtaqueBasico.mp3")
-const pyke = new Enemigo (image = "Pyke.png", position = game.at(5,5), puntosDeSalud = 200, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking, sonidoHabilidad = "AatroxHabilidad.mp3" ,sonidoAtaqueBasico = "AatroxAtaqueBasico.mp3")
-const graves = new Enemigo (image = "Graves.png", position = game.at(7,8), puntosDeSalud = 200, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking, sonidoHabilidad = "AatroxHabilidad.mp3" ,sonidoAtaqueBasico = "AatroxAtaqueBasico.mp3")
+const atrox = new Personaje (image = "AtroxMovimiento.png", position = game.at(1,0), puntosDeSalud = 100, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking, sonidoHabilidad = "AatroxHabilidad.mp3" ,sonidoAtaqueBasico = "AatroxAtaqueBasico.mp3", imagenAscendido =  "AtroxMoviminetoAssendido.png")
+const jax = new Personaje (image = "Jax.png", position = game.at(1,0), puntosDeSalud = 100, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking, sonidoHabilidad = "AatroxHabilidad.mp3" ,sonidoAtaqueBasico = "AatroxAtaqueBasico.mp3", imagenAscendido = "JaxPax.png" )
+const nautilus = new Enemigo (image = "nautilus.png", position = game.at(9,6), puntosDeSalud = 200, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking, sonidoHabilidad = "AatroxHabilidad.mp3" ,sonidoAtaqueBasico = "AatroxAtaqueBasico.mp3", imagenAscendido =  "AtroxMoviminetoAssendido.png")
+const pyke = new Enemigo (image = "Pyke.png", position = game.at(5,5), puntosDeSalud = 200, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking, sonidoHabilidad = "AatroxHabilidad.mp3" ,sonidoAtaqueBasico = "AatroxAtaqueBasico.mp3", imagenAscendido =  "Pyke.png")
+const graves = new Enemigo (image = "Graves.png", position = game.at(7,8), puntosDeSalud = 200, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking, sonidoHabilidad = "AatroxHabilidad.mp3" ,sonidoAtaqueBasico = "AatroxAtaqueBasico.mp3", imagenAscendido =  "Graves.png")
+const choGat = new Personaje (image = "ChoGat.png", position = game.at(1,0), puntosDeSalud = 100, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking, sonidoHabilidad = "AatroxHabilidad.mp3" ,sonidoAtaqueBasico = "AatroxAtaqueBasico.mp3", imagenAscendido = "chogatAsc.png" )
 const punteroMenu = new Puntero(image = "seleccionInicial.png", position = game.at(4,1))
 const punteroMenuSeleccion = new Puntero(image = "SeleccionadorPersonaje.png", position = game.at(8,5))
 

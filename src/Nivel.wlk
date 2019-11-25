@@ -239,6 +239,7 @@ object dialogoInicioAguasEstancadas inherits NivelDialogo{
 		self.asignarElementos_EnElNivel([fondoAguasEstancadasDialogo])
 		self.asignarDialogos([pykePresentacion,gravesNautilusPresentacion])
 		self.comandosDeDialogo(personaje)
+		personaje.position(game.at(0,1)) 
 		game.addVisual(dialogos.first())
 	}
 }
