@@ -68,8 +68,8 @@ class Fondo {
 	
 }
 // MODOS DE JUEGO
-const fondoSeleccionModoDeJuego = new IconosDelMenu(image = "FondoSeleccionModoDeJuego.png", position = game.at(0,0),dialogo = "")
-const fondoSeleccionPersoanje = new IconosDelMenu(image = "FondoSeleccionDePersonajeD.png", position = game.at(0,0),dialogo = "")
+const fondoSeleccionModoDeJuego = new IconosDelMenu(image = "FondoSeleccionModoDeJuego.png", position = game.at(0,0),dialogo = "Elije un modo de juego")
+const fondoSeleccionPersoanje = new IconosDelMenu(image = "FondoSeleccionDePersoanjeD.png", position = game.at(0,0),dialogo = "Elije un personaje")
 
 
 const modoDeJuampa = new IconosDelMenu(image = "", position = game.center(), dialogo = "presiona la tecla Q para jugar el modo ...")
@@ -87,6 +87,6 @@ object puntero {
 }
 
 // INCONOS PARA EL MENU DE SELECCION DE PERSONAJE
-const iconoZac = new IconosDelMenu( image = "zacIcono.png", position = game.at(1,5), dialogo = "presiona la tecla A para jugar con Darius" )
-const iconoDrMundo = new IconosDelMenu( image = "drMundoIcono.png", position = game.at(6,5), dialogo = "presiona la tecla S para jugar con DrMundo" )
-const iconoMaokai = new IconosDelMenu( image = "maokaiIcono.png", position = game.at(11,5), dialogo = "presiona la tecla D para jugar con Maokai" )
+const iconoZac = new IconosDelMenu( image = "zacIcono.png", position = game.at(1,3), dialogo = "presiona la tecla A para jugar con Darius" )
+const iconoDrMundo = new IconosDelMenu( image = "drMundoIcono.png", position = game.at(6,3), dialogo = "presiona la tecla S para jugar con DrMundo" )
+const iconoMaokai = new IconosDelMenu( image = "maokaiIcono.png", position = game.at(11,3), dialogo = "presiona la tecla D para jugar con Maokai" )
