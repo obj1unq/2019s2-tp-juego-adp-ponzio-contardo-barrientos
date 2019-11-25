@@ -12,14 +12,8 @@ class Puntero {
 	var property image
 	var property position
 
-	
-<<<<<<< HEAD
-	method interacturaCon_(boton){
-		boton.cargarSiguienteParte()
-=======
-	method interactuarCon_(boton){
-		boton.ejecutarAccion()
->>>>>>> branch 'master' of https://github.com/obj1unq/2019s2-tp-juego-adp-ponzio-contardo-barrientos.git
+	method interacturaCon_(ente){
+		ente.cargarSiguienteParte(self)
 	}
 	
 	method moverseEnDir(dir,limitesGenerales,limitesEsp){
@@ -61,11 +55,13 @@ class Personaje inherits Puntero{
 		modoActual = modoActual.siguienteModo()
 		game.addVisual(modoActual)
 	}
-		
 	method estaEnModoDefensivo(){
 		return modoActual == modoDefensa
 	}
 	
+	override method interacturaCon_(ente){
+		ente.cargarSiguienteParte(self)
+	}
 	method actualizarPersonajeEnNivel() {
 		game.removeVisual(self)
 		game.addVisual(self)
@@ -114,14 +110,7 @@ class Personaje inherits Puntero{
 	method mejorarHabilidadEspecial(nuevaHabilidad) {
 		ataqueEspecial = nuevaHabilidad
 	}
-<<<<<<< HEAD
-=======
 	
-	override method interactuarCon_(npc){
-		npc.cargarSiguienteParte()
-	}
-	
->>>>>>> branch 'master' of https://github.com/obj1unq/2019s2-tp-juego-adp-ponzio-contardo-barrientos.git
 	method eliminarEnemigo(personaje){
 		if(self.estaMuerto(personaje)){
 			game.removeVisual(personaje)
@@ -231,6 +220,7 @@ object modoAtaque {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const atrox = new Personaje (image = "AtroxMovimiento.png", position = game.at(1,0), puntosDeSalud = 100, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
+const jax = new Personaje (image = "Jax.png", position = game.at(1,0), puntosDeSalud = 100, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
 const nautilus = new Enemigo (image = "nautilus.png", position = game.at(9,6), puntosDeSalud = 200, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
 const pyke = new Enemigo (image = "Pyke.png", position = game.at(5,5), puntosDeSalud = 200, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)
 const graves = new Enemigo (image = "Graves.png", position = game.at(7,8), puntosDeSalud = 200, energia = 100, ataqueBasico = golpeAtrox,ataqueEspecial = golpeteoDarking)

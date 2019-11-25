@@ -1,6 +1,6 @@
 import wollok.game.*
-import laGrietaDelInvocador2.*
-import teclado2.*
+import LaGrietaDelInvocador.*
+import Teclado.*
 
 class Menu {
 	const iconosDelMenu = []
@@ -43,7 +43,7 @@ class SeleccionDePersonaje inherits Menu{
 
 // MENU DE SELECCION DE MODO
 
-const menuDeSelccionDeModo = new SeleccionDeModo(iconosDelMenu = [fondoSeleccionModoDeJuego])
+const menuDeSelccionDeModo = new SeleccionDeModo(iconosDelMenu = [fondoSeleccionModoDeJuego, aventuraDePortales,laGrietaDelInvocador])
 
 // MENU DE SELECCION DE PERSONAJES
 
@@ -68,12 +68,14 @@ class Fondo {
 	
 }
 // MODOS DE JUEGO
-const fondoSeleccionModoDeJuego = new Fondo(image = "FondoSeleccionModoDeJuego.png", position = game.at(0,0))
-const fondoSeleccionPersoanje = new Fondo(image = "FondoSeleccionDePersonajeD.png", position = game.at(0,0))
+const fondoSeleccionModoDeJuego = new IconosDelMenu(image = "FondoSeleccionModoDeJuego.png", position = game.at(0,0),dialogo = "")
+const fondoSeleccionPersoanje = new IconosDelMenu(image = "FondoSeleccionDePersonajeD.png", position = game.at(0,0),dialogo = "")
+
 
 const modoDeJuampa = new IconosDelMenu(image = "", position = game.center(), dialogo = "preciona la tecla Q para jugar el modo ...")
 const modoDeEric = new IconosDelMenu(image = "", position = game.center(), dialogo = "preciona la tecla W para jugar el modo ...")
-const laGrietaDelInvocador = new IconosDelMenu(image = "laGrietaDelInvocador.png", position = game.center(), dialogo = "preciona la tecla E para jugar a la grieta del invocador")
+const laGrietaDelInvocador = new IconosDelMenu(image = "IconoGrietaDelInvocador.png", position = game.center().left(2), dialogo = "preciona la tecla E para jugar a la grieta del invocador")
+const aventuraDePortales = new IconosDelMenu(image = "ADP.png", position = game.center().right(2), dialogo = "preciona la tecla W para jugar a la grieta del invocador")
 
 object puntero {
 	var property image = "Puntero.png"

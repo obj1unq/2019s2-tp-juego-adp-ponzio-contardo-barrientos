@@ -2,7 +2,7 @@ import wollok.game.*
 import Nivel.*
 
 class Portal {
-	method cargarSiguienteParte() {
+	method cargarSiguienteParte(personaje) {
 		organizador.pasarAlSiguienteNivel()
 	}
 }

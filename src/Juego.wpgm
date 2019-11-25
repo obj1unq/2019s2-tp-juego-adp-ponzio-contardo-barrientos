@@ -1,28 +1,16 @@
 import wollok.game.*
 import Personaje.*
 import Nivel.*
-
-import laGrietaDelInvocador2.*
-import menusDeSeleccion2.*
+import LaGrietaDelInvocador.*
+import MenuDeSelecionDeModo.*
 
 program juego {
-//<<<<<<< HEAD
-//    organizador.cargarListaDeNiveles([dialogoInicioAguasEstancadas, aguasEstancadas,nivelLogicaBIS])
-//    organizador.actualizar()
-//    game.addVisual(informadorDeErrores)
-//	game.errorReporter(informadorDeErrores)
+
+   	game.addVisual(informadorDeErrores)
+	game.errorReporter(informadorDeErrores)
     game.title("Aventura De Portales")
-//=======
-//    organizador.cargarListaDeNiveles([dialogoNPC3,nivelLogicaBIS, aguasEstancadas])
-//    organizador.actualizar()
-//    game.addVisual(informadorDeErrores)
-//	  game.errorReporter(informadorDeErrores)
-//    game.title("Aventura De Portales")
-
-
-    game.width(14) 
+	game.width(14) 
 	game.height(7)
-
 	menuDeSelccionDeModo.confg()
 	game.start()
 } 

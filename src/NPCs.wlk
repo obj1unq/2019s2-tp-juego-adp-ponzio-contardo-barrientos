@@ -9,12 +9,12 @@ class NPC {
 	const property image
 	const property position 
 	
-	method cargarSiguienteParte() {
+	method cargarSiguienteParte(personaje) {
 		organizador.pasarAlSiguienteNivel()
 	}
 	
-	method pasarAlSiguienteDialogo_() {
-		self.cargarSiguienteParte()
+	method pasarAlSiguienteDialogo_(personaje) {
+		self.cargarSiguienteParte(personaje)
 	}
 }
 

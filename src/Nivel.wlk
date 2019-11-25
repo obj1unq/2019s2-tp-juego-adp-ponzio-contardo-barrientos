@@ -16,6 +16,7 @@ object organizador inherits OrganizadorDeNiveles{
 
 class OrganizadorDeNiveles {
 	var listaDeNiveles
+	var personajePrincipal 
 	
 	method pasarAlSiguienteNivel(){
 		listaDeNiveles.remove(listaDeNiveles.first())
@@ -27,8 +28,9 @@ class OrganizadorDeNiveles {
 		
 	}
 	
+	method personajeSeleccionado(personaje) {personajePrincipal = personaje}
 	method cargarNivel(){
-		listaDeNiveles.first().cargarTodo()
+		listaDeNiveles.first().cargarTodo(personajePrincipal)
 	}
 	
 	method cargarListaDeNiveles(lista){
@@ -51,6 +53,7 @@ class Nivel {
 			elementosDelNivel.forEach({personajeDelNivel => game.addVisual(personajeDelNivel)})
 		}
 	}
+	method cargarTodo(personaje)
 	
 	method asignarPersonajePrincipal_AlNivel(personajePrincipal) {
 		game.addVisual(personajePrincipal)
@@ -64,7 +67,7 @@ class Nivel {
 	}
     		
     method comandosDeDialogo(personaje){
-    	keyboard.control().onPressDo {personaje.interactuarCon_(game.uniqueCollider(personaje))}
+    	keyboard.control().onPressDo {personaje.interacturaCon_(game.uniqueCollider(personaje))}
     	keyboard.alt().onPressDo {personaje.pasarAlSiguienteDialogo_(game.uniqueCollider(personaje))}
     }
  
@@ -168,11 +171,13 @@ object menuPrincipal inherits Nivel {
     	keyboard.right().onPressDo{puntero.moverseEnDir(boton.position().right(4), self.limites(), self.limitesEspecificos())}
 	}
 	
-	method cargarTodo(){
+	override method cargarTodo(personaje){
 		self.asignarElementos_EnElNivel([fondoMenu, botonIniciarMedio, botonIniciarDerecha, botonIniciarIzquierda, botonSalirIzquierda, botonSalirMedio, botonSalirDerecha, celdaConeccion, celdaInvisible])
-		self.asignarPersonajePrincipal_AlNivel(punteroMenu)
+		self.asignarPersonajePrincipal_AlNivel(personaje)
 		self.asignarLimites([botonIniciarIzquierda, botonSalirIzquierda,celdaConeccion])
-		self.comandosDeMenu(punteroMenu, botonIniciarIzquierda)	
+		self.comandosDeMenu(personaje, botonIniciarIzquierda)
+		self.comandosDeMenu(personaje, botonIniciarMedio)	
+		self.comandosDeMenu(personaje, botonIniciarDerecha)	
 	}
 }
 
@@ -189,47 +194,36 @@ object menuDeSeleccionDePersonaje inherits Nivel {
     	keyboard.down().onPressDo{puntero.moverseEnSeleccion(puntero.position().down(1), self.limites(), self.limitesEspecificos())}
 	}
 	
-	method cargarTodo(){
+	override method cargarTodo(personaje){
 		game.clear()
 		self.asignarElementos_EnElNivel([fondoMenuSeleccion, botonSeleccionAatrox, botonSeleccionJax, botonSeleccionChogath,celdaInvisible])
-		self.asignarPersonajePrincipal_AlNivel(punteroMenuSeleccion)
+		self.asignarPersonajePrincipal_AlNivel(personaje)
 		self.asignarLimites([botonSeleccionAatrox, botonSeleccionJax, botonSeleccionChogath,celdaInvisible])
-		self.comandosDeMenu(punteroMenuSeleccion)
+		self.comandosDeMenu(personaje)
+		
 	}
 }
 
-object lobbyUno inherits Nivel {
+object lobbyUno inherits Nivel { 
 	
-	method cargarTodo(){
-		game.clear()
-		self.asignarElementos_EnElNivel([fondoLobbyUno, galio, galioDiag])
-		self.asignarPersonajePrincipal_AlNivel(atrox)
-		self.comandosDeMovimiento(atrox)
-		self.comandosDeDialogo(atrox)
-		game.showAttributes(atrox)
-	}
-}
-
-object lobbyUnoBIS inherits Nivel { 
-	
-	method cargarTodo(){
+	override method cargarTodo(personaje){
 		game.clear()
 		self.asignarElementos_EnElNivel([fondoLobbyUno, portalVioleta])
-		self.asignarPersonajePrincipal_AlNivel(atrox)
-		self.comandosDelNivel(atrox)
-		self.comandosDeMovimiento(atrox)
-		self.comandosDeDialogo(atrox)
+		self.asignarPersonajePrincipal_AlNivel(personaje)
+		self.comandosDelNivel(personaje)
+		self.comandosDeMovimiento(personaje)
+		self.comandosDeDialogo(personaje)
 	}
 }
 
 object dialogoNPC1 inherits NivelDialogo{
 	
-	method cargarTodo(){
+	override method cargarTodo(personaje){
 		game.clear()
 		self.asignarElementos_EnElNivel([fondoLobbyUno, galio, galioDiag, portalVioleta])
-		self.asignarPersonajePrincipal_AlNivel(atrox)
+		self.asignarPersonajePrincipal_AlNivel(personaje)
 		self.asignarDialogos([dialogoGalioUno,dialogoGalioDos,dialogoGalioTres])
-		self.comandosDeDialogo(atrox)
+		self.comandosDeDialogo(personaje)
 		game.addVisual(dialogos.first())
 	}
 } 
@@ -240,12 +234,12 @@ object dialogoNPC1 inherits NivelDialogo{
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 object dialogoInicioAguasEstancadas inherits NivelDialogo{
 	 
-	method cargarTodo(){
+	override method cargarTodo(personaje){
 		game.clear()
 		self.asignarElementos_EnElNivel([fondoAguasEstancadasDialogo])
-		self.asignarPersonajePrincipal_AlNivel(atrox)
+		self.asignarPersonajePrincipal_AlNivel(personaje)
 		self.asignarDialogos([pykePresentacion,gravesNautilusPresentacion])
-		self.comandosDeDialogo(atrox)
+		self.comandosDeDialogo(personaje)
 		game.addVisual(dialogos.first())
 	}
 }
@@ -258,28 +252,28 @@ object aguasEstancadas inherits NivelConDialogosInternos {
 	override method limites() = limitesAguasEstancadas
 	
 	
-	method cargarTodo(){
+	override method cargarTodo(personaje){
 		game.clear()
 		game.sound("Maldicion.mp3")
 		self.asignarElementos_EnElNivel([fondoAguasEstancadas, botonAssenso ,signoVida, nautilus, pyke, graves, signoEnergia, modoAtaque ,signoVida.valorActual() , signoEnergia.valorActual()])
-		self.asignarPersonajePrincipal_AlNivel(atrox)
-		self.comandosDelNivel(atrox)
-		self.comandosDeMovimiento(atrox)
-		self.comandosDeDialogo(atrox)
+		self.asignarPersonajePrincipal_AlNivel(personaje)
+		self.comandosDelNivel(personaje)
+		self.comandosDeMovimiento(personaje)
+		self.comandosDeDialogo(personaje)
 		self.asignarDialogos([gravesNautilusDialogo])
 		listaDeEnemigos.forEach({enemigo => enemigo.mover_Veces(4)})
-		game.onTick(2000, "Regeneracion", {self.regenracionDeVidaYEnergia(atrox)})
-		game.onTick(500, "Actualizacion Contador", {self.actualizarLosContadores()})
+		game.onTick(2000, "Regeneracion", {self.regenracionDeVidaYEnergia(personaje)})
+		game.onTick(500, "Actualizacion Contador", {self.actualizarLosContadores(personaje)})
 		game.onTick(2000, "Venganza", {self.actualizarPosicionDe_Y_(graves, nautilus, pyke, "Venganza")})
 		game.onTick(2000, "El assenso del darking", {self.prepararAssenso("El assenso del darking")})
 	}
 	
 	
-	method actualizarLosContadores() {
+	method actualizarLosContadores(personaje) {
 		game.removeVisual(signoVida.valorActual())
 		game.removeVisual(signoEnergia.valorActual())
-		signoVida.actualizarValorActual(atrox.puntosDeSalud())
-		signoEnergia.actualizarValorActual(atrox.energia())
+		signoVida.actualizarValorActual(personaje.puntosDeSalud())
+		signoEnergia.actualizarValorActual(personaje.energia())
 		game.addVisual(signoVida.valorActual())
 		game.addVisual(signoEnergia.valorActual())
 	}
@@ -309,24 +303,24 @@ object aguasEstancadas inherits NivelConDialogosInternos {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 object nivelLogica inherits Nivel{
-	method cargarTodo(){
+	override method cargarTodo(personaje){
 		game.clear()
 		self.asignarElementos_EnElNivel([fondoNivelLogica, brand, brandDiag])
-		self.asignarPersonajePrincipal_AlNivel(atrox)
-		self.comandosDelNivel(atrox)
-		self.comandosDeMovimiento(atrox)
-		self.comandosDeDialogo(atrox)
+		self.asignarPersonajePrincipal_AlNivel(personaje)
+		self.comandosDelNivel(personaje)
+		self.comandosDeMovimiento(personaje)
+		self.comandosDeDialogo(personaje)
 	}
 }
 
 object dialogoNPC3 inherits NivelDialogo{
 	 
-	method cargarTodo(){
+	override method cargarTodo(personaje){
 		game.clear()
 		self.asignarElementos_EnElNivel([fondoNivelLogica, brand, brandDiag])
-		self.asignarPersonajePrincipal_AlNivel(atrox)
+		self.asignarPersonajePrincipal_AlNivel(personaje)
 		self.asignarDialogos([brandDialogoUno,brandDialogoDos, brandDialogoTres, brandDialogoCuatro])
-		self.comandosDeDialogo(atrox)
+		self.comandosDeDialogo(personaje)
 		game.addVisual(dialogos.first())
 	}
 }
@@ -338,9 +332,9 @@ object nivelLogicaBIS inherits Nivel{
 	
 	override method limites(){return limitesLogica}
 	
-	method analizarJugada(celdas){
+	method analizarJugada(celdas,personaje){
 		if ( celdas.all({celda => (celda.image() == "espacioCorrecto.png")}) ){
-			finalBueno.cargarTodo()
+			finalBueno.cargarTodo(personaje)
 		}
 	}
 	
@@ -349,23 +343,23 @@ object nivelLogicaBIS inherits Nivel{
 			game.removeVisual(numerosTiempo.first())
 			numerosTiempo.remove(numerosTiempo.first())
 			game.addVisual(numerosTiempo.first())
-			self.analizarJugada(celdasALlenar)	
+			self.analizarJugada(celdasALlenar, personaje)	
 		}
 		else{
 			game.removeVisual(numerosTiempo.first())
 			game.removeTickEvent("countDown")
-			finalMalo.cargarTodo()
+			finalMalo.cargarTodo(personaje)
 		}
 	}
 	
-	method cargarTodo(){
+	override method cargarTodo(personaje){
 		game.clear()
 		self.asignarElementos_EnElNivel([fondoNivelLogica, espacioALlenar, inventarioVisual, espacioALlenar2, espacioALlenar3,espacioALlenar4,espacioALlenar5,
 		espacioALlenar6, banana, litio, oxigeno, uranio, oxigeno2, litio2, barraTiempo, sesenta, calavera,moneda,oro ,oxido,pirata])
-		self.asignarPersonajePrincipal_AlNivel(atrox)
-		self.comandosDeMovimiento(atrox)
-		self.comandosDeDialogo(atrox)
-		self.comandosConObjetos(atrox)
+		self.asignarPersonajePrincipal_AlNivel(personaje)
+		self.comandosDeMovimiento(personaje)
+		self.comandosDeDialogo(personaje)
+		self.comandosConObjetos(personaje)
 		game.onCollideDo(uranio, {urn => espacioALlenar.cambiarImagen("espacioCorrecto.png", uranio)})
 		game.onCollideDo(oxigeno, {oxg => espacioALlenar2.cambiarImagen("espacioCorrecto.png", oxigeno)})
 		game.onCollideDo(litio, {lit => espacioALlenar3.cambiarImagen("espacioCorrecto.png", litio)})
@@ -378,46 +372,38 @@ object nivelLogicaBIS inherits Nivel{
 
 object finalMalo inherits NivelDialogo{
 	
-	override method comandosDeDialogo(atrox){
+	override method comandosDeDialogo(personaje){
 		keyboard.alt().onPressDo {game.stop()}
 	}
 	 
-	method cargarTodo(){
+	override method cargarTodo(personaje){
 		game.clear()
 		self.asignarElementos_EnElNivel([fondoFinal])
-		self.asignarPersonajePrincipal_AlNivel(atrox)
+		self.asignarPersonajePrincipal_AlNivel(personaje)
 		self.asignarDialogos([dragonDialogoMalo])
-		self.comandosDeDialogo(atrox)
+		self.comandosDeDialogo(personaje)
 		game.addVisual(dialogos.first())
 	}
 }
 
 object finalBueno inherits NivelDialogo{
 	
-	override method comandosDeDialogo(atrox){
+	override method comandosDeDialogo(personaje){
 		keyboard.alt().onPressDo {game.stop()}
 	}
 	 
-	method cargarTodo(){
+	override method cargarTodo(personaje){
 		game.clear()
 		self.asignarElementos_EnElNivel([fondoFinal])
 		self.asignarDialogos([dragonDialogoBueno])
-		self.comandosDeDialogo(atrox)
+		self.comandosDeDialogo(personaje)
 		game.addVisual(dialogos.first())
 	}
 }
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////// NIVEL ESPECIAL ///////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-object grietaDelInvocador inherits Nivel{
-	
-	
-}
 
 
 
