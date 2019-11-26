@@ -98,6 +98,7 @@ class Personaje inherits Puntero{
 			self.eliminarEnemigo(personaje)
 			self.eliminarPersonajeActual()
 		} 
+		//TODO: Lanzar excepciones
 		else if(not self.tieneSuficienteEnergia(ataqueEspecial)){
 			  game.say(self, "No tengo suficiente energia")
 		} 

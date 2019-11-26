@@ -4,6 +4,9 @@ class Numero {
 	var property image
 	var property position
 	const property valor
+	
+	//TODO: Calcular la imagen, porque depende del valor
+	method image() = valor.toString() + ".png"
 }
 
 // Numeros Medidor De Vida

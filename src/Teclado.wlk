@@ -55,6 +55,7 @@ object teclado {
 		}
 	}
 	
+	//TODO: Capaz se pueda abstraer algo de acá
 	method confgDeZonas() {
 		keyboard.c().onPressDo{ 
 			laGrieta.irSiguienteZona(carrilSuperior)

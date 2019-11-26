@@ -30,8 +30,9 @@ object signoVida inherits Medidor {
 		self.error("No esta el valor buscado")
 	} else {valoresDelMedidor.find({numero => numero.valor() == valor})}
 	
+	//TODO: Ver si podemos instaciar el número a partir del valor
 	method actualizarValorActual(valor) {
-		valorActual = self.buscarUnValor(valor) 
+		valorActual = new Numero(image = null, position = signoVida.position().down(1), valor = valor) //self.buscarUnValor(valor) 
 	}
 }
 
